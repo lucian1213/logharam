@@ -1,0 +1,3966 @@
+        .image-popup-content {
+            color: #00ff00;
+            text-align: center;
+            font-family: 'Orbit', monospace;
+            font-size: clamp(14px, 3vw, 18px);
+        function startSecondStepForSecondMemory() {
+            console.log('두번째 기억 - 장소코드 단계 시작');
+            
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            subtitle.style.transition = 'opacity 0.8s ease';
+            subtitle.style.opacity = '0';
+            
+            setTimeout(() => {
+                const dateInput = document.getElementById('dateInput');
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                
+                inputLabel.textContent = '장소코드 :';
+                dateInput.placeholder = '장소코드를 입력하세요';
+                dateInput.value = '';
+                dateInput.removeAttribute('maxlength');
+                dateInput.id = 'locationInput2';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkSecondLocationAnswer()');
+                
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showSecondLocationHint()');
+                answerButton.setAttribute('onclick', 'showSecondLocationAnswer()');
+                
+                // 힌트보기만 보이도록 설정
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = 'auto';
+                helpButtons.style.right = 'auto';
+                helpButtons.style.justifyContent = 'center';
+                helpButtons.style.marginBottom = '20px';
+                answerButton.style.display = 'none';
+                
+                subtitle.textContent = '';
+                subtitle.style.opacity = '1';
+                
+                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                    setTimeout(() => {
+                        firstMemoryScreen.classList.add('intro-waiting');
+                        
+                        inputForm.classList.add('ui-show');
+                        helpButtons.classList.add('ui-show');
+                        
+                        setTimeout(() => {
+                            startSecondLocationDialog();
+                        .rpg-dialog.with-speaker .rpg-dialog-text {
+            font-family: 'Gaegu', cursive !important;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 400;
+        .form-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+/* 글리치 효과를 위한 추가 스타일 */
+.glitch-container {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-text {
+    position: relative;
+    color: #00ff00;
+    font-size: clamp(18px, 4.5vw, 24px);
+    text-shadow: 0 0 20px #00ff00;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    animation: glitch-anim-1 0.3s infinite linear alternate-reverse;
+    color: #ff00ff;
+    z-index: -1;
+}
+
+.glitch-text::after {
+    animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+    color: #00ffff;
+    z-index: -2;
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    25% {
+        clip-path: inset(20% 0 60% 0);
+        transform: translate(-2px, 2px);
+    }
+    50% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(2px, -2px);
+    }
+    75% {
+        clip-path: inset(10% 0 80% 0);
+        transform: translate(-2px, -2px);
+    }
+    100% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(2px, 2px);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    25% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(2px, -2px);
+    }
+    50% {
+        clip-path: inset(10% 0 80% 0);
+        transform: translate(-2px, 2px);
+    }
+    75% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(2px, 2px);
+    }
+    100% {
+        clip-path: inset(20% 0 60% 0);
+        transform: translate(-2px, -2px);
+    }
+}
+
+/* 화면 전체 글리치 효과 */
+@keyframes screen-glitch {
+    0%, 100% {
+        transform: translate(0);
+        filter: hue-rotate(0deg);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+        filter: hue-rotate(90deg);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+        filter: hue-rotate(180deg);
+    }
+    60% {
+        transform: translate(2px, 2px);
+        filter: hue-rotate(270deg);
+    }
+    80% {
+        transform: translate(2px, -2px);
+        filter: hue-rotate(360deg);
+    }
+}
+        
+        body.grayscale-mode,
+        body.grayscale-mode * {
+            filter: grayscale(100%) !important;
+            -webkit-filter: grayscale(100%) !important;
+            transition: filter 0.5s ease !important;
+        }
+        .confirm-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }, 1000);
+                    }, 800);
+                });
+            }, 800);
+        }
+        
+        function startSecondLocationDialog() {
+            currentDialogType = 'secondLocation';
+            rpgDialogStep = 0;
+            showSecondLocationRPGDialog();
+        }
+        
+        function showSecondLocationRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = ["이번 장소는 아마도 회전 바구니인것 같군. 회전 바구니로 가볼까?"];
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextSecondLocationDialog() {
+            if (isTyping) return;
+            
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            dialog.style.display = 'none';
+            dialogOverlay.style.display = 'none';
+            firstMemoryScreen.classList.remove('dialog-active');
+            firstMemoryScreen.classList.remove('intro-waiting');
+        }
+        
+        function showSecondLocationHint() {
+            showImagePopup();
+        }
+        
+        function showSecondLocationAnswer() {
+            showPopup('정답\n\n장소코드 : 25653327');
+        }
+        
+        function checkSecondLocationAnswer() {
+            const location = document.getElementById('locationInput2').value.trim();
+
+            if (!location) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (location === '25653327') {
+                startSecondMemoryPlayback();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function startSecondMemoryPlayback() {
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const playbackText = document.getElementById('playbackText');
+            
+            // playbackText 초기화
+            playbackText.classList.remove('show', 'blink');
+            
+            firstMemoryScreen.style.display = 'none';
+            memoryPlaybackScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                playbackText.classList.add('show');
+                typeWriter(playbackText, "두번째 기억을 재생합니다.", 80, () => {
+                    setTimeout(() => {
+                        playbackText.classList.add('blink');
+                        setTimeout(() => {
+                            showSecondMemoryPhoto();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showSecondMemoryPhoto() {
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+            const memoryPhoto = document.getElementById('memoryPhoto');
+            
+            // memoryPhoto 초기화
+            memoryPhoto.classList.remove('show');
+            
+            memoryPlaybackScreen.style.display = 'none';
+            memoryPhotoScreen.style.display = 'flex';
+            
+            // 사진 내용은 나중에 추가
+            memoryPhoto.innerHTML = '두번째 기억 사진이 여기에 표시됩니다';
+            
+            setTimeout(() => {
+                memoryPhoto.classList.add('show');
+                setTimeout(() => {
+                    showSecondMemoryPhotoDialog();
+                }, 1000);
+            }, 500);
+        }
+        
+        function startSecondMemoryPlayback() {
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const playbackText = document.getElementById('playbackText');
+            
+            firstMemoryScreen.style.display = 'none';
+            memoryPlaybackScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                playbackText.classList.add('show');
+                typeWriter(playbackText, "두번째 기억을 재생합니다.", 80, () => {
+                    setTimeout(() => {
+                        playbackText.classList.add('blink');
+                        setTimeout(() => {
+                            showSecondMemoryPhoto();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showSecondMemoryPhoto() {
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+            const memoryPhoto = document.getElementById('memoryPhoto');
+            
+            memoryPlaybackScreen.style.display = 'none';
+            memoryPhotoScreen.style.display = 'flex';
+            
+            // 사진 내용은 나중에 추가
+            memoryPhoto.innerHTML = '두번째 기억 사진이 여기에 표시됩니다';
+            
+            setTimeout(() => {
+                memoryPhoto.classList.add('show');
+                setTimeout(() => {
+                    showPopup('두번째 기억 대화는 곧 구현됩니다!');
+                }, 1000);
+            }, 500);
+        }<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기억 수사 장치</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbit&family=Gaegu:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            -webkit-touch-callout: none; /* iOS Safari */
+        }
+        body {
+            font-family: 'Orbit', 'Courier New', monospace;
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 10px;
+            margin: 0;
+        }
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1; /* game-container보다 뒤에 위치 */
+            overflow: hidden; /* 오버플로우 숨김 추가 */
+        }
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Orbit', 'Courier New', monospace;
+            font-size: 16px;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            animation: matrix-fall linear infinite;
+            white-space: pre;
+            line-height: 18px;
+        }
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .game-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 95vw;
+            max-width: 400px;
+            height: 85vh;
+            max-height: 700px;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(1px);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            overflow: hidden;
+            z-index: 10;
+        }
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1); /* 거의 투명하게 변경 */
+            backdrop-filter: blur(0.5px); /* 블러를 더 줄임 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+        .loading-text {
+            color: #00ff00;
+            font-size: clamp(24px, 6vw, 32px);
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 40px;
+            animation: blink 0.8s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .loading-bar-container {
+            width: 300px;
+            max-width: 80vw;
+            height: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 0;
+            background: transparent;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        .loading-bar-fill {
+            height: 100%;
+            background: #00ff00;
+            width: 0%;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        @keyframes loadingProgress { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes memorySearchProgress { 0% { width: 0%; } 100% { width: 100%; } }
+        .main-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 20px 40px 20px;
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .main-screen.show { opacity: 1; transform: translateY(0); }
+        .device-title {
+            font-size: clamp(24px, 6vw, 32px);
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            text-align: center;
+            line-height: 1.3;
+            flex-shrink: 0;
+            opacity: 0;
+        }
+        .device-subtitle {
+            font-size: clamp(14px, 3.5vw, 18px);
+            color: white;
+            text-align: center;
+            line-height: 1.3;
+            flex-shrink: 0;
+            opacity: 0;
+        }
+        .input-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 350px;
+            width: 100%;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-label { font-size: clamp(12px, 3vw, 16px); color: white; line-height: 1.3; }
+        .form-input {
+            padding: 12px 15px;
+            font-size: clamp(14px, 3.5vw, 18px);
+            border: 2px solid white;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Orbit', monospace;
+            -webkit-user-select: text; /* 입력 필드는 선택 가능하게 */
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        .form-input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .form-input:focus {
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .confirm-button {
+            padding: 15px 25px;
+            font-size: clamp(16px, 4vw, 20px);
+            background: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            font-family: 'Orbit', monospace;
+            margin-top: 20px;
+        }
+        .confirm-button:hover { background: #00ff00; color: #000000; }
+        .help-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 50;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.8s ease;
+        }
+        .help-button {
+            padding: 8px 12px;
+            font-size: clamp(10px, 2.5vw, 12px);
+            background: transparent;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbit', monospace;
+        }
+        .help-button:hover { background: #00ff00; color: #000000; }
+        .memory-result-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1); /* 거의 투명하게 변경 */
+            backdrop-filter: blur(0.5px); /* 블러를 더 줄임 */
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+        .memory-result-text {
+            color: #00ff00;
+            font-size: clamp(18px, 4.5vw, 24px);
+            text-shadow: 0 0 20px #00ff00;
+            text-align: center;
+            line-height: 1.5;
+            opacity: 0;
+            z-index: 300; /* 결과 텍스트도 위에 */
+            position: relative;
+        }
+        .memory-result-text.show { opacity: 1; }
+        .memory-result-text.blink { animation: resultBlink 0.5s ease-in-out 3; }
+        @keyframes resultBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .first-memory-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px 20px 40px 20px;
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .first-memory-screen.show { opacity: 1; transform: translateY(0); }
+        .progress-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .progress-bars { display: flex; gap: 8px; justify-content: center; }
+        .progress-bar {
+            width: 40px;
+            height: 4px;
+            background: #333333;
+            border-radius: 2px;
+        }
+        .progress-bar.active {
+            background: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .progress-indicator {
+            font-size: clamp(12px, 3vw, 16px);
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .first-memory-screen .help-buttons {
+            position: relative;
+            top: 0;
+            right: 0;
+            display: flex;
+            gap: 10px;
+            z-index: 50;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.8s ease;
+            margin-bottom: 30px;
+        }
+        .memory-title {
+            font-size: clamp(24px, 6vw, 32px);
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            text-align: center;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+        .memory-subtitle {
+            font-size: clamp(14px, 3.5vw, 18px);
+            color: white;
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+        .first-memory-screen .input-form { margin-top: auto; margin-bottom: auto; }
+        .rpg-dialog-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 50; /* 999에서 50으로 낮춤 */
+            display: none;
+            border-radius: 15px;
+        }
+        .rpg-dialog {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 0;
+            padding: 20px;
+            color: white;
+            font-family: 'Orbit', monospace;
+            font-size: clamp(14px, 3.5vw, 18px);
+            line-height: 1.4;
+            min-height: 80px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            z-index: 51; /* 1000에서 51로 낮춤 */
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+        .rpg-dialog.with-speaker {
+            padding-top: 40px;
+        }
+        .rpg-dialog-speaker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #00ff00;
+            color: #000000;
+            padding: 5px 15px;
+            font-size: clamp(12px, 3vw, 16px);
+            font-weight: bold;
+            border-right: 2px solid #00ff00;
+            border-bottom: 2px solid #00ff00;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .rpg-dialog-text { 
+            margin: 0; 
+            white-space: pre-wrap; 
+            font-family: 'Orbit', monospace;
+        }
+        .rpg-dialog.with-speaker .rpg-dialog-text {
+            font-family: 'Gaegu', cursive !important;
+            font-size: clamp(16px, 4vw, 20px) !important;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .rpg-dialog-continue {
+            position: absolute;
+            bottom: 8px;
+            right: 15px;
+            color: #00ff00;
+            font-size: clamp(10px, 2.5vw, 12px);
+            animation: blink 1s ease-in-out infinite;
+        }
+        .rpg-dialog-continue.hidden { display: none; }
+        .popup-overlay {
+            position: fixed; /* absolute에서 fixed로 변경 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 400; /* 200에서 400으로 증가 */
+            display: none;
+        }
+        .popup {
+            position: fixed; /* absolute에서 fixed로 변경 */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff00;
+            padding: 30px;
+            color: white;
+            font-family: 'Orbit', monospace;
+            z-index: 401; /* 201에서 401로 증가 */
+            display: none;
+            min-width: 280px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+        .popup h3 {
+            font-size: clamp(16px, 4vw, 20px);
+            color: #00ff00;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .popup-close {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #00ff00;
+            font-size: clamp(24px, 6vw, 30px);
+            cursor: pointer;
+            font-family: 'Orbit', monospace;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-close:hover { color: white; }
+        .dialog-active .form-input { pointer-events: none; opacity: 0.5; }
+        .dialog-active .confirm-button { pointer-events: none; opacity: 0.5; }
+        .dialog-active .help-buttons { pointer-events: none; opacity: 0.5; }
+        .ui-show { opacity: 1 !important; transform: translateY(0) !important; }
+        .intro-waiting .form-input,
+        .intro-waiting .confirm-button,
+        .intro-waiting .help-buttons { pointer-events: none; }
+        .image-popup-overlay {
+            position: fixed; /* absolute에서 fixed로 변경 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 300;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-popup {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 80%;
+            max-height: 80%;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+        .image-popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #00ff00;
+            font-size: 24px;
+            cursor: pointer;
+            font-family: 'Orbit', monospace;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-popup-close:hover { color: white; }
+        .memory-playback-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(0.5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+        .playback-text {
+            color: #00ff00;
+            font-size: clamp(18px, 4.5vw, 24px);
+            text-shadow: 0 0 20px #00ff00;
+            text-align: center;
+            line-height: 1.5;
+            opacity: 0;
+            z-index: 300;
+            position: relative;
+        }
+        .playback-text.show { opacity: 1; }
+        .playback-text.blink { animation: resultBlink 0.5s ease-in-out 3; }
+        .memory-photo-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 20;
+        }
+        .memory-photo {
+            width: 90%;
+            max-width: 350px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00ff00;
+            font-family: 'Orbit', monospace;
+            font-size: clamp(14px, 3vw, 18px);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease;
+        }
+        .memory-photo.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .name-input-overlay {
+            position: fixed; /* absolute에서 fixed로 변경 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 300;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .name-input-popup {
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff00;
+            padding: 30px;
+            color: white;
+            font-family: 'Orbit', monospace;
+            z-index: 301;
+            min-width: 280px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+        .name-input-label {
+            font-size: clamp(16px, 4vw, 20px);
+            color: #00ff00;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .name-input-field {
+            padding: 12px 15px;
+            font-size: clamp(14px, 3.5vw, 18px);
+            border: 2px solid white;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Orbit', monospace;
+            width: 100%;
+            margin-bottom: 20px;
+            -webkit-user-select: text; /* 입력 필드는 선택 가능하게 */
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        .name-input-field:focus {
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .name-confirm-button {
+            padding: 12px 20px;
+            font-size: clamp(14px, 3.5vw, 18px);
+            background: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            font-family: 'Orbit', monospace;
+        }
+        .name-confirm-button:hover { background: #00ff00; color: #000000; }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+    <div class="game-container">
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-text" id="loadingText">LOADING</div>
+            <div class="loading-bar-container">
+                <div class="loading-bar-fill" id="loadingBarFill"></div>
+            </div>
+        </div>
+        <div class="main-screen" id="mainScreen">
+            <div class="help-buttons">
+                <button class="help-button" onclick="showHint()">힌트보기</button>
+                <button class="help-button" onclick="showAnswer()">정답보기</button>
+            </div>
+            <h1 class="device-title">기억 수사 장치</h1>
+            <p class="device-subtitle">수사할 대상의 정보를 입력해주세요.</p>
+            <div class="input-form">
+                <div class="input-group">
+                    <label class="input-label">이름 :</label>
+                    <input type="text" class="form-input" id="nameInput" placeholder="이름을 입력하세요">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">생년월일(8자리 숫자) :</label>
+                    <input type="text" class="form-input" id="birthInput" placeholder="YYYYMMDD" maxlength="8">
+                </div>
+                <button class="confirm-button" onclick="checkAnswer()">확인</button>
+            </div>
+        </div>
+        <div class="memory-result-screen" id="memoryResultScreen">
+            <div class="memory-result-text" id="memoryResultText"></div>
+        </div>
+        <div class="first-memory-screen" id="firstMemoryScreen">
+            <div class="progress-container">
+                <div class="progress-bars">
+                    <div class="progress-bar active"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="progress-indicator">1/6</div>
+            </div>
+            <div class="help-buttons">
+                <button class="help-button" onclick="showFirstMemoryHint()">힌트보기</button>
+                <button class="help-button" onclick="showFirstMemoryAnswer()">정답보기</button>
+            </div>
+            <h1 class="memory-title">첫번째 기억</h1>
+            <p class="memory-subtitle">이 장치는 대상의 기억을<br>순서대로 보여줍니다.<br>첫 번째 기억의 연도와 날짜를<br>입력해주세요.</p>
+            <div class="input-form">
+                <div class="input-group">
+                    <label class="input-label">연도와 날짜(숫자 8자리) :</label>
+                    <input type="text" class="form-input" id="dateInput" placeholder="YYYYMMDD" maxlength="8">
+                </div>
+                <button class="confirm-button" onclick="checkFirstMemoryAnswer()">확인</button>
+            </div>
+        </div>
+        <div class="image-popup-overlay" id="imagePopupOverlay" onclick="closeImagePopup()">
+            <div class="image-popup" onclick="event.stopPropagation()">
+                <button class="image-popup-close" onclick="closeImagePopup()">×</button>
+                <div class="image-popup-content">
+                    <p>힌트 이미지가 여기에 표시됩니다.</p>
+                </div>
+            </div>
+        </div>
+        <div class="memory-playback-screen" id="memoryPlaybackScreen">
+            <div class="playback-text" id="playbackText"></div>
+        </div>
+        <div class="memory-photo-screen" id="memoryPhotoScreen">
+            <div class="memory-photo" id="memoryPhoto">
+                사진이 여기에 표시됩니다
+            </div>
+        </div>
+        <div class="rpg-dialog-overlay" id="rpgDialogOverlay"></div>
+        <div class="rpg-dialog" id="rpgDialog">
+            <div class="rpg-dialog-speaker" id="rpgDialogSpeaker" style="display: none;"></div>
+            <p class="rpg-dialog-text" id="rpgDialogText"></p>
+            <span class="rpg-dialog-continue" id="rpgDialogContinue">▼ 터치하여 계속</span>
+        </div>
+    </div>
+    <div class="name-input-overlay" id="nameInputOverlay">
+        <div class="name-input-popup">
+            <label class="name-input-label">아이의 이름:</label>
+            <input type="text" class="name-input-field" id="childNameInput" placeholder="이름을 입력하세요">
+            <button class="name-confirm-button" onclick="checkChildName()">확인</button>
+        </div>
+    </div>
+    <div class="popup-overlay" id="popupOverlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <button class="popup-close" onclick="closePopup()">×</button>
+        <h3 id="popupMessage">정답이 아닌것 같다. 다시 한번 생각해보자.</h3>
+    </div>
+    <script>
+        let rpgDialogStep = 0;
+        let isTyping = false;
+        let currentDialogType = 'intro';
+        
+        const rpgDialogs = [
+            "이게 기억 수사장치인가.",
+            "화면을 살펴보니, 수사할 대상의 이름과 생년월일을 입력해야 하는 것 같군. 용의자의 이름과 생년월일이 어디있더라...",
+            "(힌트가 필요하면 화면상단의 힌트보기 버튼을 이용해주세요. 힌트를 본 후에도 정답을 모르겠다면 정답보기버튼으로 정답을 볼수도 있습니다.)"
+        ];
+        
+        const hintDialogs = [
+            "용의자의 이름과 생년월일이라...수사자료를 찾아볼까? 아마 용의자 조사서에..."
+        ];
+        
+        const firstMemoryDialogs = [
+            "기억을 살펴보려면 연도와 날짜가 필요한 것 같군.",
+            "일단 수사자료를 연도순서대로 정리할 필요가 있겠어. 가장 빠른 연도와 날짜의 수사자료는 언제지?"
+        ];
+        
+        const firstMemoryHintDialogs = [
+            "수사자료를 살펴보니 가장 빠른 연도는 아이의 그림일기인 것 같아."
+        ];
+        
+        const secondStepDialogs = [
+            "장소코드? 장소코드가 뭐지? 회전목마에 대한 기억이니까 회전목마에 가보면 발견할 수 있지 않을까?",
+            "(회전 목마 근처에서 해당 표식이 그려진 게시물을 찾아보세요. 힌트보기를 누르면 게시물의 위치를 사진으로 확인할 수 있습니다.)"
+        ];
+        
+        const memoryPhotoDialogs = [
+            "저건...용의자? 함께 있는 저 아이는 누구지...?"
+        ];
+        
+        const afterNameDialogs = [
+            "저 아이가 하람이구나. 대화를 들어볼까?"
+        ];
+        
+        const conversationDialogs = [
+            { speaker: "하람", text: "아빠, 나 진짜 여기 너무 좋아! 롯데월드 최고야!" },
+            { speaker: "아빠", text: "하하, 그렇게 좋아? 회전목마는 몇 번째 타는 거야, 오늘만?" },
+            { speaker: "하람", text: "음… 세 번째! 난 회전목마가 제일 좋아! 또 타고 싶어!" },
+            { speaker: "아빠", text: "좋아, 오늘은 너랑 끝까지 같이 타줄게." },
+            { speaker: "하람", text: "진짜? 아빠 최고! 우리 매번 롯데월드 오면 안 돼?" },
+            { speaker: "아빠", text: "매일은 어렵지만, 자주 오자! 약속!" }
+        ];
+        
+        const secondMemoryConversationDialogs = [
+            { speaker: "아빠", text: "아이고, 괜찮아? 어디 다친 데는 없어?" },
+            { speaker: "하람", text: "응, 괜찮아 아빠! 살짝 까진 것뿐이야. 걱정하지 마!" },
+            { speaker: "아빠", text: "그래도 혹시 모르니까, 이따가 병원 들르자. 알겠지?" },
+            { speaker: "하람", text: "응, 알겠어. 아빠가 더 걱정돼 보여. 나 진짜 괜찮아!" },
+            { speaker: "아빠", text: "우리 멋진 아들이네. 그래도 아빠는 끝까지 확인하고 싶어." }
+        ];
+        
+        const secondMemoryPhotoDialogs = [
+            "아이가 넘어진 것 같은데... 회전 바구니에서 뭔가 일이 있었나보군."
+        ];
+        
+        const secondMemoryEndingDialogs = [
+            "두번째 기억은 여기까지야. 다음 기억으로 넘어가볼까."
+        ];
+        
+        const thirdMemoryDialogs = [
+            "이제 세번째 기억이군. 다음 순서는 어떤 자료지?"
+        ];
+        
+        const thirdMemoryHintDialogs = [
+            "확실히 연도순으로 보면 2022년인 영수증인거 같은데, 날짜가 지워져있어.",
+            "범인이 의도적으로 방해하고 있는건가? 어쨌든 영수증에 정보가 있을거야.",
+            "영수증 하단을 살펴볼까? 후룸라이드라... 다른 수사자료에서 본 거 같은데..."
+        ];
+        
+        const thirdStepDialogs = [
+            "이번 장소는...영수증에 나와있는 '스페인 해적선'인거 같아. 그쪽으로 가보자."
+        ];
+        
+        const thirdMemoryEndingDialogs = [
+            "세번째 기억은 여기까지야. 다음 기억으로 넘어가볼까."
+        ];
+        
+        const fourthMemoryDialogs = [
+            "네번째 순서... 자료대로라면 분실물 게시글이 확실해 보이는데, 날짜는 아무리 생각해봐도 알 수 없는 것 같아.",
+            "아무래도 분실물 보관소의 직원을 찾아가 보는게 좋을 것 같아.",
+            "(지금부터, 롯데월드의 분실물 보관소를 직접 찾아갑니다. 분실물 보관소의 해당 표식을 가진 직원을 찾아가서 경찰증을 제시하세요. 그 후 직원과 대화를 나누며 날짜를 알아낸 후, 정답을 입력합니다.)"
+        ];
+        
+        const fourthStepDialogs = [
+            "이번 장소는... 분실물 게시글을 확인해보자."
+        ];
+        
+        const endingDialogs = [
+            "프로파일러의 조언에 따르면, **범인에게 의미있는 장소일 가능성이 높다**고했으니, 분명 이런 기억들을 속에 폭탄이 숨겨진 단서가 있을거야.",
+            "일단은… 이곳이 아이가 가장 좋아하던 놀이기구라고 하던데, 여기에 폭탄을 숨긴 것일까? 범인은 왜 폭탄을 설치한걸까?",
+            "그때, 조사를 하는 우리들 사이로 누군가의 시선이 느껴졌다.",
+            "'범인의 의식이 깨어나려 하는건가? 복잡한 생각을 할 시간이 없어. 서둘러서 나머지 기억을 확인하자"
+        ];
+        
+        const secondMemoryDialogs = [
+            "이제 두번째 순서를 찾아보자. 수사자료를 살펴볼까? 아마 두번째 연도가..."
+        ];
+        
+        const secondMemoryHintDialogs = [
+            "두번째 순서는 이 병원 진단서 같은데... 날짜가 3일전이면..."
+        ];
+        
+        function startFirstMemoryPlayback() {
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const playbackText = document.getElementById('playbackText');
+            
+            firstMemoryScreen.style.display = 'none';
+            memoryPlaybackScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                playbackText.classList.add('show');
+                typeWriter(playbackText, "첫번째 기억을 재생합니다.", 80, () => {
+                    setTimeout(() => {
+                        playbackText.classList.add('blink');
+                        setTimeout(() => {
+                            showMemoryPhoto();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showMemoryPhoto() {
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+            const memoryPhoto = document.getElementById('memoryPhoto');
+            
+            memoryPlaybackScreen.style.display = 'none';
+            memoryPhotoScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                memoryPhoto.classList.add('show');
+                setTimeout(() => {
+                    showMemoryPhotoDialog();
+                }, 1000);
+            }, 500);
+        }
+        
+        function showMemoryPhotoDialog() {
+            currentDialogType = 'memoryPhoto';
+            rpgDialogStep = 0;
+            showMemoryPhotoRPGDialog();
+        }
+        
+        function showMemoryPhotoRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = memoryPhotoDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로 복원
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextMemoryPhotoDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            const currentDialogs = memoryPhotoDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                showMemoryPhotoRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                showNameInputPopup();
+            }
+        }
+        
+        function showNameInputPopup() {
+            document.getElementById('nameInputOverlay').style.display = 'flex';
+            document.getElementById('childNameInput').focus();
+        }
+        
+        function checkChildName() {
+            const childName = document.getElementById('childNameInput').value.trim();
+            
+            if (!childName) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+            
+            if (childName === '하람') {
+                document.getElementById('nameInputOverlay').style.display = 'none';
+                // 정답 후 대화 시작
+                startAfterNameDialog();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function startAfterNameDialog() {
+            currentDialogType = 'afterName';
+            rpgDialogStep = 0;
+            showAfterNameRPGDialog();
+        }
+        
+        function showAfterNameRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = afterNameDialogs;
+            
+            console.log('showAfterNameRPGDialog - step:', rpgDialogStep, 'dialogsLength:', currentDialogs.length);
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker'); // 화자 표시 없음
+                speaker.style.display = 'none';
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            } else {
+                // 대화가 끝났으면 바로 conversation 시작
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                startConversation();
+            }
+        }
+        
+        function nextAfterNameDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            console.log('nextAfterNameDialog - step after increment:', rpgDialogStep);
+            
+            // 다음 대화 표시
+            showAfterNameRPGDialog();
+        }
+        
+        function startConversation() {
+            currentDialogType = 'conversation';
+            rpgDialogStep = 0;
+            
+            // 잠시 대기 후 대화 시작
+            setTimeout(() => {
+                showConversationDialog();
+            }, 500);
+        }
+        
+        function showConversationDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            console.log('showConversationDialog - step:', rpgDialogStep, 'totalDialogs:', conversationDialogs.length);
+            
+            if (rpgDialogStep < conversationDialogs.length) {
+                const currentDialog = conversationDialogs[rpgDialogStep];
+                
+                // 대화창이 확실히 보이도록 설정
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.add('with-speaker'); // 화자 표시 있음
+                
+                // 화자 표시
+                speaker.style.display = 'block';
+                speaker.textContent = currentDialog.speaker;
+                
+                // 대화 텍스트에 명시적으로 스타일 적용
+                dialogText.style.fontFamily = "'Gaegu', cursive";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialog.text, 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                    console.log('Typing finished for step:', rpgDialogStep);
+                });
+            } else {
+                // 대화가 끝났을 때 처리
+                console.log('All conversations finished');
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                // 엔딩 대화 시작
+                setTimeout(() => {
+                    startEndingDialog();
+                }, 500);
+            }
+        }
+        
+        function nextConversationDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            console.log('nextConversationDialog - step after increment:', rpgDialogStep);
+            
+            // 다음 대화 표시
+            showConversationDialog();
+        }
+        
+        function startEndingDialog() {
+            currentDialogType = 'ending';
+            rpgDialogStep = 0;
+            showEndingRPGDialog();
+        }
+        
+        function showEndingRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = endingDialogs;
+            
+            console.log('showEndingRPGDialog - step:', rpgDialogStep, 'dialogsLength:', currentDialogs.length);
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로 복원
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            } else {
+                // 엔딩 대화가 끝났을 때
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                showMemoryEndScreen();
+            }
+        }
+        
+        function nextEndingDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            console.log('nextEndingDialog - step after increment:', rpgDialogStep);
+            
+            // 다음 대화 표시
+            showEndingRPGDialog();
+        }
+        
+        function showMemoryEndScreen() {
+            // 모든 화면 숨기기
+            document.getElementById('memoryPhotoScreen').style.display = 'none';
+            
+            // 종료 메시지 표시
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const memoryResultText = document.getElementById('memoryResultText');
+            
+            memoryResultScreen.style.display = 'flex';
+            memoryResultText.classList.remove('show', 'blink');
+            
+            setTimeout(() => {
+                memoryResultText.classList.add('show');
+                typeWriter(memoryResultText, "첫번째 기억 재생이\n종료되었습니다.", 80, () => {
+                    setTimeout(() => {
+                        memoryResultText.classList.add('blink');
+                        
+                        setTimeout(() => {
+                            showSecondMemoryScreen();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showSecondMemoryScreen() {
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            memoryResultScreen.style.display = 'none';
+            
+            // 첫번째 기억 화면 초기화
+            firstMemoryScreen.classList.remove('show');
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars[0].classList.remove('active');
+            progressBars[1].classList.add('active');
+            
+            document.querySelector('.progress-indicator').textContent = '2/6';
+            
+            // 제목과 부제목 초기화
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            
+            title.style.opacity = '0';
+            subtitle.style.opacity = '0';
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            // 입력 필드 초기화
+            const dateInput = document.getElementById('dateInput') || document.getElementById('locationInput');
+            if (dateInput) {
+                dateInput.value = '';
+                dateInput.id = 'dateInput';
+                dateInput.placeholder = 'YYYYMMDD';
+                dateInput.maxLength = 8;
+                
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkSecondMemoryAnswer()');
+                
+                // 힌트와 정답 버튼 모두 표시
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showSecondMemoryHint()');
+                answerButton.setAttribute('onclick', 'showSecondMemoryAnswer()');
+                answerButton.style.display = 'block';
+                
+                // 버튼 정렬 원래대로 (우상단)
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = '0';
+                helpButtons.style.right = '0';
+                helpButtons.style.justifyContent = 'flex-start';
+                helpButtons.style.marginBottom = '30px';
+            }
+            
+            firstMemoryScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                firstMemoryScreen.classList.add('show');
+                startSecondMemoryAnimation();
+            }, 100);
+        }
+        
+        function startSecondMemoryAnimation() {
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            
+            title.style.opacity = '1';
+            typeWriter(title, "두번째 기억", 100, () => {
+                setTimeout(() => {
+                    subtitle.style.opacity = '1';
+                    typeWriter(subtitle, "두번째 기억의 연도와 날짜를\n입력해주세요.", 50, () => {
+                        setTimeout(() => {
+                            inputForm.classList.add('ui-show');
+                            helpButtons.classList.add('ui-show');
+                            
+                            // 입력 비활성화
+                            const dateInput = document.getElementById('dateInput');
+                            const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                            if (dateInput) {
+                                dateInput.disabled = true;
+                                confirmButton.disabled = true;
+                                helpButtons.style.pointerEvents = 'none';
+                            }
+                            
+                            setTimeout(() => {
+                                firstMemoryScreen.classList.add('intro-waiting');
+                                startSecondMemoryDialog();
+                            }, 1000);
+                        }, 500);
+                    });
+                }, 300);
+            });
+        }
+        
+        function startSecondMemoryDialog() {
+            currentDialogType = 'secondMemory';
+            rpgDialogStep = 0;
+            showSecondMemoryRPGDialog();
+        }
+        
+        function showSecondMemoryRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = secondMemoryDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                // 일반 대사는 원래 폰트로 복원
+                const dialogText = document.getElementById('rpgDialogText');
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextSecondMemoryDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            const currentDialogs = secondMemoryDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                showSecondMemoryRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+                
+                // 입력 활성화
+                const dateInput = document.getElementById('dateInput');
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                if (dateInput) {
+                    dateInput.disabled = false;
+                    confirmButton.disabled = false;
+                    helpButtons.style.pointerEvents = 'auto';
+                }
+            }
+        }
+        
+        function checkSecondMemoryAnswer() {
+            const date = document.getElementById('dateInput').value.trim();
+
+            if (!date) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date.length !== 8 || !/^\d{8}$/.test(date)) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date === '20210405') {
+                startSecondStepForSecondMemory();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function showSecondMemoryHint() {
+            currentDialogType = 'secondMemoryHint';
+            rpgDialogStep = 0;
+            isTyping = false;
+            showSecondMemoryHintDialog();
+        }
+        
+        function showSecondMemoryHintDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = secondMemoryHintDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function showSecondMemoryAnswer() {
+            showPopup('정답\n\n연도와 날짜 : 20210405');
+        }
+        
+        function startSecondStepForSecondMemory() {
+            console.log('두번째 기억 - 장소코드 단계 시작');
+            
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            subtitle.style.transition = 'opacity 0.8s ease';
+            subtitle.style.opacity = '0';
+            
+            setTimeout(() => {
+                const dateInput = document.getElementById('dateInput');
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                
+                inputLabel.textContent = '장소코드 :';
+                dateInput.placeholder = '장소코드를 입력하세요';
+                dateInput.value = '';
+                dateInput.removeAttribute('maxlength');
+                dateInput.id = 'locationInput2';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkSecondLocationAnswer()');
+                
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showSecondLocationHint()');
+                answerButton.setAttribute('onclick', 'showSecondLocationAnswer()');
+                
+                // 힌트보기만 보이도록 설정
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = 'auto';
+                helpButtons.style.right = 'auto';
+                helpButtons.style.justifyContent = 'center';
+                helpButtons.style.marginBottom = '20px';
+                answerButton.style.display = 'none';
+                
+                subtitle.textContent = '';
+                subtitle.style.opacity = '1';
+                
+                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                    setTimeout(() => {
+                        firstMemoryScreen.classList.add('intro-waiting');
+                        
+                        inputForm.classList.add('ui-show');
+                        helpButtons.classList.add('ui-show');
+                        
+                        setTimeout(() => {
+                            startSecondLocationDialog();
+                        }, 1000);
+                    }, 800);
+                });
+            }, 800);
+        }
+        
+        function startSecondLocationDialog() {
+            currentDialogType = 'secondLocation';
+            rpgDialogStep = 0;
+            showSecondLocationRPGDialog();
+        }
+        
+        function showSecondLocationRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = ["이번 장소는 아마도 회전 바구니인것 같군. 회전 바구니로 가볼까?"];
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextSecondLocationDialog() {
+            if (isTyping) return;
+            
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            dialog.style.display = 'none';
+            dialogOverlay.style.display = 'none';
+            firstMemoryScreen.classList.remove('dialog-active');
+            firstMemoryScreen.classList.remove('intro-waiting');
+        }
+        
+        function showSecondLocationHint() {
+            showImagePopup();
+        }
+        
+        function showSecondLocationAnswer() {
+            showPopup('두번째 기억 장소코드 정답은 곧 구현됩니다!');
+        }
+        
+        function checkSecondLocationAnswer() {
+            const location = document.getElementById('locationInput2').value.trim();
+
+            if (!location) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (location === '25653327') {
+                startSecondMemoryPlayback();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function createMatrixEffect() {
+            const matrixBg = document.getElementById('matrixBg');
+            const characters = '0123456789';
+            
+            function createColumn() {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                
+                column.style.left = Math.random() * window.innerWidth + 'px';
+                const duration = Math.random() * 5 + 3;
+                column.style.animationDuration = duration + 's';
+                
+                const lines = Math.floor(Math.random() * 10) + 10;
+                let text = '';
+                for (let i = 0; i < lines; i++) {
+                    text += characters.charAt(Math.floor(Math.random() * characters.length)) + '\n';
+                }
+                column.textContent = text;
+                
+                const opacity = Math.random() * 0.8 + 0.2;
+                column.style.opacity = opacity;
+                
+                matrixBg.appendChild(column);
+                
+                setTimeout(() => {
+                    if (column.parentNode) {
+                        column.parentNode.removeChild(column);
+                    }
+                }, duration * 1000);
+            }
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createColumn, i * 200);
+            }
+            
+            setInterval(createColumn, 300);
+        }
+        
+        function typeWriter(element, text, speed, callback) {
+            element.innerHTML = '';
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '\n') {
+                        element.innerHTML += '<br>';
+                    } else {
+                        element.innerHTML += text.charAt(i);
+                    }
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+            
+            type();
+        }
+        
+        function startIntroAnimation() {
+            const title = document.querySelector('.device-title');
+            const subtitle = document.querySelector('.device-subtitle');
+            const inputForm = document.querySelector('#mainScreen .input-form');
+            const helpButtons = document.querySelector('#mainScreen .help-buttons');
+            
+            title.style.opacity = '1';
+            typeWriter(title, "기억 수사 장치", 100, () => {
+                setTimeout(() => {
+                    subtitle.style.opacity = '1';
+                    typeWriter(subtitle, "수사할 대상의 정보를 입력해주세요.", 50, () => {
+                        setTimeout(() => {
+                            inputForm.classList.add('ui-show');
+                            helpButtons.classList.add('ui-show');
+                            
+                            setTimeout(() => {
+                                startRPGDialog();
+                            }, 1000);
+                        }, 500);
+                    });
+                }, 300);
+            });
+        }
+        
+        function startMemorySearchLoading() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loadingText = document.getElementById('loadingText');
+            const loadingBarFill = document.getElementById('loadingBarFill');
+            const mainScreen = document.getElementById('mainScreen');
+            
+            mainScreen.style.display = 'none';
+            
+            loadingScreen.style.display = 'flex';
+            loadingText.textContent = '기억 검색중';
+            
+            loadingBarFill.style.animation = 'none';
+            loadingBarFill.style.width = '0%';
+            
+            loadingBarFill.offsetHeight;
+            
+            setTimeout(() => {
+                loadingBarFill.style.animation = 'memorySearchProgress 6s ease-out forwards';
+            }, 100);
+            
+            setTimeout(() => {
+                showMemorySearchResult();
+            }, 6000);
+        }
+        
+        function showMemorySearchResult() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const memoryResultText = document.getElementById('memoryResultText');
+            
+            loadingScreen.style.display = 'none';
+            
+            memoryResultScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                memoryResultText.classList.add('show');
+                typeWriter(memoryResultText, "대상의 롯데월드에 관한\n기억이 6개 검색되었습니다.", 80, () => {
+                    setTimeout(() => {
+                        memoryResultText.classList.add('blink');
+                        
+                        setTimeout(() => {
+                            showFirstMemoryScreen();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showFirstMemoryScreen() {
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            memoryResultScreen.style.display = 'none';
+            
+            firstMemoryScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                firstMemoryScreen.classList.add('show');
+                startFirstMemoryAnimation();
+            }, 100);
+        }
+        
+        function startFirstMemoryAnimation() {
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            title.style.opacity = '1';
+            typeWriter(title, "첫번째 기억", 100, () => {
+                setTimeout(() => {
+                    subtitle.style.opacity = '1';
+                    typeWriter(subtitle, "이 장치는 대상의 기억을\n순서대로 보여줍니다.\n첫 번째 기억의 연도와 날짜를\n입력해주세요.", 50, () => {
+                        setTimeout(() => {
+                            inputForm.classList.add('ui-show');
+                            helpButtons.classList.add('ui-show');
+                            
+                            // 입력 비활성화
+                            const dateInput = document.getElementById('dateInput');
+                            const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                            if (dateInput) {
+                                dateInput.disabled = true;
+                                confirmButton.disabled = true;
+                                helpButtons.style.pointerEvents = 'none';
+                            }
+                            
+                            setTimeout(() => {
+                                firstMemoryScreen.classList.add('intro-waiting');
+                                startFirstMemoryDialog();
+                            }, 1000);
+                        }, 500);
+                    });
+                }, 300);
+            });
+        }
+        
+        function startFirstMemoryDialog() {
+            currentDialogType = 'firstMemory';
+            rpgDialogStep = 0;
+            showFirstMemoryRPGDialog();
+        }
+        
+        function showFirstMemoryRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = firstMemoryDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextFirstMemoryDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            const currentDialogs = firstMemoryDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                showFirstMemoryRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+                
+                // 입력 활성화
+                const dateInput = document.getElementById('dateInput');
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                if (dateInput) {
+                    dateInput.disabled = false;
+                    confirmButton.disabled = false;
+                    helpButtons.style.pointerEvents = 'auto';
+                }
+            }
+        }
+        
+        function startRPGDialog() {
+            currentDialogType = 'intro';
+            rpgDialogStep = 0;
+            console.log('Starting intro dialog'); // 디버깅용
+            showRPGDialog();
+        }
+        
+        function showRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const mainScreen = document.getElementById('mainScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            // 각 타입별로 적절한 함수 호출
+            if (currentDialogType === 'afterName') {
+                showAfterNameRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'conversation') {
+                showConversationDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'firstMemory') {
+                showFirstMemoryRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondStep') {
+                showSecondStepRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'memoryPhoto') {
+                showMemoryPhotoRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'firstMemoryHint') {
+                showFirstMemoryHintDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondMemory') {
+                showSecondMemoryRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondMemoryHint') {
+                showSecondMemoryHintDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondLocation') {
+                showSecondLocationRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondMemoryPhoto') {
+                showSecondMemoryPhotoRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondMemoryConversation') {
+                showSecondMemoryConversationDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'secondMemoryEnding') {
+                showSecondMemoryEndingRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'thirdMemory') {
+                showThirdMemoryRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'thirdMemoryHint') {
+                showThirdMemoryHintDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'thirdStep') {
+                showThirdStepRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'thirdMemoryPhoto') {
+                showThirdMemoryPhotoRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'thirdMemoryConversation') {
+                showThirdMemoryConversationDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'thirdMemoryEnding') {
+                showThirdMemoryEndingRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'fourthMemory') {
+                showFourthMemoryRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'fourthStep') {
+                showFourthStepRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'glitch') {
+                showGlitchRPGDialog();
+                return;
+            }
+            
+            if (currentDialogType === 'ending') {
+                showEndingRPGDialog();
+                return;
+            }
+            
+            const currentDialogs = currentDialogType === 'hint' ? hintDialogs : rpgDialogs;
+            
+            console.log('showRPGDialog called, currentDialogType:', currentDialogType, 'step:', rpgDialogStep); // 디버깅용
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                mainScreen.classList.add('dialog-active');
+                
+                // 일반 대사는 원래 폰트로 복원
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextRPGDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            const currentDialogs = currentDialogType === 'hint' ? hintDialogs : rpgDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                showRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const mainScreen = document.getElementById('mainScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                mainScreen.classList.remove('dialog-active');
+                
+                if (currentDialogType === 'intro') {
+                    mainScreen.classList.remove('intro-waiting');
+                }
+            }
+        }
+        
+        function showHint() {
+            currentDialogType = 'hint';
+            rpgDialogStep = 0;
+            isTyping = false;
+            showRPGDialog();
+        }
+        
+        function showAnswer() {
+            showPopup('정답\n\n이름 : 박도현\n생년월일 : 19800301');
+        }
+        
+        function showFirstMemoryHint() {
+            currentDialogType = 'firstMemoryHint';
+            rpgDialogStep = 0;
+            isTyping = false;
+            showFirstMemoryHintDialog();
+        }
+        
+        function showFirstMemoryHintDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = firstMemoryHintDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function showFirstMemoryAnswer() {
+            showPopup('정답\n\n연도와 날짜 : 20210724');
+        }
+        
+        function checkAnswer() {
+            const name = document.getElementById('nameInput').value.trim();
+            const birth = document.getElementById('birthInput').value.trim();
+
+            if (!name || !birth) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (birth.length !== 8 || !/^\d{8}$/.test(birth)) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (name === '박도현' && birth === '19800301') {
+                startMemorySearchLoading();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function checkFirstMemoryAnswer() {
+            const date = document.getElementById('dateInput').value.trim();
+
+            if (!date) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date.length !== 8 || !/^\d{8}$/.test(date)) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date === '20210724') {
+                startSecondStep();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function startSecondStep() {
+            console.log('두 번째 단계 시작');
+            
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            console.log('요소들 확인:', { subtitle, inputForm, helpButtons });
+            
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            subtitle.style.transition = 'opacity 0.8s ease';
+            subtitle.style.opacity = '0';
+            
+            console.log('페이드 아웃 시작');
+            
+            setTimeout(() => {
+                console.log('페이드 아웃 완료, 내용 변경 시작');
+                
+                const dateInput = document.getElementById('dateInput');
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                
+                inputLabel.textContent = '장소코드 :';
+                dateInput.placeholder = '장소코드를 입력하세요';
+                dateInput.value = '';
+                dateInput.removeAttribute('maxlength');
+                dateInput.id = 'locationInput';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkLocationAnswer()');
+                
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showLocationHint()');
+                answerButton.setAttribute('onclick', 'showLocationAnswer()');
+                
+                subtitle.textContent = '';
+                subtitle.style.opacity = '1';
+                
+                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                    console.log('타이핑 완료, UI 요소들 다시 표시');
+                    
+                    setTimeout(() => {
+                        // 힌트보기 버튼만 가운데 정렬로 변경
+                        const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                        helpButtons.style.position = 'relative';
+                        helpButtons.style.top = 'auto';
+                        helpButtons.style.right = 'auto';
+                        helpButtons.style.justifyContent = 'center';
+                        helpButtons.style.marginBottom = '20px';
+                        
+                        // 정답보기 버튼 숨기기
+                        const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                        answerButton.style.display = 'none';
+                        
+                        firstMemoryScreen.classList.add('intro-waiting');
+                        
+                        inputForm.classList.add('ui-show');
+                        helpButtons.classList.add('ui-show');
+                        
+                        // 입력 비활성화
+                        const locationInput = document.getElementById('locationInput');
+                        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                        if (locationInput) {
+                            locationInput.disabled = true;
+                            confirmButton.disabled = true;
+                            helpButtons.style.pointerEvents = 'none';
+                        }
+                        
+                        console.log('UI 요소들 다시 표시 완료');
+                        
+                        setTimeout(() => {
+                            startSecondStepDialog();
+                        }, 1000);
+                    }, 800);
+                });
+            }, 800);
+        }
+        
+        function startSecondStepDialog() {
+            currentDialogType = 'secondStep';
+            rpgDialogStep = 0;
+            showSecondStepRPGDialog();
+        }
+        
+        function showSecondStepRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = secondStepDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextSecondStepDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            const currentDialogs = secondStepDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                showSecondStepRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+                
+                // 입력 활성화
+                const locationInput = document.getElementById('locationInput');
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                if (locationInput) {
+                    locationInput.disabled = false;
+                    confirmButton.disabled = false;
+                    helpButtons.style.pointerEvents = 'auto';
+                }
+            }
+        }
+        
+        function showLocationHint() {
+            showImagePopup();
+        }
+        
+        function showLocationAnswer() {
+            showPopup('정답\n\n장소코드 : 58452562');
+        }
+        
+        function checkLocationAnswer() {
+            const location = document.getElementById('locationInput').value.trim();
+
+            if (!location) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (location === '58452562') {
+                startFirstMemoryPlayback();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function showImagePopup() {
+            document.getElementById('imagePopupOverlay').style.display = 'flex';
+            document.getElementById('firstMemoryScreen').classList.add('dialog-active');
+        }
+        
+        function closeImagePopup() {
+            document.getElementById('imagePopupOverlay').style.display = 'none';
+            document.getElementById('firstMemoryScreen').classList.remove('dialog-active');
+        }
+        
+        function startSecondMemoryPlayback() {
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const playbackText = document.getElementById('playbackText');
+            
+            // playbackText 초기화
+            playbackText.classList.remove('show', 'blink');
+            
+            firstMemoryScreen.style.display = 'none';
+            memoryPlaybackScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                playbackText.classList.add('show');
+                typeWriter(playbackText, "두번째 기억을 재생합니다.", 80, () => {
+                    setTimeout(() => {
+                        playbackText.classList.add('blink');
+                        setTimeout(() => {
+                            showSecondMemoryPhoto();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showSecondMemoryPhoto() {
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+            const memoryPhoto = document.getElementById('memoryPhoto');
+            
+            // memoryPhoto 초기화
+            memoryPhoto.classList.remove('show');
+            
+            memoryPlaybackScreen.style.display = 'none';
+            memoryPhotoScreen.style.display = 'flex';
+            
+            // 사진 내용은 나중에 추가
+            memoryPhoto.innerHTML = '두번째 기억 사진이 여기에 표시됩니다';
+            
+            setTimeout(() => {
+                memoryPhoto.classList.add('show');
+                setTimeout(() => {
+                    showSecondMemoryPhotoDialog();
+                }, 1000);
+            }, 500);
+        }
+        
+        function showSecondMemoryPhotoDialog() {
+            currentDialogType = 'secondMemoryPhoto';
+            rpgDialogStep = 0;
+            showSecondMemoryPhotoRPGDialog();
+        }
+        
+        function showSecondMemoryPhotoRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = secondMemoryPhotoDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로 복원
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextSecondMemoryPhotoDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < secondMemoryPhotoDialogs.length) {
+                showSecondMemoryPhotoRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                startSecondMemoryConversation();
+            }
+        }
+        
+        function startSecondMemoryConversation() {
+            currentDialogType = 'secondMemoryConversation';
+            rpgDialogStep = 0;
+            
+            setTimeout(() => {
+                showSecondMemoryConversationDialog();
+            }, 500);
+        }
+        
+        function showSecondMemoryConversationDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            if (rpgDialogStep < secondMemoryConversationDialogs.length) {
+                const currentDialog = secondMemoryConversationDialogs[rpgDialogStep];
+                
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.add('with-speaker');
+                dialog.style.display = 'block'; // 명시적으로 display 설정
+                
+                speaker.style.display = 'block';
+                speaker.textContent = currentDialog.speaker;
+                
+                // 대화 텍스트에 명시적으로 스타일 적용
+                dialogText.style.fontFamily = "'Gaegu', cursive";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialog.text, 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            } else {
+                // 대화가 끝났을 때
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                setTimeout(() => {
+                    startSecondMemoryEndingDialog();
+                }, 500);
+            }
+        }
+        
+        function nextSecondMemoryConversationDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            showSecondMemoryConversationDialog();
+        }
+        
+        function startSecondMemoryEndingDialog() {
+            currentDialogType = 'secondMemoryEnding';
+            rpgDialogStep = 0;
+            showSecondMemoryEndingRPGDialog();
+        }
+        
+        function showSecondMemoryEndingRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = secondMemoryEndingDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로 복원
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextSecondMemoryEndingDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < secondMemoryEndingDialogs.length) {
+                showSecondMemoryEndingRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                showSecondMemoryEndScreen();
+            }
+        }
+        
+        function showSecondMemoryEndScreen() {
+            // 모든 화면 숨기기
+            document.getElementById('memoryPhotoScreen').style.display = 'none';
+            
+            // 종료 메시지 표시
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const memoryResultText = document.getElementById('memoryResultText');
+            
+            memoryResultScreen.style.display = 'flex';
+            memoryResultText.classList.remove('show', 'blink');
+            
+            setTimeout(() => {
+                memoryResultText.classList.add('show');
+                typeWriter(memoryResultText, "두번째 기억 재생이\n종료되었습니다.", 80, () => {
+                    setTimeout(() => {
+                        memoryResultText.classList.add('blink');
+                        
+                        setTimeout(() => {
+                            showThirdMemoryScreen();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showThirdMemoryScreen() {
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            memoryResultScreen.style.display = 'none';
+            
+            // 화면 초기화
+            firstMemoryScreen.classList.remove('show');
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars[1].classList.remove('active');
+            progressBars[2].classList.add('active');
+            
+            document.querySelector('.progress-indicator').textContent = '3/6';
+            
+            // 제목과 부제목 초기화
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            
+            title.style.opacity = '0';
+            subtitle.style.opacity = '0';
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            // 입력 필드 초기화
+            const locationInput = document.getElementById('locationInput2');
+            if (locationInput) {
+                locationInput.value = '';
+                locationInput.id = 'dateInput';
+                locationInput.placeholder = 'YYYYMMDD';
+                locationInput.maxLength = 8;
+                
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkThirdMemoryAnswer()');
+                
+                // 힌트와 정답 버튼 모두 표시
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showThirdMemoryHint()');
+                answerButton.setAttribute('onclick', 'showThirdMemoryAnswer()');
+                answerButton.style.display = 'block';
+                
+                // 버튼 정렬 원래대로
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = '0';
+                helpButtons.style.right = '0';
+                helpButtons.style.justifyContent = 'flex-start';
+                helpButtons.style.marginBottom = '30px';
+            }
+            
+            firstMemoryScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                firstMemoryScreen.classList.add('show');
+                startThirdMemoryAnimation();
+            }, 100);
+        }
+        
+        function startThirdMemoryAnimation() {
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            
+            title.style.opacity = '1';
+            typeWriter(title, "세번째 기억", 100, () => {
+                setTimeout(() => {
+                    subtitle.style.opacity = '1';
+                    typeWriter(subtitle, "세번째 기억의 연도와 날짜를\n입력해주세요.", 50, () => {
+                        setTimeout(() => {
+                            inputForm.classList.add('ui-show');
+                            helpButtons.classList.add('ui-show');
+                            
+                            setTimeout(() => {
+                                firstMemoryScreen.classList.add('intro-waiting');
+                                startThirdMemoryDialog();
+                            }, 1000);
+                        }, 500);
+                    });
+                }, 300);
+            });
+        }
+        
+        function startThirdMemoryDialog() {
+            currentDialogType = 'thirdMemory';
+            rpgDialogStep = 0;
+            showThirdMemoryRPGDialog();
+        }
+        
+        function showThirdMemoryRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = thirdMemoryDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextThirdMemoryDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < thirdMemoryDialogs.length) {
+                showThirdMemoryRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+            }
+        }
+        
+        function checkThirdMemoryAnswer() {
+            const date = document.getElementById('dateInput').value.trim();
+
+            if (!date) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date.length !== 8 || !/^\d{8}$/.test(date)) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date === '20220911') {
+                startThirdStep();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function showThirdMemoryHint() {
+            currentDialogType = 'thirdMemoryHint';
+            rpgDialogStep = 0;
+            isTyping = false;
+            showThirdMemoryHintDialog();
+        }
+        
+        function showThirdMemoryHintDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = thirdMemoryHintDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextThirdMemoryHintDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < thirdMemoryHintDialogs.length) {
+                showThirdMemoryHintDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+            }
+        }
+        
+        function showThirdMemoryAnswer() {
+            showPopup('정답\n\n연도와 날짜 : 20220911');
+        }
+        
+        function startThirdStep() {
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            subtitle.style.transition = 'opacity 0.8s ease';
+            subtitle.style.opacity = '0';
+            
+            setTimeout(() => {
+                const dateInput = document.getElementById('dateInput');
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                
+                inputLabel.textContent = '장소코드 :';
+                dateInput.placeholder = '장소코드를 입력하세요';
+                dateInput.value = '';
+                dateInput.removeAttribute('maxlength');
+                dateInput.id = 'locationInput3';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkThirdLocationAnswer()');
+                
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showThirdLocationHint()');
+                answerButton.setAttribute('onclick', 'showThirdLocationAnswer()');
+                
+                // 힌트보기만 보이도록 설정
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = 'auto';
+                helpButtons.style.right = 'auto';
+                helpButtons.style.justifyContent = 'center';
+                helpButtons.style.marginBottom = '20px';
+                answerButton.style.display = 'none';
+                
+                subtitle.textContent = '';
+                subtitle.style.opacity = '1';
+                
+                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                    setTimeout(() => {
+                        firstMemoryScreen.classList.add('intro-waiting');
+                        
+                        inputForm.classList.add('ui-show');
+                        helpButtons.classList.add('ui-show');
+                        
+                        // 입력 비활성화
+                        const locationInput = document.getElementById('locationInput3');
+                        if (locationInput) {
+                            locationInput.disabled = true;
+                            confirmButton.disabled = false;
+                            helpButtons.style.pointerEvents = 'none';
+                        }
+                        
+                        setTimeout(() => {
+                            startThirdStepDialog();
+                        }, 1000);
+                    }, 800);
+                });
+            }, 800);
+        }
+        
+        function startThirdStepDialog() {
+            currentDialogType = 'thirdStep';
+            rpgDialogStep = 0;
+            showThirdStepRPGDialog();
+        }
+        
+        function showThirdStepRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = thirdStepDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextThirdStepDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < thirdStepDialogs.length) {
+                showThirdStepRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+                
+                // 입력 활성화
+                const locationInput = document.getElementById('locationInput3');
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                if (locationInput) {
+                    locationInput.disabled = false;
+                    confirmButton.disabled = false;
+                    helpButtons.style.pointerEvents = 'auto';
+                }
+            }
+        }
+        
+        function showThirdLocationHint() {
+            showImagePopup();
+        }
+        
+        function showThirdLocationAnswer() {
+            showPopup('정답\n\n장소코드 : 65252211');
+        }
+        
+        function checkThirdLocationAnswer() {
+            const location = document.getElementById('locationInput3').value.trim();
+
+            if (!location) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (location === '65252211') {
+                startThirdMemoryPlayback();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function startThirdMemoryPlayback() {
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const playbackText = document.getElementById('playbackText');
+            
+            // playbackText 초기화
+            playbackText.classList.remove('show', 'blink');
+            
+            firstMemoryScreen.style.display = 'none';
+            memoryPlaybackScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                playbackText.classList.add('show');
+                typeWriter(playbackText, "세번째 기억을 재생합니다.", 80, () => {
+                    setTimeout(() => {
+                        playbackText.classList.add('blink');
+                        setTimeout(() => {
+                            showThirdMemoryPhoto();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showThirdMemoryPhoto() {
+            const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+            const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+            const memoryPhoto = document.getElementById('memoryPhoto');
+            
+            // memoryPhoto 초기화
+            memoryPhoto.classList.remove('show');
+            
+            memoryPlaybackScreen.style.display = 'none';
+            memoryPhotoScreen.style.display = 'flex';
+            
+            // 사진 내용은 나중에 추가
+            memoryPhoto.innerHTML = '세번째 기억 사진이 여기에 표시됩니다';
+            
+            setTimeout(() => {
+                memoryPhoto.classList.add('show');
+                setTimeout(() => {
+                    showThirdMemoryPhotoDialog();
+                }, 1000);
+            }, 500);
+        }
+        
+        function showThirdMemoryPhotoDialog() {
+            currentDialogType = 'thirdMemoryPhoto';
+            rpgDialogStep = 0;
+            showThirdMemoryPhotoRPGDialog();
+        }
+        
+        function showThirdMemoryPhotoRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = ["아이가 타고 싶어했는데 키가 작아서 못 탔나보군."];
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextThirdMemoryPhotoDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            
+            dialog.style.display = 'none';
+            dialogOverlay.style.display = 'none';
+            
+            startThirdMemoryConversation();
+        }
+        
+        function startThirdMemoryConversation() {
+            currentDialogType = 'thirdMemoryConversation';
+            rpgDialogStep = 0;
+            
+            setTimeout(() => {
+                showThirdMemoryConversationDialog();
+            }, 500);
+        }
+        
+        function showThirdMemoryConversationDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const thirdMemoryConversationDialogs = [
+                { speaker: "하람", text: "…나 키 조금만 더 컸으면 탈 수 있었는데…" },
+                { speaker: "아빠", text: "에구, 속상했겠다. 아빠도 같이 타고 싶었는데 말이야." },
+                { speaker: "하람", text: "다음엔 탈 수 있을까…?" },
+                { speaker: "아빠", text: "그럼! 지금도 쑥쑥 크고 있으니까, 다음엔 꼭 탈 수 있어." },
+                { speaker: "하람", text: "진짜지?" },
+                { speaker: "아빠", text: "진짜지. 우리 그때 같이 맨 뒷자리에 앉자!" },
+                { speaker: "하람", text: "히히 약속이야!" }
+            ];
+            
+            if (rpgDialogStep < thirdMemoryConversationDialogs.length) {
+                const currentDialog = thirdMemoryConversationDialogs[rpgDialogStep];
+                
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.add('with-speaker');
+                
+                speaker.style.display = 'block';
+                speaker.textContent = currentDialog.speaker;
+                
+                // 대화 텍스트에 Gaegu 폰트 적용
+                dialogText.style.fontFamily = "'Gaegu', cursive";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialog.text, 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            } else {
+                // 대화가 끝났을 때
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                setTimeout(() => {
+                    startThirdMemoryEndingDialog();
+                }, 500);
+            }
+        }
+        
+        function nextThirdMemoryConversationDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            showThirdMemoryConversationDialog();
+        }
+        
+        function startThirdMemoryEndingDialog() {
+            currentDialogType = 'thirdMemoryEnding';
+            rpgDialogStep = 0;
+            showThirdMemoryEndingRPGDialog();
+        }
+        
+        function showThirdMemoryEndingRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = thirdMemoryEndingDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextThirdMemoryEndingDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < thirdMemoryEndingDialogs.length) {
+                showThirdMemoryEndingRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                
+                showThirdMemoryEndScreen();
+            }
+        }
+        
+        function showThirdMemoryEndScreen() {
+            // 모든 화면 숨기기
+            document.getElementById('memoryPhotoScreen').style.display = 'none';
+            
+            // 종료 메시지 표시
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const memoryResultText = document.getElementById('memoryResultText');
+            
+            memoryResultScreen.style.display = 'flex';
+            memoryResultText.classList.remove('show', 'blink');
+            
+            setTimeout(() => {
+                memoryResultText.classList.add('show');
+                typeWriter(memoryResultText, "세번째 기억 재생이\n종료되었습니다.", 80, () => {
+                    setTimeout(() => {
+                        memoryResultText.classList.add('blink');
+                        
+                        setTimeout(() => {
+                            showFourthMemoryScreen();
+                        }, 1500);
+                    }, 500);
+                });
+            }, 500);
+        }
+        
+        function showFourthMemoryScreen() {
+            const memoryResultScreen = document.getElementById('memoryResultScreen');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            memoryResultScreen.style.display = 'none';
+            
+            // 화면 초기화
+            firstMemoryScreen.classList.remove('show');
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars[2].classList.remove('active');
+            progressBars[3].classList.add('active');
+            
+            document.querySelector('.progress-indicator').textContent = '4/6';
+            
+            // 제목과 부제목 초기화
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            
+            title.style.opacity = '0';
+            subtitle.style.opacity = '0';
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            // 입력 필드 초기화
+            const locationInput = document.getElementById('locationInput3');
+            if (locationInput) {
+                locationInput.value = '';
+                locationInput.id = 'dateInput';
+                locationInput.placeholder = 'YYYYMMDD';
+                locationInput.maxLength = 8;
+                
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkFourthMemoryAnswer()');
+                
+                // 힌트와 정답 버튼 모두 표시
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showFourthMemoryHint()');
+                answerButton.setAttribute('onclick', 'showFourthMemoryAnswer()');
+                answerButton.style.display = 'block';
+                
+                // 버튼 정렬 원래대로
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = '0';
+                helpButtons.style.right = '0';
+                helpButtons.style.justifyContent = 'flex-start';
+                helpButtons.style.marginBottom = '30px';
+            }
+            
+            firstMemoryScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                firstMemoryScreen.classList.add('show');
+                startFourthMemoryAnimation();
+            }, 100);
+        }
+        
+        function startFourthMemoryAnimation() {
+            const title = document.querySelector('.memory-title');
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            
+            title.style.opacity = '1';
+            typeWriter(title, "네번째 기억", 100, () => {
+                setTimeout(() => {
+                    subtitle.style.opacity = '1';
+                    typeWriter(subtitle, "네번째 기억의 연도와 날짜를\n입력해주세요.", 50, () => {
+                        setTimeout(() => {
+                            inputForm.classList.add('ui-show');
+                            helpButtons.classList.add('ui-show');
+                            
+                            // 입력 비활성화
+                            const dateInput = document.getElementById('dateInput');
+                            const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                            if (dateInput) {
+                                dateInput.disabled = true;
+                                confirmButton.disabled = true;
+                                helpButtons.style.pointerEvents = 'none';
+                            }
+                            
+                            setTimeout(() => {
+                                firstMemoryScreen.classList.add('intro-waiting');
+                                startFourthMemoryDialog();
+                            }, 1000);
+                        }, 500);
+                    });
+                }, 300);
+            });
+        }
+        
+        function startFourthMemoryDialog() {
+            currentDialogType = 'fourthMemory';
+            rpgDialogStep = 0;
+            showFourthMemoryRPGDialog();
+        }
+        
+        function showFourthMemoryRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = fourthMemoryDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextFourthMemoryDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < fourthMemoryDialogs.length) {
+                showFourthMemoryRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+                
+                // 입력 활성화
+                const dateInput = document.getElementById('dateInput');
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                if (dateInput) {
+                    dateInput.disabled = false;
+                    confirmButton.disabled = false;
+                    helpButtons.style.pointerEvents = 'auto';
+                }
+            }
+        }
+        
+        function checkFourthMemoryAnswer() {
+            const date = document.getElementById('dateInput').value.trim();
+
+            if (!date) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date.length !== 8 || !/^\d{8}$/.test(date)) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (date === '20230520') {
+                startFourthStep();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+        function showFourthMemoryHint() {
+            showImagePopup();
+        }
+        
+        function showFourthMemoryAnswer() {
+            showPopup('정답\n\n연도와 날짜 : 20230520');
+        }
+        
+        function startFourthStep() {
+            const subtitle = document.querySelector('.memory-subtitle');
+            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            inputForm.classList.remove('ui-show');
+            helpButtons.classList.remove('ui-show');
+            
+            subtitle.style.transition = 'opacity 0.8s ease';
+            subtitle.style.opacity = '0';
+            
+            setTimeout(() => {
+                const dateInput = document.getElementById('dateInput');
+                const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+                
+                inputLabel.textContent = '장소코드 :';
+                dateInput.placeholder = '장소코드를 입력하세요';
+                dateInput.value = '';
+                dateInput.removeAttribute('maxlength');
+                dateInput.id = 'locationInput4';
+                
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                confirmButton.setAttribute('onclick', 'checkFourthLocationAnswer()');
+                
+                const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+                const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+                hintButton.setAttribute('onclick', 'showFourthLocationHint()');
+                answerButton.setAttribute('onclick', 'showFourthLocationAnswer()');
+                
+                // 힌트보기만 보이도록 설정
+                helpButtons.style.position = 'relative';
+                helpButtons.style.top = 'auto';
+                helpButtons.style.right = 'auto';
+                helpButtons.style.justifyContent = 'center';
+                helpButtons.style.marginBottom = '20px';
+                answerButton.style.display = 'none';
+                
+                subtitle.textContent = '';
+                subtitle.style.opacity = '1';
+                
+                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                    setTimeout(() => {
+                        firstMemoryScreen.classList.add('intro-waiting');
+                        
+                        inputForm.classList.add('ui-show');
+                        helpButtons.classList.add('ui-show');
+                        
+                        // 입력 비활성화
+                        const locationInput = document.getElementById('locationInput4');
+                        if (locationInput) {
+                            locationInput.disabled = true;
+                            confirmButton.disabled = false;
+                            helpButtons.style.pointerEvents = 'none';
+                        }
+                        
+                        setTimeout(() => {
+                            startFourthStepDialog();
+                        }, 1000);
+                    }, 800);
+                });
+            }, 800);
+        }
+        
+        function startFourthStepDialog() {
+            currentDialogType = 'fourthStep';
+            rpgDialogStep = 0;
+            showFourthStepRPGDialog();
+        }
+        
+        function showFourthStepRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const currentDialogs = fourthStepDialogs;
+            
+            if (rpgDialogStep < currentDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                firstMemoryScreen.classList.add('dialog-active');
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextFourthStepDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            if (rpgDialogStep < fourthStepDialogs.length) {
+                showFourthStepRPGDialog();
+            } else {
+                const dialog = document.getElementById('rpgDialog');
+                const dialogOverlay = document.getElementById('rpgDialogOverlay');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                dialog.style.display = 'none';
+                dialogOverlay.style.display = 'none';
+                firstMemoryScreen.classList.remove('dialog-active');
+                firstMemoryScreen.classList.remove('intro-waiting');
+                
+                // 입력 활성화
+                const locationInput = document.getElementById('locationInput4');
+                const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+                if (locationInput) {
+                    locationInput.disabled = false;
+                    confirmButton.disabled = false;
+                    helpButtons.style.pointerEvents = 'auto';
+                }
+            }
+        }
+        
+        function showFourthLocationHint() {
+            showImagePopup();
+        }
+        
+        function showFourthLocationAnswer() {
+            showPopup('정답\n\n장소코드 : 74562732');
+        }
+        
+        function checkFourthLocationAnswer() {
+            const location = document.getElementById('locationInput4').value.trim();
+
+            if (!location) {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+                return;
+            }
+
+            if (location === '74562732') {
+                startFourthMemoryPlayback();
+            } else {
+                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+            }
+        }
+        
+      function startFourthMemoryPlayback() {
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+    const playbackText = document.getElementById('playbackText');
+    
+    // playbackText 초기화
+    playbackText.classList.remove('show', 'blink');
+    playbackText.innerHTML = ''; // 텍스트 초기화
+    
+    firstMemoryScreen.style.display = 'none';
+    memoryPlaybackScreen.style.display = 'flex';
+    
+    setTimeout(() => {
+        playbackText.classList.add('show');
+        typeWriter(playbackText, "네번째 기억을", 80, () => {
+            // 글리치 효과 시작
+            setTimeout(() => {
+                // 텍스트에 글리치 효과를 위한 data attribute 추가
+                const currentText = playbackText.textContent;
+                playbackText.setAttribute('data-text', currentText);
+                playbackText.classList.add('apply-glitch');
+                
+                // 게임 컨테이너와 모든 요소에 글리치 효과
+                const gameContainer = document.querySelector('.game-container');
+                const matrixBg = document.getElementById('matrixBg');
+                
+                // 더 강렬한 글리치 효과를 위한 인터벌
+                let glitchPhase = 0;
+                const glitchInterval = setInterval(() => {
+                    // 랜덤한 변형 값 생성
+                    const translateX = (Math.random() - 0.5) * 40;
+                    const translateY = (Math.random() - 0.5) * 40;
+                    const rotate = (Math.random() - 0.5) * 10;
+                    const scale = 0.95 + Math.random() * 0.1;
+                    const hue = Math.random() * 360;
+                    
+                    // 게임 컨테이너 변형
+                    gameContainer.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+                    gameContainer.style.filter = `hue-rotate(${hue}deg) contrast(${1.5 + Math.random()}) brightness(${0.8 + Math.random() * 0.4})`;
+                    
+                    // 배경도 함께 글리치
+                    matrixBg.style.transform = `translate(${-translateX}px, ${-translateY}px)`;
+                    matrixBg.style.filter = `hue-rotate(${360 - hue}deg)`;
+                    
+                    // 텍스트에 추가 효과
+                    playbackText.style.textShadow = `
+                        ${Math.random() * 10 - 5}px ${Math.random() * 10 - 5}px 0 #ff00ff,
+                        ${Math.random() * 10 - 5}px ${Math.random() * 10 - 5}px 0 #00ffff,
+                        ${Math.random() * 10 - 5}px ${Math.random() * 10 - 5}px 0 #ffff00
+                    `;
+                    
+                    // 가끔 화면 전체 플래시 효과
+                    if (Math.random() > 0.8) {
+                        document.body.style.backgroundColor = Math.random() > 0.5 ? '#ff00ff' : '#00ffff';
+                        setTimeout(() => {
+                            document.body.style.backgroundColor = '#000000';
+                        }, 50);
+                    }
+                    
+                    glitchPhase++;
+                    
+                    // 3초 동안 지속 (30회 * 100ms)
+                    if (glitchPhase >= 30) {
+                        clearInterval(glitchInterval);
+                        
+                        // 효과 정리
+                        gameContainer.style.transform = '';
+                        gameContainer.style.filter = '';
+                        matrixBg.style.transform = '';
+                        matrixBg.style.filter = '';
+                        playbackText.style.textShadow = '';
+                        playbackText.classList.remove('apply-glitch');
+                        
+                        // 흑백으로 전환
+                        setTimeout(() => {
+                            document.body.classList.add('grayscale-mode');
+                            document.body.style.filter = 'grayscale(100%)';
+                            document.body.style.webkitFilter = 'grayscale(100%)';
+                            gameContainer.style.filter = 'grayscale(100%)';
+                            gameContainer.style.webkitFilter = 'grayscale(100%)';
+                            
+                            // 화면 숨기고 대사창 표시
+                            setTimeout(() => {
+                                memoryPlaybackScreen.style.display = 'none';
+                                showGlitchDialog();
+                            }, 500);
+                        }, 200);
+                    }
+                }, 100); // 100ms마다 실행
+                
+            }, 500);
+        });
+    }, 500);
+}
+        
+        function showGlitchDialog() {
+            currentDialogType = 'glitch';
+            rpgDialogStep = 0;
+            showGlitchRPGDialog();
+        }
+        
+        function showGlitchRPGDialog() {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            const dialogText = document.getElementById('rpgDialogText');
+            const continueBtn = document.getElementById('rpgDialogContinue');
+            const speaker = document.getElementById('rpgDialogSpeaker');
+            
+            const glitchDialogs = ["뭐..뭐지? 이게 어떻게 된거야?"];
+            
+            if (rpgDialogStep < glitchDialogs.length) {
+                dialogOverlay.style.display = 'block';
+                dialog.style.display = 'block';
+                dialog.classList.remove('with-speaker');
+                speaker.style.display = 'none';
+                
+                // 일반 대사는 원래 폰트로
+                dialogText.style.fontFamily = "'Orbit', monospace";
+                
+                continueBtn.classList.add('hidden');
+                isTyping = true;
+                
+                typeWriter(dialogText, glitchDialogs[rpgDialogStep], 50, () => {
+                    isTyping = false;
+                    continueBtn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function nextGlitchDialog() {
+            if (isTyping) return;
+            
+            rpgDialogStep++;
+            
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            
+            dialog.style.display = 'none';
+            dialogOverlay.style.display = 'none';
+            
+            // 다음 단계로
+            showPopup('네번째 기억 계속 구현중...');
+        }
+        
+        function showPopup(message) {
+            document.getElementById('popupMessage').textContent = message;
+            document.getElementById('popupOverlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+            
+            const mainScreen = document.getElementById('mainScreen');
+            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+            
+            if (mainScreen.style.display !== 'none') {
+                mainScreen.classList.add('dialog-active');
+            }
+            if (firstMemoryScreen.style.display !== 'none') {
+                firstMemoryScreen.classList.add('dialog-active');
+            }
+        }
+        
+        function closePopup() {
+            document.getElementById('popupOverlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+            
+            document.getElementById('mainScreen').classList.remove('dialog-active');
+            document.getElementById('firstMemoryScreen').classList.remove('dialog-active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dialog = document.getElementById('rpgDialog');
+            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            
+            if ((dialog.style.display === 'block' || dialogOverlay.style.display === 'block') && 
+                (event.target === dialog || dialog.contains(event.target) || 
+                 event.target === dialogOverlay)) {
+                
+                if (isTyping) {
+                    return;
+                }
+                
+                if (currentDialogType === 'firstMemory') {
+                    nextFirstMemoryDialog();
+                } else if (currentDialogType === 'secondStep') {
+                    nextSecondStepDialog();
+                } else if (currentDialogType === 'firstMemoryHint') {
+                    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                    dialog.style.display = 'none';
+                    dialogOverlay.style.display = 'none';
+                    firstMemoryScreen.classList.remove('dialog-active');
+                } else if (currentDialogType === 'memoryPhoto') {
+                    nextMemoryPhotoDialog();
+                } else {
+                    nextRPGDialog();
+                }
+            }
+        });
+
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const mainScreen = document.getElementById('mainScreen');
+                const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+                
+                if (mainScreen.style.display !== 'none') {
+                    checkAnswer();
+                } else if (firstMemoryScreen.style.display !== 'none') {
+                    const dateInput = document.getElementById('dateInput');
+                    const locationInput = document.getElementById('locationInput');
+                    
+                    if (dateInput) {
+                        checkFirstMemoryAnswer();
+                    } else if (locationInput) {
+                        checkLocationAnswer();
+                    }
+                }
+            } else if (event.key === 'Enter' && document.getElementById('nameInputOverlay').style.display === 'flex') {
+                checkChildName();
+            }
+        });
+
+        window.onload = function() {
+            createMatrixEffect();
+            
+            const loadingBarFill = document.getElementById('loadingBarFill');
+            loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
+            
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainScreen').style.display = 'flex';
+                document.getElementById('mainScreen').classList.add('show');
+                document.getElementById('mainScreen').classList.add('intro-waiting');
+                
+                setTimeout(() => {
+                    startIntroAnimation();
+                }, 500);
+            }, 10000);
+            
+            // rpgDialog와 rpgDialogOverlay에 직접 클릭 이벤트 추가
+            const rpgDialog = document.getElementById('rpgDialog');
+            const rpgDialogOverlay = document.getElementById('rpgDialogOverlay');
+            
+            function handleDialogClick() {
+                if (isTyping) return;
+                
+                console.log('Dialog clicked - currentDialogType:', currentDialogType, 'step:', rpgDialogStep);
+                
+                if (currentDialogType === 'conversation') {
+                    nextConversationDialog();
+                } else if (currentDialogType === 'afterName') {
+                    nextAfterNameDialog();
+                } else if (currentDialogType === 'firstMemory') {
+                    nextFirstMemoryDialog();
+                } else if (currentDialogType === 'secondStep') {
+                    nextSecondStepDialog();
+                } else if (currentDialogType === 'memoryPhoto') {
+                    nextMemoryPhotoDialog();
+                } else if (currentDialogType === 'firstMemoryHint') {
+                    rpgDialog.style.display = 'none';
+                    rpgDialogOverlay.style.display = 'none';
+                    document.getElementById('firstMemoryScreen').classList.remove('dialog-active');
+                } else if (currentDialogType === 'ending') {
+                    nextEndingDialog();
+                } else if (currentDialogType === 'secondMemory') {
+                    nextSecondMemoryDialog();
+                } else if (currentDialogType === 'secondMemoryHint') {
+                    rpgDialog.style.display = 'none';
+                    rpgDialogOverlay.style.display = 'none';
+                    document.getElementById('firstMemoryScreen').classList.remove('dialog-active');
+                } else if (currentDialogType === 'secondLocation') {
+                    nextSecondLocationDialog();
+                } else if (currentDialogType === 'secondMemoryPhoto') {
+                    nextSecondMemoryPhotoDialog();
+                } else if (currentDialogType === 'secondMemoryConversation') {
+                    nextSecondMemoryConversationDialog();
+                } else if (currentDialogType === 'secondMemoryEnding') {
+                    nextSecondMemoryEndingDialog();
+                } else if (currentDialogType === 'thirdMemory') {
+                    nextThirdMemoryDialog();
+                } else if (currentDialogType === 'thirdMemoryHint') {
+                    nextThirdMemoryHintDialog();
+                } else if (currentDialogType === 'thirdStep') {
+                    nextThirdStepDialog();
+                } else if (currentDialogType === 'thirdMemoryPhoto') {
+                    nextThirdMemoryPhotoDialog();
+                } else if (currentDialogType === 'thirdMemoryConversation') {
+                    nextThirdMemoryConversationDialog();
+                } else if (currentDialogType === 'thirdMemoryEnding') {
+                    nextThirdMemoryEndingDialog();
+                } else if (currentDialogType === 'fourthMemory') {
+                    nextFourthMemoryDialog();
+                } else if (currentDialogType === 'fourthStep') {
+                    nextFourthStepDialog();
+                } else if (currentDialogType === 'glitch') {
+                    nextGlitchDialog();
+                } else if (currentDialogType === 'hint' || currentDialogType === 'intro') {
+                    nextRPGDialog();
+                }
+            }
+            
+            rpgDialog.addEventListener('click', handleDialogClick);
+            rpgDialogOverlay.addEventListener('click', handleDialogClick);
+        };
+    </script>
+</body>
+</html>
