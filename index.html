@@ -3797,12 +3797,23 @@ function showGlitchRPGDialog() {
         { speaker: "??", text: "선생님. 더 방법이 없는 걸까요?" },
         { speaker: "의사", text: "이제까지 버틴 것도 기적입니다. 시간이 얼마 없습니다. 마음의 준비를..." },
         { speaker: "??", text: "대체 왜 하람이에게 이런 일이 일어나야 하는거죠...? 대체 왜... 흑흑흑" },
+        "GLITCH_EFFECT", // 특수 마커
         "뭐지. 방금 보였던 기억은...?",
         "범인의 의식이...간섭하고 있는걸까? 서둘러야겠어."
     ];
     
     if (rpgDialogStep < glitchDialogs.length) {
         const currentDialog = glitchDialogs[rpgDialogStep];
+        
+        // 글리치 효과 마커 체크
+        if (currentDialog === "GLITCH_EFFECT") {
+            dialog.style.display = 'none';
+            dialogOverlay.style.display = 'none';
+            
+            // 두 번째 글리치 효과 실행
+            applySecondGlitchEffect();
+            return;
+        }
         
         dialogOverlay.style.display = 'block';
         dialog.style.display = 'block';
@@ -3825,13 +3836,13 @@ function showGlitchRPGDialog() {
             dialog.classList.add('with-speaker', 'doctor-style');
             speaker.style.display = 'block';
             speaker.textContent = currentDialog.speaker;
-
-                dialogText.style.fontFamily = "'Noto Serif KR', serif";
-                dialogText.style.fontSize = "clamp(16px, 4vw, 20px)";
-                dialogText.style.fontWeight = "400";
-                dialogText.style.lineHeight = "1.6";
             
-                continueBtn.classList.add('hidden');
+            dialogText.style.fontFamily = "'Noto Serif KR', serif";
+            dialogText.style.fontSize = "clamp(16px, 4vw, 20px)";
+            dialogText.style.fontWeight = "400";
+            dialogText.style.lineHeight = "1.6";
+            
+            continueBtn.classList.add('hidden');
             isTyping = true;
             
             typeWriter(dialogText, currentDialog.text, 50, () => {
@@ -3840,6 +3851,50 @@ function showGlitchRPGDialog() {
             });
         }
     }
+}
+
+            function applySecondGlitchEffect() {
+    const gameContainer = document.querySelector('.game-container');
+    const matrixBg = document.getElementById('matrixBg');
+    
+    // 짧은 글리치 효과
+    let glitchCount = 0;
+    const glitchInterval = setInterval(() => {
+        const translateX = (Math.random() - 0.5) * 30;
+        const translateY = (Math.random() - 0.5) * 30;
+        const rotate = (Math.random() - 0.5) * 8;
+        const hue = Math.random() * 360;
+        
+        gameContainer.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) rotate(${rotate}deg)`;
+        gameContainer.style.filter = `grayscale(100%) hue-rotate(${hue}deg) contrast(${1.5 + Math.random()})`;
+        
+        matrixBg.style.transform = `translate(${-translateX}px, ${-translateY}px)`;
+        
+        glitchCount++;
+        
+        // 1초 동안만 (10회)
+        if (glitchCount >= 10) {
+            clearInterval(glitchInterval);
+            
+            // 원래대로 복구
+            gameContainer.style.transform = 'translate(-50%, -50%)';
+            gameContainer.style.filter = '';
+            matrixBg.style.transform = '';
+            
+            // 색상 복원
+            document.body.classList.remove('grayscale-mode');
+            document.body.style.filter = '';
+            document.body.style.webkitFilter = '';
+            gameContainer.style.filter = '';
+            gameContainer.style.webkitFilter = '';
+            
+            // 다음 대사로 진행
+            setTimeout(() => {
+                rpgDialogStep++;
+                showGlitchRPGDialog();
+            }, 500);
+        }
+    }, 100);
 }
 
 function nextGlitchDialog() {
@@ -3853,6 +3908,7 @@ function nextGlitchDialog() {
         { speaker: "??", text: "선생님. 더 방법이 없는 걸까요?" },
         { speaker: "의사", text: "이제까지 버틴 것도 기적입니다. 시간이 얼마 없습니다. 마음의 준비를..." },
         { speaker: "??", text: "대체 왜 하람이에게 이런 일이 일어나야 하는거죠...? 대체 왜... 흑흑흑" },
+        "GLITCH_EFFECT",
         "뭐지. 방금 보였던 기억은...?",
         "범인의 의식이...간섭하고 있는걸까? 서둘러야겠어."
     ];
@@ -3866,7 +3922,7 @@ function nextGlitchDialog() {
         dialog.style.display = 'none';
         dialogOverlay.style.display = 'none';
         
-        // 색감 복구 및 네번째 기억 재생
+        // 색감 이미 복구되었으므로 바로 네번째 기억 재생
         restoreColorAndPlayFourthMemory();
     }
 }
