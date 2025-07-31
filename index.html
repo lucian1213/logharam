@@ -1158,6 +1158,17 @@ const fifthMemoryHintDialogs = [
             const fifthStepDialogs = [
     "이번엔 회전바구니 앞이겠군. 회전바구니로 가보자"
 ];
+            const sixthMemoryDialogs = [
+    "좋아. 이제 마지막이야. 오늘의 날짜를 입력하자."
+];
+
+const sixthMemoryHintDialogs = [
+    "오늘이 며칠이었지...? 오늘은 사건이 일어난 날이잖아."
+];
+
+const sixthPhotoHintDialogs = [
+    "사진의 순서...사진을 잘 살펴보면 단서를 찾을 수 있을거야. 점검시간, 아이스크림, 퍼레이드, 가방의 유무 정도일까? 그 후에 가이드맵에서 범인의 동선을 그려보면... 범인의 기억과 관련된 장소는 여기야!"
+];
         
         function startFirstMemoryPlayback() {
             const firstMemoryScreen = document.getElementById('firstMemoryScreen');
@@ -4724,6 +4735,7 @@ function startSixthMemoryAnimation() {
     const subtitle = document.querySelector('.memory-subtitle');
     const inputForm = document.querySelector('#firstMemoryScreen .input-form');
     const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
     
     title.style.opacity = '1';
     typeWriter(title, "여섯번째 기억", 100, () => {
@@ -4733,10 +4745,463 @@ function startSixthMemoryAnimation() {
                 setTimeout(() => {
                     inputForm.classList.add('ui-show');
                     helpButtons.classList.add('ui-show');
+                    
+                    // 입력 비활성화
+                    const dateInput = document.getElementById('dateInput');
+                    const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+                    if (dateInput) {
+                        dateInput.disabled = true;
+                        confirmButton.disabled = true;
+                        helpButtons.style.pointerEvents = 'none';
+                    }
+                    
+                    setTimeout(() => {
+                        firstMemoryScreen.classList.add('intro-waiting');
+                        startSixthMemoryDialog();
+                    }, 1000);
                 }, 500);
             });
         }, 300);
     });
+}
+
+function startSixthMemoryDialog() {
+    currentDialogType = 'sixthMemory';
+    rpgDialogStep = 0;
+    showSixthMemoryRPGDialog();
+}
+
+function showSixthMemoryRPGDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const currentDialogs = sixthMemoryDialogs;
+    
+    if (rpgDialogStep < currentDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        
+        firstMemoryScreen.classList.add('dialog-active');
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    }
+}
+
+function nextSixthMemoryDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    
+    if (rpgDialogStep < sixthMemoryDialogs.length) {
+        showSixthMemoryRPGDialog();
+    } else {
+        const dialog = document.getElementById('rpgDialog');
+        const dialogOverlay = document.getElementById('rpgDialogOverlay');
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        firstMemoryScreen.classList.remove('dialog-active');
+        firstMemoryScreen.classList.remove('intro-waiting');
+        
+        // 입력 활성화
+        const dateInput = document.getElementById('dateInput');
+        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+        const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+        if (dateInput) {
+            dateInput.disabled = false;
+            confirmButton.disabled = false;
+            helpButtons.style.pointerEvents = 'auto';
+        }
+    }
+}
+
+function showSixthMemoryHint() {
+    currentDialogType = 'sixthMemoryHint';
+    rpgDialogStep = 0;
+    isTyping = false;
+    showSixthMemoryHintDialog();
+}
+
+function showSixthMemoryHintDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const currentDialogs = sixthMemoryHintDialogs;
+    
+    if (rpgDialogStep < currentDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        firstMemoryScreen.classList.add('dialog-active');
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    }
+}
+
+function nextSixthMemoryHintDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    
+    if (rpgDialogStep < sixthMemoryHintDialogs.length) {
+        showSixthMemoryHintDialog();
+    } else {
+        const dialog = document.getElementById('rpgDialog');
+        const dialogOverlay = document.getElementById('rpgDialogOverlay');
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        firstMemoryScreen.classList.remove('dialog-active');
+    }
+}
+
+function showSixthMemoryAnswer() {
+    showPopup('정답\n\n연도와 날짜 : 20250724');
+}
+
+function checkSixthMemoryAnswer() {
+    const date = document.getElementById('dateInput').value.trim();
+
+    if (!date) {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+        return;
+    }
+
+    if (date.length !== 8 || !/^\d{8}$/.test(date)) {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+        return;
+    }
+
+    if (date === '20250724') {
+        // 장소코드 스킵하고 바로 기억 재생
+        startSixthMemoryPlayback();
+    } else {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+    }
+}
+
+function startSixthMemoryPlayback() {
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+    const playbackText = document.getElementById('playbackText');
+    
+    playbackText.classList.remove('show', 'blink');
+    playbackText.innerHTML = '';
+    
+    firstMemoryScreen.style.display = 'none';
+    memoryPlaybackScreen.style.display = 'flex';
+    
+    setTimeout(() => {
+        playbackText.classList.add('show');
+        typeWriter(playbackText, "여섯번째 기억을 재생합니다.", 80, () => {
+            setTimeout(() => {
+                playbackText.classList.add('blink');
+                setTimeout(() => {
+                    showSixthMemoryPhotos();
+                }, 1500);
+            }, 500);
+        });
+    }, 500);
+}
+
+function showSixthMemoryPhotos() {
+    const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+    const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+    const memoryPhoto = document.getElementById('memoryPhoto');
+    
+    memoryPlaybackScreen.style.display = 'none';
+    memoryPhotoScreen.style.display = 'flex';
+    
+    // 4장의 사진을 표시하기 위한 HTML
+    memoryPhoto.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; height: 100%;">
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 1</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 2</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 3</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 4</div>
+        </div>
+    `;
+    
+    memoryPhoto.style.height = '400px'; // 4장 표시를 위해 높이 조정
+    memoryPhoto.classList.add('show');
+    
+    setTimeout(() => {
+        showSixthMemoryDialog();
+    }, 2000);
+}
+
+function showSixthMemoryDialog() {
+    currentDialogType = 'sixthMemoryPhoto';
+    rpgDialogStep = 0;
+    showSixthMemoryPhotoDialog();
+}
+
+function showSixthMemoryPhotoDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const sixthMemoryPhotoDialogs = [
+        "드디어 여기까지 왔어… 하지만 범인의 의식이 거의 다 돌아온 탓인지 쓸만한 정보들이 별로 없군. CCTV의 기록만 의도적으로 지운 것으로 보아, 이 정보들을 종합하면 아마도 위치를 알아낼 수 있을 것이 분명해"
+    ];
+    
+    if (rpgDialogStep < sixthMemoryPhotoDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, sixthMemoryPhotoDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    }
+}
+
+function nextSixthMemoryPhotoDialog() {
+    if (isTyping) return;
+    
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    
+    dialog.style.display = 'none';
+    dialogOverlay.style.display = 'none';
+    
+    showSixthPhotoInstruction();
+}
+
+function showSixthPhotoInstruction() {
+    const memoryPhoto = document.getElementById('memoryPhoto');
+    
+    // 기존 사진 아래에 지시사항 추가
+    const instructionDiv = document.createElement('div');
+    instructionDiv.style.cssText = `
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        font-family: 'Orbit', monospace;
+        font-size: clamp(14px, 3vw, 18px);
+        line-height: 1.5;
+        opacity: 0;
+    `;
+    
+    memoryPhoto.parentElement.appendChild(instructionDiv);
+    
+    setTimeout(() => {
+        instructionDiv.style.opacity = '1';
+        typeWriter(instructionDiv, "키트 구성품 중 봉투를 열어 CCTV사진 4장과 증언 스티커를 꺼내주세요. 사진을 잘 살펴보고 시간 순서대로 책자에 부착하고, 증언 스티커 또한 책자에 잘 붙여주세요. 그 후 범인의 동선을 파악해 폭탄이 설치되어있는 위치를 적어주세요.", 50, () => {
+            setTimeout(() => {
+                showLocationInputScreen();
+            }, 2000);
+        });
+    }, 500);
+}
+
+function showLocationInputScreen() {
+    const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    
+    memoryPhotoScreen.style.display = 'none';
+    firstMemoryScreen.style.display = 'flex';
+    firstMemoryScreen.classList.remove('show');
+    
+    // 화면 초기화
+    const progressContainer = document.querySelector('.progress-container');
+    progressContainer.style.display = 'none'; // 진행 바 숨기기
+    
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    title.style.opacity = '0';
+    subtitle.style.opacity = '0';
+    inputForm.classList.remove('ui-show');
+    helpButtons.classList.remove('ui-show');
+    
+    // 입력 필드 재구성
+    const dateInput = document.getElementById('dateInput');
+    const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+    
+    inputLabel.textContent = '장소입력(한글,띄어쓰기 없음) :';
+    dateInput.placeholder = '장소를 입력하세요';
+    dateInput.value = '';
+    dateInput.removeAttribute('maxlength');
+    dateInput.id = 'finalLocationInput';
+    
+    const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+    confirmButton.setAttribute('onclick', 'checkFinalLocationAnswer()');
+    
+    const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+    const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+    hintButton.setAttribute('onclick', 'showFinalLocationHint()');
+    answerButton.setAttribute('onclick', 'showFinalLocationAnswer()');
+    
+    // 타이틀 제거하고 입력 폼만 보이게
+    title.style.display = 'none';
+    subtitle.style.display = 'none';
+    
+    setTimeout(() => {
+        firstMemoryScreen.classList.add('show');
+        inputForm.classList.add('ui-show');
+        helpButtons.classList.add('ui-show');
+    }, 100);
+}
+
+function showFinalLocationHint() {
+    currentDialogType = 'sixthPhotoHint';
+    rpgDialogStep = 0;
+    isTyping = false;
+    showSixthPhotoHintDialog();
+}
+
+function showSixthPhotoHintDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const currentDialogs = sixthPhotoHintDialogs;
+    
+    if (rpgDialogStep < currentDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        firstMemoryScreen.classList.add('dialog-active');
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    }
+}
+
+function nextSixthPhotoHintDialog() {
+    if (isTyping) return;
+    
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    
+    dialog.style.display = 'none';
+    dialogOverlay.style.display = 'none';
+    firstMemoryScreen.classList.remove('dialog-active');
+}
+
+function showFinalLocationAnswer() {
+    showPopup('정답\n\n장소 : 스페인해적선');
+}
+
+function checkFinalLocationAnswer() {
+    const location = document.getElementById('finalLocationInput').value.trim();
+
+    if (!location) {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+        return;
+    }
+
+    if (location === '스페인해적선') {
+        showFinalSequence();
+    } else {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+    }
+}
+
+function showFinalSequence() {
+    // 모든 화면 요소 숨기기
+    document.getElementById('firstMemoryScreen').style.display = 'none';
+    
+    currentDialogType = 'finalSequence';
+    rpgDialogStep = 0;
+    showFinalSequenceDialog();
+}
+
+function showFinalSequenceDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const finalSequenceDialogs = [
+        "그래. 폭탄은 틀림없이 스페인 해적선에 숨겨져 있어! 어서 수색을 해야해!",
+        "얼마 후, 가방이 발견되었지만 안에는 허름한 곰인형이 들어있을 뿐이다. 눈 밑으로 터져나온 하얀 솜이 마치 눈물처럼 보인다.",
+        "가방 안은 텅 비어있어… 박도현의 목적은 무엇일까? 내가 뭘 놓친거지? 잘 생각해보자…그래..! 이제야 알겠어. 진실은 바로!"
+    ];
+    
+    if (rpgDialogStep < finalSequenceDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, finalSequenceDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    } else {
+        // 마지막 대사 후 처리
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        
+        showPopup('여섯번째 기억 구현 완료!');
+    }
+}
+
+function nextFinalSequenceDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    showFinalSequenceDialog();
 }
         
         function showPopup(message) {
@@ -4902,6 +5367,16 @@ function startSixthMemoryAnimation() {
                     nextFifthStepDialog();
                 } else if (currentDialogType === 'fifthMemoryPhoto') {
                     nextFifthMemoryPhotoDialog();
+                }else if (currentDialogType === 'sixthMemory') {
+                    nextSixthMemoryDialog();
+                } else if (currentDialogType === 'sixthMemoryHint') {
+                    nextSixthMemoryHintDialog();
+                } else if (currentDialogType === 'sixthMemoryPhoto') {
+                    nextSixthMemoryPhotoDialog();
+                } else if (currentDialogType === 'sixthPhotoHint') {
+                    nextSixthPhotoHintDialog();
+                } else if (currentDialogType === 'finalSequence') {
+                    nextFinalSequenceDialog();
                 }
             }
             
