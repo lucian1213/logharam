@@ -3773,53 +3773,128 @@ if (glitchPhase % 2 === 0) {
 }
         
         function showGlitchDialog() {
-            currentDialogType = 'glitch';
-            rpgDialogStep = 0;
-            showGlitchRPGDialog();
-        }
+    currentDialogType = 'glitch';
+    rpgDialogStep = 0;
+    showGlitchRPGDialog();
+}
+
+function showGlitchRPGDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const glitchDialogs = [
+        "뭐..뭐지? 이게 어떻게 된거야?",
+        { speaker: "의사", text: "아버님. 이제 마음의 준비를 하셔야 할 것 같습니다." },
+        { speaker: "??", text: "선생님. 더 방법이 없는 걸까요?" },
+        { speaker: "의사", text: "이제까지 버틴 것도 기적입니다. 시간이 얼마 없습니다. 마음의 준비를..." },
+        { speaker: "??", text: "대체 왜 하람이에게 이런 일이 일어나야 하는거죠...? 대체 왜... 흑흑흑" },
+        "뭐지. 방금 보였던 기억은...?",
+        "범인의 의식이...간섭하고 있는걸까? 서둘러야겠어."
+    ];
+    
+    if (rpgDialogStep < glitchDialogs.length) {
+        const currentDialog = glitchDialogs[rpgDialogStep];
         
-        function showGlitchRPGDialog() {
-            const dialog = document.getElementById('rpgDialog');
-            const dialogOverlay = document.getElementById('rpgDialogOverlay');
-            const dialogText = document.getElementById('rpgDialogText');
-            const continueBtn = document.getElementById('rpgDialogContinue');
-            const speaker = document.getElementById('rpgDialogSpeaker');
-            
-            const glitchDialogs = ["뭐..뭐지? 이게 어떻게 된거야?"];
-            
-            if (rpgDialogStep < glitchDialogs.length) {
-                dialogOverlay.style.display = 'block';
-                dialog.style.display = 'block';
-                dialog.classList.remove('with-speaker');
-                speaker.style.display = 'none';
-                
-                // 일반 대사는 원래 폰트로
-                dialogText.style.fontFamily = "'Orbit', monospace";
-                
-                continueBtn.classList.add('hidden');
-                isTyping = true;
-                
-                typeWriter(dialogText, glitchDialogs[rpgDialogStep], 50, () => {
-                    isTyping = false;
-                    continueBtn.classList.remove('hidden');
-                });
-            }
-        }
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
         
-        function nextGlitchDialog() {
-            if (isTyping) return;
+        if (typeof currentDialog === 'string') {
+            // 일반 대사
+            dialog.classList.remove('with-speaker', 'doctor-style');
+            speaker.style.display = 'none';
+            dialogText.style.fontFamily = "'Orbit', monospace";
             
-            rpgDialogStep++;
+            continueBtn.classList.add('hidden');
+            isTyping = true;
             
-            const dialog = document.getElementById('rpgDialog');
-            const dialogOverlay = document.getElementById('rpgDialogOverlay');
+            typeWriter(dialogText, currentDialog, 50, () => {
+                isTyping = false;
+                continueBtn.classList.remove('hidden');
+            });
+        } else {
+            // 의사 대화
+            dialog.classList.add('with-speaker', 'doctor-style');
+            speaker.style.display = 'block';
+            speaker.textContent = currentDialog.speaker;
             
-            dialog.style.display = 'none';
-            dialogOverlay.style.display = 'none';
+            continueBtn.classList.add('hidden');
+            isTyping = true;
             
-            // 다음 단계로
-            showPopup('네번째 기억 계속 구현중...');
+            typeWriter(dialogText, currentDialog.text, 50, () => {
+                isTyping = false;
+                continueBtn.classList.remove('hidden');
+            });
         }
+    }
+}
+
+function nextGlitchDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    
+    const glitchDialogs = [
+        "뭐..뭐지? 이게 어떻게 된거야?",
+        { speaker: "의사", text: "아버님. 이제 마음의 준비를 하셔야 할 것 같습니다." },
+        { speaker: "??", text: "선생님. 더 방법이 없는 걸까요?" },
+        { speaker: "의사", text: "이제까지 버틴 것도 기적입니다. 시간이 얼마 없습니다. 마음의 준비를..." },
+        { speaker: "??", text: "대체 왜 하람이에게 이런 일이 일어나야 하는거죠...? 대체 왜... 흑흑흑" },
+        "뭐지. 방금 보였던 기억은...?",
+        "범인의 의식이...간섭하고 있는걸까? 서둘러야겠어."
+    ];
+    
+    if (rpgDialogStep < glitchDialogs.length) {
+        showGlitchRPGDialog();
+    } else {
+        const dialog = document.getElementById('rpgDialog');
+        const dialogOverlay = document.getElementById('rpgDialogOverlay');
+        
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        
+        // 색감 복구 및 네번째 기억 재생
+        restoreColorAndPlayFourthMemory();
+    }
+}
+
+// 새로운 함수 추가
+function restoreColorAndPlayFourthMemory() {
+    // 흑백 효과 제거
+    document.body.classList.remove('grayscale-mode');
+    document.body.style.filter = '';
+    document.body.style.webkitFilter = '';
+    
+    const gameContainer = document.querySelector('.game-container');
+    gameContainer.style.filter = '';
+    gameContainer.style.webkitFilter = '';
+    
+    // 잠시 대기 후 기억 재생
+    setTimeout(() => {
+        const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+        const playbackText = document.getElementById('playbackText');
+        
+        playbackText.classList.remove('show', 'blink');
+        playbackText.innerHTML = '';
+        
+        memoryPlaybackScreen.style.display = 'flex';
+        
+        setTimeout(() => {
+            playbackText.classList.add('show');
+            typeWriter(playbackText, "네번째 기억을 재생합니다.", 80, () => {
+                setTimeout(() => {
+                    playbackText.classList.add('blink');
+                    setTimeout(() => {
+                        // 여기에 네번째 기억 사진이나 다음 단계 추가
+                        showPopup('네번째 기억 계속 구현중...');
+                    }, 1500);
+                }, 500);
+            });
+        }, 500);
+    }, 500);
+}
         
         function showPopup(message) {
             document.getElementById('popupMessage').textContent = message;
