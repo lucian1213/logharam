@@ -3701,11 +3701,12 @@
                     const hue = Math.random() * 360;
                     
                     // 게임 컨테이너 변형 - 항상 중심으로 돌아오도록
-                    if (glitchPhase % 2 === 0) {
-                        gameContainer.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
-                    } else {
-                        gameContainer.style.transform = `translate(${-translateX}px, ${-translateY}px) rotate(${-rotate}deg) scale(${scale})`;
-                    }
+                   // 게임 컨테이너 변형 - 중앙 정렬 유지하면서 변형
+if (glitchPhase % 2 === 0) {
+    gameContainer.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) rotate(${rotate}deg) scale(${scale})`;
+} else {
+    gameContainer.style.transform = `translate(calc(-50% - ${translateX}px), calc(-50% - ${translateY}px)) rotate(${-rotate}deg) scale(${scale})`;
+}
                     
                     gameContainer.style.filter = `hue-rotate(${hue}deg) contrast(${1.5 + Math.random()}) brightness(${0.8 + Math.random() * 0.4})`;
                     
@@ -3738,6 +3739,7 @@
                     if (glitchPhase >= 30) {
                         clearInterval(glitchInterval);
                         
+                        // 효과 정리 - 원래 위치로 복귀
                         // 효과 정리 - 원래 위치로 복귀
                         gameContainer.style.transition = 'all 0.3s ease';
                         matrixBg.style.transition = 'all 0.3s ease';
