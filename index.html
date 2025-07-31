@@ -4940,25 +4940,30 @@ function showSixthMemoryPhotos() {
     
     memoryPlaybackScreen.style.display = 'none';
     memoryPhotoScreen.style.display = 'flex';
+    memoryPhotoScreen.style.flexDirection = 'column';
+    memoryPhotoScreen.style.alignItems = 'center';
+    memoryPhotoScreen.style.overflowY = 'auto';
+    memoryPhotoScreen.style.padding = '20px';
     
-    // 4장의 사진을 표시하기 위한 HTML
+    // 4장의 사진을 세로로 표시
     memoryPhoto.innerHTML = `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; height: 100%;">
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 1</div>
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 2</div>
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 3</div>
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; display: flex; align-items: center; justify-content: center;">사진 4</div>
+        <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 350px;">
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 1</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 2</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 3</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 4</div>
         </div>
     `;
     
-    memoryPhoto.style.height = '400px'; // 4장 표시를 위해 높이 조정
+    memoryPhoto.style.height = 'auto';
+    memoryPhoto.style.width = '100%';
+    memoryPhoto.style.maxWidth = '350px';
     memoryPhoto.classList.add('show');
     
     setTimeout(() => {
         showSixthMemoryDialog();
     }, 2000);
 }
-
 function showSixthMemoryDialog() {
     currentDialogType = 'sixthMemoryPhoto';
     rpgDialogStep = 0;
@@ -5007,81 +5012,96 @@ function nextSixthMemoryPhotoDialog() {
 }
 
 function showSixthPhotoInstruction() {
-    const memoryPhoto = document.getElementById('memoryPhoto');
+    const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
     
     // 기존 사진 아래에 지시사항 추가
     const instructionDiv = document.createElement('div');
     instructionDiv.style.cssText = `
         color: white;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 30px;
         font-family: 'Orbit', monospace;
         font-size: clamp(14px, 3vw, 18px);
         line-height: 1.5;
         opacity: 0;
+        padding: 0 20px;
+        max-width: 350px;
     `;
     
-    memoryPhoto.parentElement.appendChild(instructionDiv);
+    memoryPhotoScreen.appendChild(instructionDiv);
     
     setTimeout(() => {
         instructionDiv.style.opacity = '1';
         typeWriter(instructionDiv, "키트 구성품 중 봉투를 열어 CCTV사진 4장과 증언 스티커를 꺼내주세요. 사진을 잘 살펴보고 시간 순서대로 책자에 부착하고, 증언 스티커 또한 책자에 잘 붙여주세요. 그 후 범인의 동선을 파악해 폭탄이 설치되어있는 위치를 적어주세요.", 50, () => {
             setTimeout(() => {
-                showLocationInputScreen();
-            }, 2000);
+                showLocationInputForm();
+            }, 1000);
         });
     }, 500);
 }
 
-function showLocationInputScreen() {
+function showLocationInputForm() {
     const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
-    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
     
-    memoryPhotoScreen.style.display = 'none';
-    firstMemoryScreen.style.display = 'flex';
-    firstMemoryScreen.classList.remove('show');
+    // 입력 폼을 현재 화면에 추가
+    const inputFormDiv = document.createElement('div');
+    inputFormDiv.style.cssText = `
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        max-width: 350px;
+    `;
     
-    // 화면 초기화
-    const progressContainer = document.querySelector('.progress-container');
-    progressContainer.style.display = 'none'; // 진행 바 숨기기
+    inputFormDiv.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+            <label style="color: white; font-size: clamp(12px, 3vw, 16px); font-family: 'Orbit', monospace;">
+                장소입력(한글,띄어쓰기 없음) :
+            </label>
+            <input type="text" id="finalLocationInput" placeholder="장소를 입력하세요" 
+                style="padding: 12px 15px; font-size: clamp(14px, 3.5vw, 18px); 
+                border: 2px solid white; background: rgba(255, 255, 255, 0.1); 
+                color: white; font-family: 'Orbit', monospace; width: 100%;">
+        </div>
+        <button onclick="checkFinalLocationAnswer()" 
+            style="padding: 15px 25px; font-size: clamp(16px, 4vw, 20px); 
+            background: transparent; color: #00ff00; border: 2px solid #00ff00; 
+            cursor: pointer; font-family: 'Orbit', monospace; margin-top: 10px;">
+            확인
+        </button>
+    `;
     
-    const title = document.querySelector('.memory-title');
-    const subtitle = document.querySelector('.memory-subtitle');
-    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
-    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    memoryPhotoScreen.appendChild(inputFormDiv);
     
-    title.style.opacity = '0';
-    subtitle.style.opacity = '0';
-    inputForm.classList.remove('ui-show');
-    helpButtons.classList.remove('ui-show');
+    // 힌트와 정답 버튼 추가
+    const helpButtonsDiv = document.createElement('div');
+    helpButtonsDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+        z-index: 50;
+    `;
     
-    // 입력 필드 재구성
-    const dateInput = document.getElementById('dateInput');
-    const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+    helpButtonsDiv.innerHTML = `
+        <button onclick="showFinalLocationHint()" 
+            style="padding: 8px 12px; font-size: clamp(10px, 2.5vw, 12px); 
+            background: transparent; color: #00ff00; border: 1px solid #00ff00; 
+            cursor: pointer; font-family: 'Orbit', monospace;">
+            힌트보기
+        </button>
+        <button onclick="showFinalLocationAnswer()" 
+            style="padding: 8px 12px; font-size: clamp(10px, 2.5vw, 12px); 
+            background: transparent; color: #00ff00; border: 1px solid #00ff00; 
+            cursor: pointer; font-family: 'Orbit', monospace;">
+            정답보기
+        </button>
+    `;
     
-    inputLabel.textContent = '장소입력(한글,띄어쓰기 없음) :';
-    dateInput.placeholder = '장소를 입력하세요';
-    dateInput.value = '';
-    dateInput.removeAttribute('maxlength');
-    dateInput.id = 'finalLocationInput';
-    
-    const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
-    confirmButton.setAttribute('onclick', 'checkFinalLocationAnswer()');
-    
-    const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
-    const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
-    hintButton.setAttribute('onclick', 'showFinalLocationHint()');
-    answerButton.setAttribute('onclick', 'showFinalLocationAnswer()');
-    
-    // 타이틀 제거하고 입력 폼만 보이게
-    title.style.display = 'none';
-    subtitle.style.display = 'none';
-    
-    setTimeout(() => {
-        firstMemoryScreen.classList.add('show');
-        inputForm.classList.add('ui-show');
-        helpButtons.classList.add('ui-show');
-    }, 100);
+    memoryPhotoScreen.appendChild(helpButtonsDiv);
 }
 
 function showFinalLocationHint() {
@@ -5152,8 +5172,8 @@ function checkFinalLocationAnswer() {
 }
 
 function showFinalSequence() {
-    // 모든 화면 요소 숨기기
-    document.getElementById('firstMemoryScreen').style.display = 'none';
+    // 현재 화면 모두 숨기기
+    document.getElementById('memoryPhotoScreen').style.display = 'none';
     
     currentDialogType = 'finalSequence';
     rpgDialogStep = 0;
