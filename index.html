@@ -3898,13 +3898,241 @@ function restoreColorAndPlayFourthMemory() {
                 setTimeout(() => {
                     playbackText.classList.add('blink');
                     setTimeout(() => {
-                        // 여기에 네번째 기억 사진이나 다음 단계 추가
-                        showPopup('네번째 기억 계속 구현중...');
+                        showFourthMemoryPhoto();
                     }, 1500);
                 }, 500);
             });
         }, 500);
     }, 500);
+}
+
+function showFourthMemoryPhoto() {
+    const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+    const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+    const memoryPhoto = document.getElementById('memoryPhoto');
+    
+    memoryPhoto.classList.remove('show');
+    
+    memoryPlaybackScreen.style.display = 'none';
+    memoryPhotoScreen.style.display = 'flex';
+    
+    memoryPhoto.innerHTML = '네번째 기억 사진이 여기에 표시됩니다';
+    
+    setTimeout(() => {
+        memoryPhoto.classList.add('show');
+        setTimeout(() => {
+            showFourthMemoryPhotoDialog();
+        }, 1000);
+    }, 500);
+}
+
+function showFourthMemoryPhotoDialog() {
+    currentDialogType = 'fourthMemoryPhoto';
+    rpgDialogStep = 0;
+    showFourthMemoryPhotoRPGDialog();
+}
+
+function showFourthMemoryPhotoRPGDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const currentDialogs = ["잃어버린 곰인형 때문에 울고 있는 것 같군."];
+    
+    if (rpgDialogStep < currentDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    }
+}
+
+function nextFourthMemoryPhotoDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    
+    dialog.style.display = 'none';
+    dialogOverlay.style.display = 'none';
+    
+    startFourthMemoryConversation();
+}
+
+function startFourthMemoryConversation() {
+    currentDialogType = 'fourthMemoryConversation';
+    rpgDialogStep = 0;
+    
+    setTimeout(() => {
+        showFourthMemoryConversationDialog();
+    }, 500);
+}
+
+function showFourthMemoryConversationDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const fourthMemoryConversationDialogs = [
+        { speaker: "하람", text: "엉엉...아빠가 사준 곰인형이...내가 제일 소중하게 생각하는건데..." },
+        { speaker: "아빠", text: "아빠도 어릴 때 소중한 걸 잃어버린 적이 있어. 그땐 세상이 무너지는 줄 알았지. 근데 말이야... 소중한 걸 잃고, 슬픈 마음이 들때 마다 아빠는 이렇게 생각했어. '그만큼 내가 뭔가를 좋아할 줄 아는 사람이구나.'하고" },
+        { speaker: "아빠", text: "잃어버린 건 속상하지만, 그만큼 네 마음이 예쁘다는 증거야. 그 마음은, 누구도 못 가져가." },
+        { speaker: "하람", text: "…그럼, 다음엔 더 안 잃어버릴래. 내 마음도, 내가 더 잘 지킬래!" }
+    ];
+    
+    if (rpgDialogStep < fourthMemoryConversationDialogs.length) {
+        const currentDialog = fourthMemoryConversationDialogs[rpgDialogStep];
+        
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.add('with-speaker');
+        
+        speaker.style.display = 'block';
+        speaker.textContent = currentDialog.speaker;
+        
+        dialogText.style.fontFamily = "'Gaegu', cursive";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialog.text, 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    } else {
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        
+        setTimeout(() => {
+            showFourthMemoryEndScreen();
+        }, 500);
+    }
+}
+
+function nextFourthMemoryConversationDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    showFourthMemoryConversationDialog();
+}
+
+function showFourthMemoryEndScreen() {
+    document.getElementById('memoryPhotoScreen').style.display = 'none';
+    
+    const memoryResultScreen = document.getElementById('memoryResultScreen');
+    const memoryResultText = document.getElementById('memoryResultText');
+    
+    memoryResultScreen.style.display = 'flex';
+    memoryResultText.classList.remove('show', 'blink');
+    
+    setTimeout(() => {
+        memoryResultText.classList.add('show');
+        typeWriter(memoryResultText, "네번째 기억 재생이\n종료되었습니다.", 80, () => {
+            setTimeout(() => {
+                memoryResultText.classList.add('blink');
+                
+                setTimeout(() => {
+                    showFifthMemoryScreen();
+                }, 1500);
+            }, 500);
+        });
+    }, 500);
+}
+
+function showFifthMemoryScreen() {
+    const memoryResultScreen = document.getElementById('memoryResultScreen');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    
+    memoryResultScreen.style.display = 'none';
+    
+    // 화면 초기화
+    firstMemoryScreen.classList.remove('show');
+    const progressBars = document.querySelectorAll('.progress-bar');
+    progressBars[3].classList.remove('active');
+    progressBars[4].classList.add('active');
+    
+    document.querySelector('.progress-indicator').textContent = '5/6';
+    
+    // 제목과 부제목 초기화
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    title.style.opacity = '0';
+    subtitle.style.opacity = '0';
+    inputForm.classList.remove('ui-show');
+    helpButtons.classList.remove('ui-show');
+    
+    // 입력 필드 초기화
+    const locationInput = document.getElementById('locationInput4');
+    if (locationInput) {
+        locationInput.value = '';
+        locationInput.id = 'dateInput';
+        locationInput.placeholder = 'YYYYMMDD';
+        locationInput.maxLength = 8;
+        
+        const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+        inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+        
+        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+        confirmButton.setAttribute('onclick', 'checkFifthMemoryAnswer()');
+        
+        const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+        const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+        hintButton.setAttribute('onclick', 'showFifthMemoryHint()');
+        answerButton.setAttribute('onclick', 'showFifthMemoryAnswer()');
+        answerButton.style.display = 'block';
+        
+        helpButtons.style.position = 'relative';
+        helpButtons.style.top = '0';
+        helpButtons.style.right = '0';
+        helpButtons.style.justifyContent = 'flex-start';
+        helpButtons.style.marginBottom = '30px';
+    }
+    
+    firstMemoryScreen.style.display = 'flex';
+    
+    setTimeout(() => {
+        firstMemoryScreen.classList.add('show');
+        startFifthMemoryAnimation();
+    }, 100);
+}
+
+function startFifthMemoryAnimation() {
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    title.style.opacity = '1';
+    typeWriter(title, "다섯번째 기억", 100, () => {
+        setTimeout(() => {
+            subtitle.style.opacity = '1';
+            typeWriter(subtitle, "다섯번째 기억의 연도와 날짜를\n입력해주세요.", 50, () => {
+                setTimeout(() => {
+                    inputForm.classList.add('ui-show');
+                    helpButtons.classList.add('ui-show');
+                }, 500);
+            });
+        }, 300);
+    });
 }
         
         function showPopup(message) {
@@ -4058,6 +4286,10 @@ function restoreColorAndPlayFourthMemory() {
                     nextGlitchDialog();
                 } else if (currentDialogType === 'hint' || currentDialogType === 'intro') {
                     nextRPGDialog();
+                } else if (currentDialogType === 'fourthMemoryPhoto') {
+                    nextFourthMemoryPhotoDialog();
+                } else if (currentDialogType === 'fourthMemoryConversation') {
+                    nextFourthMemoryConversationDialog();
                 }
             }
             
