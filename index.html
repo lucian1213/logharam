@@ -339,7 +339,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>기억 수사 장치</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbit&family=Gaegu:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbit&family=Gaegu:wght@300;400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html {
             margin: 0;
@@ -715,6 +715,12 @@
             font-size: clamp(16px, 4vw, 20px) !important;
             font-weight: 400;
             line-height: 1.5;
+        }
+        .rpg-dialog.with-speaker.doctor-style .rpg-dialog-text {
+            font-family: 'Noto Serif KR', serif !important;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 400;
+            line-height: 1.6;
         }
         .rpg-dialog-continue {
             position: absolute;
@@ -3819,8 +3825,13 @@ function showGlitchRPGDialog() {
             dialog.classList.add('with-speaker', 'doctor-style');
             speaker.style.display = 'block';
             speaker.textContent = currentDialog.speaker;
+
+                dialogText.style.fontFamily = "'Noto Serif KR', serif";
+                dialogText.style.fontSize = "clamp(16px, 4vw, 20px)";
+                dialogText.style.fontWeight = "400";
+                dialogText.style.lineHeight = "1.6";
             
-            continueBtn.classList.add('hidden');
+                continueBtn.classList.add('hidden');
             isTyping = true;
             
             typeWriter(dialogText, currentDialog.text, 50, () => {
