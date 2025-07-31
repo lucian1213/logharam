@@ -3660,7 +3660,7 @@
             }
         }
         
-      function startFourthMemoryPlayback() {
+   function startFourthMemoryPlayback() {
     const firstMemoryScreen = document.getElementById('firstMemoryScreen');
     const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
     const playbackText = document.getElementById('playbackText');
@@ -3686,22 +3686,35 @@
                 const gameContainer = document.querySelector('.game-container');
                 const matrixBg = document.getElementById('matrixBg');
                 
+                // transition 추가로 부드러운 움직임
+                gameContainer.style.transition = 'none';
+                matrixBg.style.transition = 'none';
+                
                 // 더 강렬한 글리치 효과를 위한 인터벌
                 let glitchPhase = 0;
                 const glitchInterval = setInterval(() => {
-                    // 랜덤한 변형 값 생성
-                    const translateX = (Math.random() - 0.5) * 40;
-                    const translateY = (Math.random() - 0.5) * 40;
-                    const rotate = (Math.random() - 0.5) * 10;
-                    const scale = 0.95 + Math.random() * 0.1;
+                    // 랜덤한 변형 값 생성 (더 작은 범위로)
+                    const translateX = (Math.random() - 0.5) * 20;
+                    const translateY = (Math.random() - 0.5) * 20;
+                    const rotate = (Math.random() - 0.5) * 5;
+                    const scale = 0.98 + Math.random() * 0.04;
                     const hue = Math.random() * 360;
                     
-                    // 게임 컨테이너 변형
-                    gameContainer.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+                    // 게임 컨테이너 변형 - 항상 중심으로 돌아오도록
+                    if (glitchPhase % 2 === 0) {
+                        gameContainer.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+                    } else {
+                        gameContainer.style.transform = `translate(${-translateX}px, ${-translateY}px) rotate(${-rotate}deg) scale(${scale})`;
+                    }
+                    
                     gameContainer.style.filter = `hue-rotate(${hue}deg) contrast(${1.5 + Math.random()}) brightness(${0.8 + Math.random() * 0.4})`;
                     
-                    // 배경도 함께 글리치
-                    matrixBg.style.transform = `translate(${-translateX}px, ${-translateY}px)`;
+                    // 배경은 반대로 움직여서 분리된 느낌
+                    if (glitchPhase % 2 === 0) {
+                        matrixBg.style.transform = `translate(${-translateX * 0.5}px, ${-translateY * 0.5}px)`;
+                    } else {
+                        matrixBg.style.transform = `translate(${translateX * 0.5}px, ${translateY * 0.5}px)`;
+                    }
                     matrixBg.style.filter = `hue-rotate(${360 - hue}deg)`;
                     
                     // 텍스트에 추가 효과
@@ -3725,8 +3738,10 @@
                     if (glitchPhase >= 30) {
                         clearInterval(glitchInterval);
                         
-                        // 효과 정리
-                        gameContainer.style.transform = '';
+                        // 효과 정리 - 원래 위치로 복귀
+                        gameContainer.style.transition = 'all 0.3s ease';
+                        matrixBg.style.transition = 'all 0.3s ease';
+                        gameContainer.style.transform = 'translate(-50%, -50%)'; // 원래 중앙 정렬로 복귀
                         gameContainer.style.filter = '';
                         matrixBg.style.transform = '';
                         matrixBg.style.filter = '';
