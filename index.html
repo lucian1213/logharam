@@ -1154,6 +1154,10 @@
 const fifthMemoryHintDialogs = [
     "다섯번째 순서라면...작년의 이 자료같은데. 이 자료 역시 날짜는 지워져있어. 아이의 생일이 언제였지..?"
 ];
+
+            const fifthStepDialogs = [
+    "이번엔 회전바구니 앞이겠군. 회전바구니로 가보자"
+];
         
         function startFirstMemoryPlayback() {
             const firstMemoryScreen = document.getElementById('firstMemoryScreen');
@@ -4419,11 +4423,320 @@ function startFifthStep() {
         
         typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
             setTimeout(() => {
+                firstMemoryScreen.classList.add('intro-waiting');
+                
                 inputForm.classList.add('ui-show');
                 helpButtons.classList.add('ui-show');
+                
+                // 입력 비활성화
+                const locationInput = document.getElementById('locationInput5');
+                if (locationInput) {
+                    locationInput.disabled = true;
+                    confirmButton.disabled = true;
+                    helpButtons.style.pointerEvents = 'none';
+                }
+                
+                setTimeout(() => {
+                    startFifthStepDialog();
+                }, 1000);
             }, 800);
         });
     }, 800);
+}
+
+// 다섯번째 장소 대사 관련 함수들 추가
+function startFifthStepDialog() {
+    currentDialogType = 'fifthStep';
+    rpgDialogStep = 0;
+    showFifthStepRPGDialog();
+}
+
+function showFifthStepRPGDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const currentDialogs = fifthStepDialogs;
+    
+    if (rpgDialogStep < currentDialogs.length) {
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.remove('with-speaker');
+        speaker.style.display = 'none';
+        firstMemoryScreen.classList.add('dialog-active');
+        
+        dialogText.style.fontFamily = "'Orbit', monospace";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialogs[rpgDialogStep], 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    }
+}
+
+function nextFifthStepDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    
+    if (rpgDialogStep < fifthStepDialogs.length) {
+        showFifthStepRPGDialog();
+    } else {
+        const dialog = document.getElementById('rpgDialog');
+        const dialogOverlay = document.getElementById('rpgDialogOverlay');
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        firstMemoryScreen.classList.remove('dialog-active');
+        firstMemoryScreen.classList.remove('intro-waiting');
+        
+        // 입력 활성화
+        const locationInput = document.getElementById('locationInput5');
+        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+        const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+        if (locationInput) {
+            locationInput.disabled = false;
+            confirmButton.disabled = false;
+            helpButtons.style.pointerEvents = 'auto';
+        }
+    }
+}
+
+function showFifthLocationHint() {
+    showImagePopup();
+}
+
+function showFifthLocationAnswer() {
+    showPopup('정답\n\n장소코드 : 36985452');
+}
+
+function checkFifthLocationAnswer() {
+    const location = document.getElementById('locationInput5').value.trim();
+
+    if (!location) {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+        return;
+    }
+
+    if (location === '36985452') {
+        startFifthMemoryPlayback();
+    } else {
+        showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+    }
+}
+
+// 다섯번째 기억 재생 관련 함수들
+function startFifthMemoryPlayback() {
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+    const playbackText = document.getElementById('playbackText');
+    
+    playbackText.classList.remove('show', 'blink');
+    playbackText.innerHTML = '';
+    
+    firstMemoryScreen.style.display = 'none';
+    memoryPlaybackScreen.style.display = 'flex';
+    
+    setTimeout(() => {
+        playbackText.classList.add('show');
+        typeWriter(playbackText, "다섯번째 기억을 재생합니다.", 80, () => {
+            setTimeout(() => {
+                playbackText.classList.add('blink');
+                setTimeout(() => {
+                    showFifthMemoryPhoto();
+                }, 1500);
+            }, 500);
+        });
+    }, 500);
+}
+
+function showFifthMemoryPhoto() {
+    const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
+    const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+    const memoryPhoto = document.getElementById('memoryPhoto');
+    
+    memoryPhoto.classList.remove('show');
+    
+    memoryPlaybackScreen.style.display = 'none';
+    memoryPhotoScreen.style.display = 'flex';
+    
+    memoryPhoto.innerHTML = '다섯번째 기억 사진이 여기에 표시됩니다';
+    
+    setTimeout(() => {
+        memoryPhoto.classList.add('show');
+        setTimeout(() => {
+            showFifthMemoryPhotoDialog();
+        }, 1000);
+    }, 500);
+}
+
+function showFifthMemoryPhotoDialog() {
+    currentDialogType = 'fifthMemoryPhoto';
+    rpgDialogStep = 0;
+    showFifthMemoryPhotoRPGDialog();
+}
+
+function showFifthMemoryPhotoRPGDialog() {
+    const dialog = document.getElementById('rpgDialog');
+    const dialogOverlay = document.getElementById('rpgDialogOverlay');
+    const dialogText = document.getElementById('rpgDialogText');
+    const continueBtn = document.getElementById('rpgDialogContinue');
+    const speaker = document.getElementById('rpgDialogSpeaker');
+    
+    const fifthMemoryDialogs = [
+        { speaker: "도현", text: "네가 좋아하던 그 자리, 여전히 아이들 웃음소리로 가득하네. 너 없는 세상은 여전히 잘만 돌아가고, 사람들은 아무 일 없다는 듯 웃고, 뛰고, 사랑하지. 그런 세상이... 참 얄밉다." },
+        { speaker: "도현", text: "왜 너였을까. 왜 하필 우리였을까. 말도 잘 듣고, 잘 웃고, 아프다고 한 마디도 안 하던… 그 작고 따뜻한 손을, 난 더 잡아주지 못했는데." },
+        { speaker: "도현", text: "지금이라도, 네가 저기서 다시 나타나 '아빠, 나 여기 있어!' 하고 달려와 줄 것만 같은데… 그건 그냥, 내 바람이지." },
+        { speaker: "도현", text: "미안하다. 지켜주지 못해서, 끝까지 웃어준 너한테… 아빠는 아직도, 매일 울고 있다." }
+    ];
+    
+    if (rpgDialogStep < fifthMemoryDialogs.length) {
+        const currentDialog = fifthMemoryDialogs[rpgDialogStep];
+        
+        dialogOverlay.style.display = 'block';
+        dialog.style.display = 'block';
+        dialog.classList.add('with-speaker', 'doctor-style'); // doctor-style을 사용해 Noto Serif KR 적용
+        speaker.style.display = 'block';
+        speaker.textContent = currentDialog.speaker;
+        
+        // Noto Serif KR 폰트 적용
+        dialogText.style.fontFamily = "'Noto Serif KR', serif";
+        dialogText.style.fontSize = "clamp(16px, 4vw, 20px)";
+        dialogText.style.fontWeight = "400";
+        dialogText.style.lineHeight = "1.6";
+        
+        continueBtn.classList.add('hidden');
+        isTyping = true;
+        
+        typeWriter(dialogText, currentDialog.text, 50, () => {
+            isTyping = false;
+            continueBtn.classList.remove('hidden');
+        });
+    } else {
+        dialog.style.display = 'none';
+        dialogOverlay.style.display = 'none';
+        
+        setTimeout(() => {
+            showFifthMemoryEndScreen();
+        }, 500);
+    }
+}
+
+function nextFifthMemoryPhotoDialog() {
+    if (isTyping) return;
+    
+    rpgDialogStep++;
+    showFifthMemoryPhotoRPGDialog();
+}
+
+function showFifthMemoryEndScreen() {
+    document.getElementById('memoryPhotoScreen').style.display = 'none';
+    
+    const memoryResultScreen = document.getElementById('memoryResultScreen');
+    const memoryResultText = document.getElementById('memoryResultText');
+    
+    memoryResultScreen.style.display = 'flex';
+    memoryResultText.classList.remove('show', 'blink');
+    
+    setTimeout(() => {
+        memoryResultText.classList.add('show');
+        typeWriter(memoryResultText, "다섯번째 기억 재생이\n종료되었습니다.", 80, () => {
+            setTimeout(() => {
+                memoryResultText.classList.add('blink');
+                
+                setTimeout(() => {
+                    showSixthMemoryScreen();
+                }, 1500);
+            }, 500);
+        });
+    }, 500);
+}
+
+function showSixthMemoryScreen() {
+    const memoryResultScreen = document.getElementById('memoryResultScreen');
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    
+    memoryResultScreen.style.display = 'none';
+    
+    // 화면 초기화
+    firstMemoryScreen.classList.remove('show');
+    const progressBars = document.querySelectorAll('.progress-bar');
+    progressBars[4].classList.remove('active');
+    progressBars[5].classList.add('active');
+    
+    document.querySelector('.progress-indicator').textContent = '6/6';
+    
+    // 제목과 부제목 초기화
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    title.style.opacity = '0';
+    subtitle.style.opacity = '0';
+    inputForm.classList.remove('ui-show');
+    helpButtons.classList.remove('ui-show');
+    
+    // 입력 필드 초기화
+    const locationInput = document.getElementById('locationInput5');
+    if (locationInput) {
+        locationInput.value = '';
+        locationInput.id = 'dateInput';
+        locationInput.placeholder = 'YYYYMMDD';
+        locationInput.maxLength = 8;
+        
+        const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
+        inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+        
+        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+        confirmButton.setAttribute('onclick', 'checkSixthMemoryAnswer()');
+        
+        const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+        const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+        hintButton.setAttribute('onclick', 'showSixthMemoryHint()');
+        answerButton.setAttribute('onclick', 'showSixthMemoryAnswer()');
+        answerButton.style.display = 'block';
+        
+        helpButtons.style.position = 'relative';
+        helpButtons.style.top = '0';
+        helpButtons.style.right = '0';
+        helpButtons.style.justifyContent = 'flex-start';
+        helpButtons.style.marginBottom = '30px';
+    }
+    
+    firstMemoryScreen.style.display = 'flex';
+    
+    setTimeout(() => {
+        firstMemoryScreen.classList.add('show');
+        startSixthMemoryAnimation();
+    }, 100);
+}
+
+function startSixthMemoryAnimation() {
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    title.style.opacity = '1';
+    typeWriter(title, "여섯번째 기억", 100, () => {
+        setTimeout(() => {
+            subtitle.style.opacity = '1';
+            typeWriter(subtitle, "여섯번째 기억의 연도와 날짜를\n입력해주세요.", 50, () => {
+                setTimeout(() => {
+                    inputForm.classList.add('ui-show');
+                    helpButtons.classList.add('ui-show');
+                }, 500);
+            });
+        }, 300);
+    });
 }
         
         function showPopup(message) {
@@ -4585,6 +4898,10 @@ function startFifthStep() {
                     nextFifthMemoryDialog();
                 } else if (currentDialogType === 'fifthMemoryHint') {
                     nextFifthMemoryHintDialog();
+                }else if (currentDialogType === 'fifthStep') {
+                    nextFifthStepDialog();
+                } else if (currentDialogType === 'fifthMemoryPhoto') {
+                    nextFifthMemoryPhotoDialog();
                 }
             }
             
