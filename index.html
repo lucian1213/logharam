@@ -5186,9 +5186,19 @@ function showFinalSequence() {
     // 현재 화면 모두 숨기기
     document.getElementById('memoryPhotoScreen').style.display = 'none';
     
+    // 게임 컨테이너 원래 크기로 복구
+    resetGameContainer();
+    
     currentDialogType = 'finalSequence';
     rpgDialogStep = 0;
     showFinalSequenceDialog();
+}
+
+function resetGameContainer() {
+    const gameContainer = document.querySelector('.game-container');
+    gameContainer.style.height = '85vh';
+    gameContainer.style.maxHeight = '700px';
+    gameContainer.style.overflow = 'hidden';
 }
 
 function showFinalSequenceDialog() {
