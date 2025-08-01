@@ -4937,6 +4937,12 @@ function showSixthMemoryPhotos() {
     const memoryPlaybackScreen = document.getElementById('memoryPlaybackScreen');
     const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
     const memoryPhoto = document.getElementById('memoryPhoto');
+    const gameContainer = document.querySelector('.game-container');
+    
+    // 게임 컨테이너 임시로 크기 조정
+    gameContainer.style.height = 'auto';
+    gameContainer.style.maxHeight = '95vh';
+    gameContainer.style.overflow = 'auto';
     
     memoryPlaybackScreen.style.display = 'none';
     memoryPhotoScreen.style.display = 'flex';
@@ -4944,6 +4950,8 @@ function showSixthMemoryPhotos() {
     memoryPhotoScreen.style.alignItems = 'center';
     memoryPhotoScreen.style.overflowY = 'auto';
     memoryPhotoScreen.style.padding = '20px';
+    memoryPhotoScreen.style.height = 'auto';
+    memoryPhotoScreen.style.minHeight = '100%';
     
     // 4장의 사진을 세로로 표시
     memoryPhoto.innerHTML = `
@@ -5016,6 +5024,7 @@ function showSixthPhotoInstruction() {
     
     // 기존 사진 아래에 지시사항 추가
     const instructionDiv = document.createElement('div');
+    instructionDiv.id = 'instructionDiv';
     instructionDiv.style.cssText = `
         color: white;
         text-align: center;
@@ -5032,14 +5041,24 @@ function showSixthPhotoInstruction() {
     
     setTimeout(() => {
         instructionDiv.style.opacity = '1';
+        
+        // 타이핑 중 자동 스크롤
+        const originalTypeWriter = typeWriter;
         typeWriter(instructionDiv, "키트 구성품 중 봉투를 열어 CCTV사진 4장과 증언 스티커를 꺼내주세요. 사진을 잘 살펴보고 시간 순서대로 책자에 부착하고, 증언 스티커 또한 책자에 잘 붙여주세요. 그 후 범인의 동선을 파악해 폭탄이 설치되어있는 위치를 적어주세요.", 50, () => {
             setTimeout(() => {
                 showLocationInputForm();
             }, 1000);
         });
+        
+        // 타이핑 중 스크롤 조정
+        const scrollInterval = setInterval(() => {
+            instructionDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            if (instructionDiv.innerHTML.includes("적어주세요.")) {
+                clearInterval(scrollInterval);
+            }
+        }, 100);
     }, 500);
 }
-
 function showLocationInputForm() {
     const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
     
@@ -5053,6 +5072,7 @@ function showLocationInputForm() {
         gap: 15px;
         width: 100%;
         max-width: 350px;
+        padding-bottom: 50px;
     `;
     
     inputFormDiv.innerHTML = `
@@ -5071,37 +5091,28 @@ function showLocationInputForm() {
             cursor: pointer; font-family: 'Orbit', monospace; margin-top: 10px;">
             확인
         </button>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button onclick="showFinalLocationHint()" 
+                style="padding: 8px 12px; font-size: clamp(10px, 2.5vw, 12px); 
+                background: transparent; color: #00ff00; border: 1px solid #00ff00; 
+                cursor: pointer; font-family: 'Orbit', monospace;">
+                힌트보기
+            </button>
+            <button onclick="showFinalLocationAnswer()" 
+                style="padding: 8px 12px; font-size: clamp(10px, 2.5vw, 12px); 
+                background: transparent; color: #00ff00; border: 1px solid #00ff00; 
+                cursor: pointer; font-family: 'Orbit', monospace;">
+                정답보기
+            </button>
+        </div>
     `;
     
     memoryPhotoScreen.appendChild(inputFormDiv);
     
-    // 힌트와 정답 버튼 추가
-    const helpButtonsDiv = document.createElement('div');
-    helpButtonsDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        display: flex;
-        gap: 10px;
-        z-index: 50;
-    `;
-    
-    helpButtonsDiv.innerHTML = `
-        <button onclick="showFinalLocationHint()" 
-            style="padding: 8px 12px; font-size: clamp(10px, 2.5vw, 12px); 
-            background: transparent; color: #00ff00; border: 1px solid #00ff00; 
-            cursor: pointer; font-family: 'Orbit', monospace;">
-            힌트보기
-        </button>
-        <button onclick="showFinalLocationAnswer()" 
-            style="padding: 8px 12px; font-size: clamp(10px, 2.5vw, 12px); 
-            background: transparent; color: #00ff00; border: 1px solid #00ff00; 
-            cursor: pointer; font-family: 'Orbit', monospace;">
-            정답보기
-        </button>
-    `;
-    
-    memoryPhotoScreen.appendChild(helpButtonsDiv);
+    // 입력 폼으로 스크롤
+    setTimeout(() => {
+        inputFormDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
 }
 
 function showFinalLocationHint() {
@@ -5366,8 +5377,11 @@ function showRevealScreen() {
 function showEpilogue() {
     const questionScreen = document.getElementById('questionScreen');
     questionScreen.innerHTML = '';
+    questionScreen.style.overflowY = 'auto';
+    questionScreen.style.height = '100%';
     
     const epilogueText = document.createElement('div');
+    epilogueText.id = 'epilogueText';
     epilogueText.style.cssText = `
         color: white;
         text-align: left;
@@ -5377,8 +5391,8 @@ function showEpilogue() {
         line-height: 1.8;
         max-width: 350px;
         opacity: 0;
-        height: 80vh;
-        overflow-y: auto;
+        margin: 0 auto;
+        padding-bottom: 100px;
     `;
     
     questionScreen.appendChild(epilogueText);
@@ -5387,7 +5401,18 @@ function showEpilogue() {
     
     setTimeout(() => {
         epilogueText.style.opacity = '1';
+        
+        // 타이핑 중 자동 스크롤
+        let lastLength = 0;
+        const scrollInterval = setInterval(() => {
+            if (epilogueText.innerHTML.length > lastLength) {
+                lastLength = epilogueText.innerHTML.length;
+                questionScreen.scrollTop = questionScreen.scrollHeight;
+            }
+        }, 50);
+        
         typeWriter(epilogueText, epilogueContent, 30, () => {
+            clearInterval(scrollInterval);
             // 엔딩 처리
             setTimeout(() => {
                 showPopup('플레이해주셔서 감사합니다!');
