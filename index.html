@@ -5209,11 +5209,11 @@ function showFinalSequenceDialog() {
             continueBtn.classList.remove('hidden');
         });
     } else {
-        // 마지막 대사 후 처리
         dialog.style.display = 'none';
         dialogOverlay.style.display = 'none';
         
-        showPopup('여섯번째 기억 구현 완료!');
+        // 3지선다 문제로 이동
+        showMultipleChoiceQuestions();
     }
 }
 
@@ -5222,6 +5222,178 @@ function nextFinalSequenceDialog() {
     
     rpgDialogStep++;
     showFinalSequenceDialog();
+}
+
+            let currentQuestion = 1;
+let answers = { question1: null, question2: null };
+
+function showMultipleChoiceQuestions() {
+    // 새로운 화면 생성
+    const gameContainer = document.querySelector('.game-container');
+    
+    const questionScreen = document.createElement('div');
+    questionScreen.id = 'questionScreen';
+    questionScreen.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.95);
+    `;
+    
+    gameContainer.appendChild(questionScreen);
+    
+    showQuestion1();
+}
+
+function showQuestion1() {
+    const questionScreen = document.getElementById('questionScreen');
+    questionScreen.innerHTML = `
+        <div style="text-align: center; max-width: 350px; width: 100%;">
+            <h2 style="color: #00ff00; font-size: clamp(18px, 4.5vw, 24px); margin-bottom: 30px; font-family: 'Orbit', monospace;">
+                범인의 목적은 무엇인가요?
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button onclick="selectAnswer(1, 1)" class="choice-button" style="padding: 15px 20px; background: transparent; color: white; border: 2px solid white; cursor: pointer; font-family: 'Orbit', monospace; font-size: clamp(14px, 3.5vw, 18px); text-align: left;">
+                    1. 경찰을 농락하고 절망하는 모습을 보는 것
+                </button>
+                <button onclick="selectAnswer(1, 2)" class="choice-button" style="padding: 15px 20px; background: transparent; color: white; border: 2px solid white; cursor: pointer; font-family: 'Orbit', monospace; font-size: clamp(14px, 3.5vw, 18px); text-align: left;">
+                    2. 진짜 폭탄이 터질 때까지 시간을 끌는 것
+                </button>
+                <button onclick="selectAnswer(1, 3)" class="choice-button" style="padding: 15px 20px; background: transparent; color: white; border: 2px solid white; cursor: pointer; font-family: 'Orbit', monospace; font-size: clamp(14px, 3.5vw, 18px); text-align: left;">
+                    3. 기억 수사 장치를 통해 아이를 다시 한 번 만나기 위해
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function showQuestion2() {
+    const questionScreen = document.getElementById('questionScreen');
+    questionScreen.innerHTML = `
+        <div style="text-align: center; max-width: 350px; width: 100%;">
+            <h2 style="color: #00ff00; font-size: clamp(18px, 4.5vw, 24px); margin-bottom: 30px; font-family: 'Orbit', monospace;">
+                범인의 기억 안에서 느껴진 시선은 누구의 것인가요?
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button onclick="selectAnswer(2, 1)" class="choice-button" style="padding: 15px 20px; background: transparent; color: white; border: 2px solid white; cursor: pointer; font-family: 'Orbit', monospace; font-size: clamp(14px, 3.5vw, 18px);">
+                    1. 아이
+                </button>
+                <button onclick="selectAnswer(2, 2)" class="choice-button" style="padding: 15px 20px; background: transparent; color: white; border: 2px solid white; cursor: pointer; font-family: 'Orbit', monospace; font-size: clamp(14px, 3.5vw, 18px);">
+                    2. 범인
+                </button>
+                <button onclick="selectAnswer(2, 3)" class="choice-button" style="padding: 15px 20px; background: transparent; color: white; border: 2px solid white; cursor: pointer; font-family: 'Orbit', monospace; font-size: clamp(14px, 3.5vw, 18px);">
+                    3. 제3의 인물
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function selectAnswer(questionNum, answer) {
+    if (questionNum === 1) {
+        if (answer === 3) {
+            // 정답
+            answers.question1 = answer;
+            currentQuestion = 2;
+            showQuestion2();
+        } else {
+            // 오답
+            showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+        }
+    } else if (questionNum === 2) {
+        if (answer === 2) {
+            // 정답
+            answers.question2 = answer;
+            showRevealScreen();
+        } else {
+            // 오답
+            showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
+        }
+    }
+}
+
+function showRevealScreen() {
+    const questionScreen = document.getElementById('questionScreen');
+    questionScreen.innerHTML = '';
+    
+    const revealText = document.createElement('div');
+    revealText.style.cssText = `
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-family: 'Orbit', monospace;
+        font-size: clamp(14px, 3.5vw, 18px);
+        line-height: 1.8;
+        max-width: 350px;
+        opacity: 0;
+    `;
+    
+    questionScreen.appendChild(revealText);
+    
+    setTimeout(() => {
+        revealText.style.opacity = '1';
+        typeWriter(revealText, `사실 폭탄 같은 건 없었다, 범인은 경찰이 기억 조사를 하게 만들어 다시 한 번 자신의 아들의 모습을 보고 싶었던 것이다. 범인이 모든 것을 포기하고 이제 자신은 더 이상 살아갈 자신이 없다며 자리에 쓰러앉아 흐느껴 울기 시작한다. 형사는 다가가서 범인의 어깨에 손을 올리고 말한다.\n\n"박도현씨 잃어버린 건 속상하겠지만, 그만큼 당신이 아이를 사랑했다는 증거입니다. 다시 일어나십시오."`, 50, () => {
+            // 에필로그 버튼 추가
+            setTimeout(() => {
+                const epilogueButton = document.createElement('button');
+                epilogueButton.textContent = '에필로그';
+                epilogueButton.style.cssText = `
+                    margin-top: 30px;
+                    padding: 15px 25px;
+                    font-size: clamp(16px, 4vw, 20px);
+                    background: transparent;
+                    color: #00ff00;
+                    border: 2px solid #00ff00;
+                    cursor: pointer;
+                    font-family: 'Orbit', monospace;
+                    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+                `;
+                epilogueButton.onclick = showEpilogue;
+                
+                questionScreen.appendChild(epilogueButton);
+            }, 1000);
+        });
+    }, 500);
+}
+
+function showEpilogue() {
+    const questionScreen = document.getElementById('questionScreen');
+    questionScreen.innerHTML = '';
+    
+    const epilogueText = document.createElement('div');
+    epilogueText.style.cssText = `
+        color: white;
+        text-align: left;
+        padding: 20px;
+        font-family: 'Orbit', monospace;
+        font-size: clamp(14px, 3.5vw, 18px);
+        line-height: 1.8;
+        max-width: 350px;
+        opacity: 0;
+        height: 80vh;
+        overflow-y: auto;
+    `;
+    
+    questionScreen.appendChild(epilogueText);
+    
+    const epilogueContent = `[에필로그]\n\n얼마 후, 경찰서로 편지 한장이 도착한다.\n\n- 범인의 편지 낭독\n\n안녕하세요, 형사님.\n\n그날 이후, 제 삶은 많이 달라졌습니다. 매일 아침 눈을 뜰 때마다 아이가 없는 세상이 낯설고 차갑기만 했습니다. 처음엔 그 추위 속에서 더는 살 이유가 없다고 믿었습니다.\n\n하지만 당신이 제 기억을 들여다보고 말씀해주신 그 한마디,\n\n"잃어버린 건 속상하지만, 그만큼 아이를 사랑했다는 증거입니다. 다시 일어나십시오."\n\n그 말이 제 안에 스며들어, 얼어붙은 제 마음을 녹였습니다.\n\n저는 아이를 잃은 게 아니라, 그 아이를 진심으로 사랑한 시간을 가졌던 사람이라는 걸 당신 덕분에 깨달을 수 있었습니다. 그리고 그 기억이 제가 앞으로 살아가야 할 이유라는 것도요.\n\n지금 저는 이곳에서 매일 아이와의 기억을 꺼내어 봅니다. 그 기억 속에서 아이는 언제나 웃고 있고, 저도 함께 웃고 있습니다. 비록 그때로 돌아갈 수는 없지만, 그 시간은 제가 살아있다는 증거입니다.\n\n형사님.\n\n제가 누군가의 손을 필요로 했던 그 순간, 당신이 제 손을 붙잡아 주셨습니다. 그 손길이 없었다면 저는 지금 이 세상에 없었을지도 모릅니다.\n\n이제는 저도 누군가에게 그런 손이 되고 싶습니다. 비록 교도소에 갇혀있지만, 제 삶은 이제 다시 시작입니다.\n\n진심으로 감사합니다.\n\n그리고 언젠가, 아이의 이름으로 누군가를 도울 수 있는 날이 오기를 바랍니다.`;
+    
+    setTimeout(() => {
+        epilogueText.style.opacity = '1';
+        typeWriter(epilogueText, epilogueContent, 30, () => {
+            // 엔딩 처리
+            setTimeout(() => {
+                showPopup('플레이해주셔서 감사합니다!');
+            }, 3000);
+        });
+    }, 500);
 }
         
         function showPopup(message) {
