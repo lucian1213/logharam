@@ -4939,27 +4939,30 @@ function showSixthMemoryPhotos() {
     const memoryPhoto = document.getElementById('memoryPhoto');
     const gameContainer = document.querySelector('.game-container');
     
-    // 게임 컨테이너 임시로 크기 조정
-    gameContainer.style.height = 'auto';
+    // 게임 컨테이너 스타일 조정 (height: auto 제거)
     gameContainer.style.maxHeight = '95vh';
-    gameContainer.style.overflow = 'auto';
+    gameContainer.style.overflowY = 'auto';
     
     memoryPlaybackScreen.style.display = 'none';
     memoryPhotoScreen.style.display = 'flex';
     memoryPhotoScreen.style.flexDirection = 'column';
     memoryPhotoScreen.style.alignItems = 'center';
-    memoryPhotoScreen.style.overflowY = 'auto';
     memoryPhotoScreen.style.padding = '20px';
-    memoryPhotoScreen.style.height = 'auto';
-    memoryPhotoScreen.style.minHeight = '100%';
+    memoryPhotoScreen.style.height = '100%'; // auto 대신 100%
+    memoryPhotoScreen.style.position = 'relative'; // 추가
+    
+    // memoryPhoto 스타일 초기화
+    memoryPhoto.style.transform = 'none'; // scale 초기화
+    memoryPhoto.style.border = 'none'; // 기존 border 제거
+    memoryPhoto.style.background = 'none'; // 기존 background 제거
     
     // 4장의 사진을 세로로 표시
     memoryPhoto.innerHTML = `
         <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 350px;">
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 1</div>
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 2</div>
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 3</div>
-            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center;">CCTV 사진 4</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center; color: #00ff00; font-family: 'Orbit', monospace;">CCTV 사진 1</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center; color: #00ff00; font-family: 'Orbit', monospace;">CCTV 사진 2</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center; color: #00ff00; font-family: 'Orbit', monospace;">CCTV 사진 3</div>
+            <div style="background: rgba(0, 255, 0, 0.1); border: 1px solid #00ff00; height: 200px; display: flex; align-items: center; justify-content: center; color: #00ff00; font-family: 'Orbit', monospace;">CCTV 사진 4</div>
         </div>
     `;
     
