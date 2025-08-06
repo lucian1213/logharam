@@ -13,6 +13,9 @@
             height: 100%;
             overflow-x: hidden;
         }
+        body.loaded {
+            opacity: 1;
+        }
         * { 
             margin: 0; 
             padding: 0; 
@@ -26,6 +29,8 @@
         body {
             font-family: 'Orbit', 'Courier New', monospace;
             background: #000000;
+            opacity: 0; /* 추가 */
+            transition: opacity 0.1s ease-in; /* 추가 */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -5179,6 +5184,8 @@ function showEpilogue() {
         });
 
         window.onload = function() {
+            document.body.classList.add('loaded');
+            
             createMatrixEffect();
             
             const loadingBarFill = document.getElementById('loadingBarFill');
