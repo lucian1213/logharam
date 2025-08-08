@@ -715,6 +715,61 @@
         <h3 id="popupMessage">정답이 아닌것 같다. 다시 한번 생각해보자.</h3>
     </div>
     <script>
+        // 게임 상태 관리 (맨 위에 추가)
+const GAME_STATES = {
+    INTRO: 'intro',
+    MAIN_SCREEN: 'main_screen',
+    FIRST_MEMORY: 'first_memory',
+    FIRST_LOCATION: 'first_location', 
+    SECOND_MEMORY: 'second_memory',
+    SECOND_LOCATION: 'second_location',
+    THIRD_MEMORY: 'third_memory',
+    THIRD_LOCATION: 'third_location',
+    FOURTH_MEMORY: 'fourth_memory',
+    FOURTH_LOCATION: 'fourth_location',
+    FIFTH_MEMORY: 'fifth_memory',
+    FIFTH_LOCATION: 'fifth_location',
+    SIXTH_MEMORY: 'sixth_memory',
+    FINAL_SEQUENCE: 'final_sequence',
+    COMPLETED: 'completed'
+};
+
+let currentGameState = GAME_STATES.INTRO;
+let gameProgress = {
+    currentMemory: 1,
+    completedSteps: []
+};
+
+// 저장/로드 함수들
+function saveGameState() {
+    try {
+        const saveData = {
+            currentGameState: currentGameState,
+            gameProgress: gameProgress,
+            timestamp: Date.now()
+        };
+        localStorage.setItem('memoryInvestigationSave', JSON.stringify(saveData));
+        console.log('Game saved:', currentGameState);
+    } catch (e) {
+        console.log('Save failed - localStorage not available');
+    }
+}
+
+function loadGameState() {
+    try {
+        const saveData = localStorage.getItem('memoryInvestigationSave');
+        if (saveData) {
+            const parsed = JSON.parse(saveData);
+            currentGameState = parsed.currentGameState;
+            gameProgress = parsed.gameProgress;
+            console.log('Game loaded:', currentGameState);
+            return true;
+        }
+    } catch (e) {
+        console.log('Load failed - localStorage not available');
+    }
+    return false;
+}
         let rpgDialogStep = 0;
         let isTyping = false;
         let currentDialogType = 'intro';
@@ -5189,6 +5244,12 @@ function showEpilogue() {
             document.body.classList.add('loaded');
             
             createMatrixEffect();
+
+                if (loadGameState()) {
+                    restoreGameState();
+                } else {
+                    startNewGame();
+                }
             
             const loadingBarFill = document.getElementById('loadingBarFill');
             loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
@@ -5291,6 +5352,56 @@ function showEpilogue() {
             rpgDialog.addEventListener('click', handleDialogClick);
             rpgDialogOverlay.addEventListener('click', handleDialogClick);
         };
+        function startNewGame() {
+    currentGameState = GAME_STATES.INTRO;
+    const loadingBarFill = document.getElementById('loadingBarFill');
+    loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
+    
+    setTimeout(() => {
+        currentGameState = GAME_STATES.MAIN_SCREEN;
+        saveGameState();
+        
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('mainScreen').style.display = 'flex';
+        document.getElementById('mainScreen').classList.add('show');
+        document.getElementById('mainScreen').classList.add('intro-waiting');
+        
+        setTimeout(() => {
+            startIntroAnimation();
+        }, 500);
+    }, 10000);
+}
+
+function restoreGameState() {
+    // 로딩 화면 즉시 건너뛰기
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    switch(currentGameState) {
+        case GAME_STATES.MAIN_SCREEN:
+            showMainScreen();
+            break;
+        case GAME_STATES.FIRST_MEMORY:
+            skipToFirstMemory();
+            break;
+        case GAME_STATES.SECOND_MEMORY:
+            skipToSecondMemory();
+            break;
+        case GAME_STATES.THIRD_MEMORY:
+            skipToThirdMemory();
+            break;
+        case GAME_STATES.FOURTH_MEMORY:
+            skipToFourthMemory();
+            break;
+        case GAME_STATES.FIFTH_MEMORY:
+            skipToFifthMemory();
+            break;
+        case GAME_STATES.SIXTH_MEMORY:
+            skipToSixthMemory();
+            break;
+        default:
+            startNewGame();
+    }
+}
     </script>
 </body>
 </html>
