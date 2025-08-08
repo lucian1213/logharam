@@ -5223,26 +5223,25 @@ function showEpilogue() {
             showMemorySearchResult();
         }, 1000);
         
-        return; // 나머지 로딩 과정 건너뛰기
-    } else if (saveData) {
-        console.log('🎮 저장된 진행상황:', saveData.step, '(아직 복원 미구현)');
-    }
-            
-            createMatrixEffect();
-            
-            const loadingBarFill = document.getElementById('loadingBarFill');
-            loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
-            
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.display = 'none';
-                document.getElementById('mainScreen').style.display = 'flex';
-                document.getElementById('mainScreen').classList.add('show');
-                document.getElementById('mainScreen').classList.add('intro-waiting');
-                
-                setTimeout(() => {
-                    startIntroAnimation();
-                }, 500);
-            }, 10000);
+       } else {
+    // 새 게임인 경우에만 로딩 실행
+    createMatrixEffect();
+    
+    const loadingBarFill = document.getElementById('loadingBarFill');
+    loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
+    
+    setTimeout(() => {
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('mainScreen').style.display = 'flex';
+        document.getElementById('mainScreen').classList.add('show');
+        document.getElementById('mainScreen').classList.add('intro-waiting');
+        
+        setTimeout(() => {
+            startIntroAnimation();
+        }, 500);
+    }, 10000);
+}
+
             
             // rpgDialog와 rpgDialogOverlay에 직접 클릭 이벤트 추가
             const rpgDialog = document.getElementById('rpgDialog');
