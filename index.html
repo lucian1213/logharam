@@ -5222,21 +5222,34 @@ if (saveData && saveData.step === 'main_complete') {
         showMemorySearchResult();
     }, 1000);
 } else if (saveData && saveData.step === 'first_memory_date_complete') {
-    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+     console.log('🎮 저장된 진행상황 복원:', saveData.step);
     document.getElementById('loadingScreen').style.display = 'none';
     
-    // showFirstMemoryScreen() 호출하지 말고 바로 장소코드 단계로
     setTimeout(() => {
-        // 첫 번째 기억 화면을 직접 설정
         const firstMemoryScreen = document.getElementById('firstMemoryScreen');
         firstMemoryScreen.style.display = 'flex';
         firstMemoryScreen.classList.add('show');
         
-        // 바로 장소코드 입력 단계로 설정
+        // 제목과 부제목 표시
+        const title = document.querySelector('.memory-title');
+        const subtitle = document.querySelector('.memory-subtitle');
+        
+        title.style.opacity = '1';
+        title.textContent = '첫번째 기억';
+        
+        subtitle.style.opacity = '1';
+        subtitle.textContent = '해당 기억의 장소코드를 입력해주세요.';
+        
+        // 프로그레스 바 설정
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars[0].classList.add('active');
+        document.querySelector('.progress-indicator').textContent = '1/6';
+        
+        // 장소코드 입력 상태로 설정
         setTimeout(() => {
-            startSecondStep(); // 이미 날짜를 입력했으므로 바로 장소코드 단계로
+            startSecondStep();
         }, 500);
-    }, 500);
+    }, 1000);
 } else if (saveData && saveData.step === 'first_memory_location_complete') {
     console.log('🎮 저장된 진행상황 복원:', saveData.step);
     document.getElementById('loadingScreen').style.display = 'none';
