@@ -5206,6 +5206,13 @@ function showEpilogue() {
             document.body.classList.add('loaded');
             
             createMatrixEffect();
+
+                const savedProgress = loadProgress();
+    if (savedProgress) {
+        console.log('Found save:', savedProgress);
+        // 일단 메시지만 보여주고 원래대로 진행
+        alert('저장된 진행상황을 발견했습니다: ' + savedProgress + '\n새 게임을 시작합니다.');
+    }
             
             const loadingBarFill = document.getElementById('loadingBarFill');
             loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
