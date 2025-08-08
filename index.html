@@ -5378,25 +5378,33 @@ function restoreGameState() {
     
     switch(currentGameState) {
         case GAME_STATES.MAIN_SCREEN:
-            showMainScreen();
+            // showMainScreen(); 이 줄을 아래로 교체
+            document.getElementById('mainScreen').style.display = 'flex';
+            document.getElementById('mainScreen').classList.add('show');
             break;
         case GAME_STATES.FIRST_MEMORY:
-            skipToFirstMemory();
+            // skipToFirstMemory(); 이 줄을 아래로 교체
+            showFirstMemoryScreen();
             break;
         case GAME_STATES.SECOND_MEMORY:
-            skipToSecondMemory();
+            // skipToSecondMemory(); 이 줄을 아래로 교체  
+            showSecondMemoryScreen();
             break;
         case GAME_STATES.THIRD_MEMORY:
-            skipToThirdMemory();
+            // skipToThirdMemory(); 이 줄을 아래로 교체
+            showThirdMemoryScreen();
             break;
         case GAME_STATES.FOURTH_MEMORY:
-            skipToFourthMemory();
+            // skipToFourthMemory(); 이 줄을 아래로 교체
+            showFourthMemoryScreen();
             break;
         case GAME_STATES.FIFTH_MEMORY:
-            skipToFifthMemory();
+            // skipToFifthMemory(); 이 줄을 아래로 교체
+            showFifthMemoryScreen();
             break;
         case GAME_STATES.SIXTH_MEMORY:
-            skipToSixthMemory();
+            // skipToSixthMemory(); 이 줄을 아래로 교체
+            showSixthMemoryScreen();
             break;
         default:
             startNewGame();
