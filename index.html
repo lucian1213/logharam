@@ -1160,8 +1160,9 @@ const sixthPhotoHintDialogs = [
                     setTimeout(() => {
                         memoryResultText.classList.add('blink');
                         
-                        setTimeout(() => {
-                            showSecondMemoryScreen();
+                setTimeout(() => {
+                    saveProgress('second_memory_start'); // 추가
+                    showSecondMemoryScreen();
                         }, 1500);
                     }, 500);
                 });
@@ -2425,6 +2426,7 @@ const sixthPhotoHintDialogs = [
                         memoryResultText.classList.add('blink');
                         
                         setTimeout(() => {
+                            saveProgress('third_memory_start'); // 추가
                             showThirdMemoryScreen();
                         }, 1500);
                     }, 500);
@@ -5210,10 +5212,19 @@ function showEpilogue() {
 const savedProgress = loadProgress();
 if (savedProgress === 'first_memory_start') {
     console.log('Found save:', savedProgress);
-    // 로딩 건너뛰고 바로 첫 번째 기억 화면으로
     document.getElementById('loadingScreen').style.display = 'none';
-    showMemorySearchResult(); // 기존 함수 재사용
-    return; // 나머지 로딩 과정 건너뛰기
+    showMemorySearchResult();
+    return;
+} else if (savedProgress === 'second_memory_start') {
+    console.log('Found save:', savedProgress);
+    document.getElementById('loadingScreen').style.display = 'none';
+    showSecondMemoryScreen();
+    return;
+} else if (savedProgress === 'third_memory_start') {
+    console.log('Found save:', savedProgress);
+    document.getElementById('loadingScreen').style.display = 'none';
+    showThirdMemoryScreen();
+    return;
 }
             
             const loadingBarFill = document.getElementById('loadingBarFill');
