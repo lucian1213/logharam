@@ -715,22 +715,6 @@
         <h3 id="popupMessage">정답이 아닌것 같다. 다시 한번 생각해보자.</h3>
     </div>
     <script>
-        function saveProgress(step) {
-    try {
-        localStorage.setItem('memoryGameProgress', step);
-        console.log('Saved:', step);
-    } catch(e) {
-        console.log('Save failed');
-    }
-}
-
-function loadProgress() {
-    try {
-        return localStorage.getItem('memoryGameProgress') || null;
-    } catch(e) {
-        return null;
-    }
-}
         let rpgDialogStep = 0;
         let isTyping = false;
         let currentDialogType = 'intro';
@@ -1998,7 +1982,6 @@ const sixthPhotoHintDialogs = [
             }
 
             if (name === '박도현' && birth === '19800301') {
-                saveProgress('first_memory_start');
                 startMemorySearchLoading();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -5206,15 +5189,6 @@ function showEpilogue() {
             document.body.classList.add('loaded');
             
             createMatrixEffect();
-
-const savedProgress = loadProgress();
-if (savedProgress === 'first_memory_start') {
-    console.log('Found save:', savedProgress);
-    // 로딩 건너뛰고 바로 첫 번째 기억 화면으로
-    document.getElementById('loadingScreen').style.display = 'none';
-    showMemorySearchResult(); // 기존 함수 재사용
-    return; // 나머지 로딩 과정 건너뛰기
-}
             
             const loadingBarFill = document.getElementById('loadingBarFill');
             loadingBarFill.style.animation = 'loadingProgress 10s ease-out forwards';
