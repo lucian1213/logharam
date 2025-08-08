@@ -1167,6 +1167,7 @@ const sixthPhotoHintDialogs = [
                         memoryResultText.classList.add('blink');
                         
                         setTimeout(() => {
+                            autoSave('first_memory_playback_complete');
                             showSecondMemoryScreen();
                         }, 1500);
                     }, 500);
@@ -2025,6 +2026,7 @@ const sixthPhotoHintDialogs = [
             }
 
             if (date === '20200724') {
+                autoSave('first_memory_date_complete');
                 startSecondStep();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -2192,6 +2194,7 @@ const sixthPhotoHintDialogs = [
             }
 
             if (location === '58452562') {
+                autoSave('first_memory_location_complete');
                 startFirstMemoryPlayback();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -5212,16 +5215,34 @@ function showEpilogue() {
             document.body.classList.add('loaded');
 
                    const saveData = checkSave();
-    if (saveData && saveData.step === 'main_complete') {
-        console.log('🎮 저장된 진행상황 복원:', saveData.step);
-        
-        // 로딩 건너뛰고 바로 기억 검색 결과로
-        document.getElementById('loadingScreen').style.display = 'none';
-        
-        // 3초 후에 기억 검색 결과 표시 (기존 함수 재사용)
+if (saveData && saveData.step === 'main_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        showMemorySearchResult();
+    }, 1000);
+} else if (saveData && saveData.step === 'first_memory_date_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        showFirstMemoryScreen();
+        // 날짜 입력 완료 상태로 바로 장소코드 입력 단계로
         setTimeout(() => {
-            showMemorySearchResult();
+            startSecondStep();
         }, 1000);
+    }, 1000);
+} else if (saveData && saveData.step === 'first_memory_location_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        startFirstMemoryPlayback();
+    }, 1000);
+} else if (saveData && saveData.step === 'first_memory_playback_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        showSecondMemoryScreen();
+    }, 1000);
         
        } else {
     // 새 게임인 경우에만 로딩 실행
