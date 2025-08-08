@@ -5211,9 +5211,21 @@ function showEpilogue() {
         window.onload = function() {
             document.body.classList.add('loaded');
 
-                const saveData = checkSave();
-    if (saveData) {
-        console.log('🎮 저장된 진행상황:', saveData.step);
+                   const saveData = checkSave();
+    if (saveData && saveData.step === 'main_complete') {
+        console.log('🎮 저장된 진행상황 복원:', saveData.step);
+        
+        // 로딩 건너뛰고 바로 기억 검색 결과로
+        document.getElementById('loadingScreen').style.display = 'none';
+        
+        // 3초 후에 기억 검색 결과 표시 (기존 함수 재사용)
+        setTimeout(() => {
+            showMemorySearchResult();
+        }, 1000);
+        
+        return; // 나머지 로딩 과정 건너뛰기
+    } else if (saveData) {
+        console.log('🎮 저장된 진행상황:', saveData.step, '(아직 복원 미구현)');
     }
             
             createMatrixEffect();
