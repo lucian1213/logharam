@@ -2036,12 +2036,11 @@ const sixthPhotoHintDialogs = [
                 return;
             }
 
-            if (name === '박도현' && birth === '19800301') {
-                startMemorySearchLoading();
-            } else {
-                showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
-            }
-        }
+if (name === '박도현' && birth === '19800301') {
+    currentGameState = GAME_STATES.FIRST_MEMORY;
+    saveGameState(); // 여기서 저장
+    startMemorySearchLoading();
+}
         
         function checkFirstMemoryAnswer() {
             const date = document.getElementById('dateInput').value.trim();
@@ -5365,6 +5364,7 @@ function showEpilogue() {
         document.getElementById('mainScreen').style.display = 'flex';
         document.getElementById('mainScreen').classList.add('show');
         document.getElementById('mainScreen').classList.add('intro-waiting');
+        currentGameState = GAME_STATES.MAIN_SCREEN;
         
         setTimeout(() => {
             startIntroAnimation();
