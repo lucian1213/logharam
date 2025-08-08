@@ -715,6 +715,28 @@
         <h3 id="popupMessage">정답이 아닌것 같다. 다시 한번 생각해보자.</h3>
     </div>
     <script>
+
+        function autoSave(stepName) {
+    try {
+        const saveData = {
+            step: stepName,
+            timestamp: new Date().getTime()
+        };
+        localStorage.setItem('memoryGameSave', JSON.stringify(saveData));
+        console.log('✅ 저장됨:', stepName);
+    } catch(e) {
+        console.log('❌ 저장 실패:', e);
+    }
+}
+
+function checkSave() {
+    try {
+        const data = localStorage.getItem('memoryGameSave');
+        return data ? JSON.parse(data) : null;
+    } catch(e) {
+        return null;
+    }
+}
         let rpgDialogStep = 0;
         let isTyping = false;
         let currentDialogType = 'intro';
@@ -1982,6 +2004,7 @@ const sixthPhotoHintDialogs = [
             }
 
             if (name === '박도현' && birth === '19800301') {
+                autoSave('main_complete');
                 startMemorySearchLoading();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -5187,6 +5210,11 @@ function showEpilogue() {
 
         window.onload = function() {
             document.body.classList.add('loaded');
+
+                const saveData = checkSave();
+    if (saveData) {
+        console.log('🎮 저장된 진행상황:', saveData.step);
+    }
             
             createMatrixEffect();
             
