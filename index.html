@@ -715,6 +715,22 @@
         <h3 id="popupMessage">정답이 아닌것 같다. 다시 한번 생각해보자.</h3>
     </div>
     <script>
+        function saveProgress(step) {
+    try {
+        localStorage.setItem('memoryGameProgress', step);
+        console.log('Saved:', step);
+    } catch(e) {
+        console.log('Save failed');
+    }
+}
+
+function loadProgress() {
+    try {
+        return localStorage.getItem('memoryGameProgress') || null;
+    } catch(e) {
+        return null;
+    }
+}
         let rpgDialogStep = 0;
         let isTyping = false;
         let currentDialogType = 'intro';
@@ -1982,6 +1998,7 @@ const sixthPhotoHintDialogs = [
             }
 
             if (name === '박도현' && birth === '19800301') {
+                saveProgress('first_memory_start');
                 startMemorySearchLoading();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
