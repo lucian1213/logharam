@@ -1353,6 +1353,7 @@ const sixthPhotoHintDialogs = [
             }
 
             if (date === '20210906') {
+                autoSave('second_memory_date_complete');
                 startSecondStepForSecondMemory();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -1518,6 +1519,7 @@ const sixthPhotoHintDialogs = [
             }
 
             if (location === '25653327') {
+                autoSave('second_memory_location_complete');
                 startSecondMemoryPlayback();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -2434,6 +2436,7 @@ const sixthPhotoHintDialogs = [
                         memoryResultText.classList.add('blink');
                         
                         setTimeout(() => {
+                            autoSave('second_memory_playback_complete');
                             showThirdMemoryScreen();
                         }, 1500);
                     }, 500);
@@ -5259,6 +5262,42 @@ if (saveData && saveData.step === 'main_complete') {
     document.getElementById('loadingScreen').style.display = 'none';
     setTimeout(() => {
         showSecondMemoryScreen();
+    }, 1000);
+    } else if (saveData && saveData.step === 'second_memory_date_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    setTimeout(() => {
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        firstMemoryScreen.style.display = 'flex';
+        firstMemoryScreen.classList.add('show');
+        
+        // 제목 설정
+        const title = document.querySelector('.memory-title');
+        title.style.opacity = '1';
+        title.textContent = '두번째 기억';
+        
+        // 프로그레스 바 설정 (2/6)
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars[1].classList.add('active');
+        document.querySelector('.progress-indicator').textContent = '2/6';
+        
+        // 장소코드 입력 상태로
+        setTimeout(() => {
+            startSecondStepForSecondMemory();
+        }, 500);
+    }, 1000);
+} else if (saveData && saveData.step === 'second_memory_location_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        startSecondMemoryPlayback();
+    }, 1000);
+} else if (saveData && saveData.step === 'second_memory_playback_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        showThirdMemoryScreen();
     }, 1000);
         
        } else {
