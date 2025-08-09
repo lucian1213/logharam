@@ -744,7 +744,7 @@ function checkSave() {
         const rpgDialogs = [
             "이게 기억 수사장치인가.",
             "화면을 살펴보니, 수사할 대상의 이름과 생년월일을 입력해야 하는 것 같군. 용의자의 이름과 생년월일이 어디있더라...",
-            "(힌트가 필요하면 화면상단의 힌트보기 버튼을 이용해주세요. 힌트를 본 후에도 정답을 모르겠다면 정답보기버튼으로 정답을 볼수도 있습니다.)"
+            "(힌트가 필요하면 화면상단의 힌트보기 버튼을 이용해주세요. 힌트를 본 후에도 정답을 모르겠다면 정답보기 버튼으로 정답을 볼수도 있습니다.)"
         ];
         
         const hintDialogs = [
@@ -761,7 +761,7 @@ function checkSave() {
         ];
         
         const secondStepDialogs = [
-            "장소코드? 장소코드가 뭐지? 회전목마에 대한 기억이니까 회전목마에 가보면 발견할 수 있지 않을까?",
+            "기억 키워드? 기억 키워드가 뭐지? 회전목마에 대한 기억이니까 회전목마에 가보면 발견할 수 있지 않을까?",
             "(회전 목마 근처에서 해당 표식이 그려진 게시물을 찾아보세요. 힌트보기를 누르면 게시물의 위치를 사진으로 확인할 수 있습니다.)"
         ];
         
@@ -775,9 +775,9 @@ function checkSave() {
         
         const conversationDialogs = [
             { speaker: "하람", text: "아빠, 나 진짜 여기 너무 좋아! 롯데월드 최고야!" },
-            { speaker: "아빠", text: "하하, 그렇게 좋아? 회전목마는 몇 번째 타는 거야, 오늘만?" },
+            { speaker: "아빠", text: "하하, 그렇게 좋아? 회전목마는 오늘만 몇 번째 타는 거야?" },
             { speaker: "하람", text: "음… 세 번째! 난 회전목마가 제일 좋아! 또 타고 싶어!" },
-            { speaker: "아빠", text: "좋아, 오늘은 너랑 끝까지 같이 타줄게." },
+            { speaker: "아빠", text: "좋아, 오늘은 끝까지 같이 타줄게." },
             { speaker: "하람", text: "진짜? 아빠 최고! 우리 매번 롯데월드 오면 안 돼?" },
             { speaker: "아빠", text: "매일은 어렵지만, 자주 오자! 약속!" }
         ];
@@ -819,18 +819,18 @@ function checkSave() {
         const fourthMemoryDialogs = [
             "네번째 순서... 자료대로라면 분실물 게시글이 확실해 보이는데, 날짜는 아무리 생각해봐도 알 수 없는 것 같아.",
             "아무래도 분실물 보관소의 직원을 찾아가 보는게 좋을 것 같아.",
-            "(지금부터, 롯데월드의 분실물 보관소를 직접 찾아갑니다. 분실물 보관소의 해당 표식을 가진 직원을 찾아가서 경찰증을 제시하세요. 그 후 직원과 대화를 나누며 날짜를 알아낸 후, 정답을 입력합니다.)"
+            "(지금부터, 롯데월드의 분실물 보관소를 직접 찾아갑니다. 분실물 보관소는 3층에 있습니다. 직원을 찾아가서 경찰증을 제시하세요. 그 후 직원과 대화를 나누며 날짜를 알아낸 후, 정답을 입력합니다.)"
         ];
         
         const fourthStepDialogs = [
-            "이번 장소는... 분실물 게시글을 확인해보자."
+            "이번 장소는... 분실물 보관소 근처를 확인해보자."
         ];
         
         const endingDialogs = [
-            "프로파일러의 조언에 따르면, **범인에게 의미있는 장소일 가능성이 높다**고했으니, 분명 이런 기억들을 속에 폭탄이 숨겨진 단서가 있을거야.",
+            "프로파일러의 조언에 따르면, 폭탄이 있는 곳은 범인에게 의미있는 장소일 가능성이 높다고했으니, 분명 이런 기억들 속에 폭탄이 숨겨진 단서가 있을거야.",
             "일단은… 이곳이 아이가 가장 좋아하던 놀이기구라고 하던데, 여기에 폭탄을 숨긴 것일까? 범인은 왜 폭탄을 설치한걸까?",
             "그때, 조사를 하는 우리들 사이로 누군가의 시선이 느껴졌다.",
-            "'범인의 의식이 깨어나려 하는건가? 복잡한 생각을 할 시간이 없어. 서둘러서 나머지 기억을 확인하자"
+            "범인의 의식이 깨어나려 하는건가? 복잡한 생각을 할 시간이 없어. 서둘러서 나머지 기억을 확인하자"
         ];
         
         const secondMemoryDialogs = [
@@ -850,7 +850,7 @@ const fifthMemoryHintDialogs = [
 ];
 
             const fifthStepDialogs = [
-    "이번엔 회전바구니 앞이겠군. 회전바구니로 가보자"
+    "이번엔 매직붕붕카 앞이겠군. 매직 붕붕카로 가보자"
 ];
             const sixthMemoryDialogs = [
     "좋아. 이제 마지막이야. 오늘의 날짜를 입력하자."
@@ -1399,7 +1399,7 @@ const sixthPhotoHintDialogs = [
         }
         
         function startSecondStepForSecondMemory() {
-            console.log('두번째 기억 - 장소코드 단계 시작');
+            console.log('두번째 기억 - 기억 키워드 단계 시작');
             
             const subtitle = document.querySelector('.memory-subtitle');
             const inputForm = document.querySelector('#firstMemoryScreen .input-form');
@@ -1416,8 +1416,8 @@ const sixthPhotoHintDialogs = [
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '장소코드 :';
-                dateInput.placeholder = '장소코드를 입력하세요';
+                inputLabel.textContent = '기억 키워드 :';
+                dateInput.placeholder = '기억 키워드를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput2';
@@ -1441,7 +1441,7 @@ const sixthPhotoHintDialogs = [
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 키워드를 입력해주세요.", 80, () => {
                     setTimeout(() => {
                         firstMemoryScreen.classList.add('intro-waiting');
                         
@@ -1507,7 +1507,7 @@ const sixthPhotoHintDialogs = [
         }
         
         function showSecondLocationAnswer() {
-            showPopup('두번째 기억 장소코드 정답은 곧 구현됩니다!');
+            showPopup('두번째 기억 기억 키워드 정답은 곧 구현됩니다!');
         }
         
         function checkSecondLocationAnswer() {
@@ -1518,7 +1518,7 @@ const sixthPhotoHintDialogs = [
                 return;
             }
 
-            if (location === '25653327') {
+            if (location === '부상') {
                 autoSave('second_memory_location_complete');
                 startSecondMemoryPlayback();
             } else {
@@ -2059,8 +2059,8 @@ const sixthPhotoHintDialogs = [
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '장소코드 :';
-                dateInput.placeholder = '장소코드를 입력하세요';
+                inputLabel.textContent = '기억 키워드 :';
+                dateInput.placeholder = '기억 키워드드를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput';
@@ -2076,7 +2076,7 @@ const sixthPhotoHintDialogs = [
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 키워드드를 입력해주세요.", 80, () => {
                     console.log('타이핑 완료, UI 요소들 다시 표시');
                     
                     setTimeout(() => {
@@ -2184,7 +2184,7 @@ const sixthPhotoHintDialogs = [
         }
         
         function showLocationAnswer() {
-            showPopup('정답\n\n장소코드 : 58452562');
+            showPopup('정답\n\n : 생일');
         }
         
         function checkLocationAnswer() {
@@ -2195,7 +2195,7 @@ const sixthPhotoHintDialogs = [
                 return;
             }
 
-            if (location === '58452562') {
+            if (location === '생일일') {
                 autoSave('first_memory_location_complete');
                 startFirstMemoryPlayback();
             } else {
@@ -2737,8 +2737,8 @@ function showThirdMemoryScreen() {
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '장소코드 :';
-                dateInput.placeholder = '장소코드를 입력하세요';
+                inputLabel.textContent = '기억 키워드 :';
+                dateInput.placeholder = '기억 키워드를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput3';
@@ -2762,7 +2762,7 @@ function showThirdMemoryScreen() {
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 기억 키워드를 입력해주세요.", 80, () => {
                     setTimeout(() => {
                         firstMemoryScreen.classList.add('intro-waiting');
                         
@@ -2855,7 +2855,7 @@ function showThirdMemoryScreen() {
         }
         
         function showThirdLocationAnswer() {
-            showPopup('정답\n\n장소코드 : 65252211');
+            showPopup('정답\n\n기억 키워드 : 성장');
         }
         
         function checkThirdLocationAnswer() {
@@ -2866,7 +2866,7 @@ function showThirdMemoryScreen() {
                 return;
             }
 
-            if (location === '65252211') {
+            if (location === '성장') {
                 autoSave('third_memory_location_complete');
                 startThirdMemoryPlayback();
             } else {
@@ -3360,8 +3360,8 @@ function showThirdMemoryScreen() {
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '장소코드 :';
-                dateInput.placeholder = '장소코드를 입력하세요';
+                inputLabel.textContent = '기억 키워드 :';
+                dateInput.placeholder = '기억 키워드를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput4';
@@ -3385,7 +3385,7 @@ function showThirdMemoryScreen() {
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 기억 키워드를 입력해주세요.", 80, () => {
                     setTimeout(() => {
                         firstMemoryScreen.classList.add('intro-waiting');
                         
@@ -3478,7 +3478,7 @@ function showThirdMemoryScreen() {
         }
         
         function showFourthLocationAnswer() {
-            showPopup('정답\n\n장소코드 : 74562732');
+            showPopup('정답\n\n기억 키워드 : 분실');
         }
         
         function checkFourthLocationAnswer() {
@@ -3489,7 +3489,7 @@ function showThirdMemoryScreen() {
                 return;
             }
 
-            if (location === '74562732') {
+            if (location === '분실') {
                 autoSave('fourth_memory_location_complete');
                 startFourthMemoryPlayback();
             } else {
@@ -4261,8 +4261,8 @@ function startFifthStep() {
         const dateInput = document.getElementById('dateInput');
         const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
         
-        inputLabel.textContent = '장소코드 :';
-        dateInput.placeholder = '장소코드를 입력하세요';
+        inputLabel.textContent = '기억 키워드 :';
+        dateInput.placeholder = '기억 키워드를 입력하세요';
         dateInput.value = '';
         dateInput.removeAttribute('maxlength');
         dateInput.id = 'locationInput5';
@@ -4286,7 +4286,7 @@ function startFifthStep() {
         subtitle.textContent = '';
         subtitle.style.opacity = '1';
         
-        typeWriter(subtitle, "해당 기억의 장소코드를 입력해주세요.", 80, () => {
+        typeWriter(subtitle, "해당 기억의 기억 키워드를 입력해주세요.", 80, () => {
             setTimeout(() => {
                 firstMemoryScreen.classList.add('intro-waiting');
                 
@@ -4379,7 +4379,7 @@ function showFifthLocationHint() {
 }
 
 function showFifthLocationAnswer() {
-    showPopup('정답\n\n장소코드 : 36985452');
+    showPopup('정답\n\n기억 키워드 : 소실');
 }
 
 function checkFifthLocationAnswer() {
@@ -4390,7 +4390,7 @@ function checkFifthLocationAnswer() {
         return;
     }
 
-    if (location === '36985452') {
+    if (location === '소실') {
         autoSave('fifth_memory_location_complete'); 
         startFifthMemoryPlayback();
     } else {
@@ -4802,7 +4802,7 @@ function checkSixthMemoryAnswer() {
     }
 
     if (date === '20250724') {
-        // 장소코드 스킵하고 바로 기억 재생
+        // 기억 키워드 스킵하고 바로 기억 재생
         autoSave('sixth_memory_date_complete');
         startSixthMemoryPlayback();
     } else {
@@ -5464,7 +5464,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[0].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '1/6';
         
-        // 장소코드 입력 상태로 설정
+        // 기억 키워드 입력 상태로 설정
         setTimeout(() => {
             startSecondStep();
         }, 500);
@@ -5500,7 +5500,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[1].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '2/6';
         
-        // 장소코드 입력 상태로
+        // 기억 키워드 입력 상태로
         setTimeout(() => {
             startSecondStepForSecondMemory();
         }, 500);
@@ -5543,7 +5543,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[2].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '3/6';
         
-        // 세 번째 기억 날짜 입력 완료 상태이므로 바로 장소코드 단계로
+        // 세 번째 기억 날짜 입력 완료 상태이므로 바로 기억 키워드 단계로
         setTimeout(() => {
             startThirdStep();
         }, 500);
@@ -5598,7 +5598,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[3].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '4/6';
         
-        // 네 번째 기억 날짜 입력 완료 상태이므로 바로 장소코드 단계로
+        // 네 번째 기억 날짜 입력 완료 상태이므로 바로 기억 키워드 단계로
         setTimeout(() => {
             startFourthStep();
         }, 500);
@@ -5653,7 +5653,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[4].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '5/6';
         
-        // 다섯 번째 기억 날짜 입력 완료 상태이므로 바로 장소코드 단계로
+        // 다섯 번째 기억 날짜 입력 완료 상태이므로 바로 기억 키워드 단계로
         setTimeout(() => {
             startFifthStep();
         }, 500);
