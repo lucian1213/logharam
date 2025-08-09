@@ -5246,6 +5246,10 @@ function showFinalSequenceDialog() {
 }
 
 function showBearPhotoInDialog() {
+    // 대화창 숨기기 - 이 부분 추가!
+    document.getElementById('rpgDialog').style.display = 'none';
+    document.getElementById('rpgDialogOverlay').style.display = 'none';
+    
     // 모든 관련 화면 완전히 숨기기
     document.getElementById('firstMemoryScreen').style.display = 'none';
     document.getElementById('memoryResultScreen').style.display = 'none';
