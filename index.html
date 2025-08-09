@@ -2450,121 +2450,129 @@ const sixthPhotoHintDialogs = [
         }
         
 function showThirdMemoryScreen() {
-  // === 화면 전환 ===
-  var videoContainer = document.getElementById('videoContainer');
-  var firstMemoryScreen = document.getElementById('firstMemoryScreen');
-  if (videoContainer) videoContainer.style.display = 'none';
-  if (firstMemoryScreen) firstMemoryScreen.style.display = 'block';
+    // === 화면 전환 ===
+    var videoContainer = document.getElementById('videoContainer');
+    var firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    if (videoContainer) videoContainer.style.display = 'none';
+    if (firstMemoryScreen) firstMemoryScreen.style.display = 'block';
 
-  // === 진행바: 전체 off → 3번만 on ===
-  var progressBars = document.querySelectorAll('.progress-bar');
-  for (var i = 0; i < progressBars.length; i++) {
-    progressBars[i].classList.remove('active');
-  }
-  if (progressBars.length > 2) {
-    progressBars[2].classList.add('active');
-  }
-  var indicator = document.querySelector('.progress-indicator');
-  if (indicator) indicator.textContent = '3/6';
+    // === 진행바: 전체 off → 3번만 on ===
+    var progressBars = document.querySelectorAll('.progress-bar');
+    for (var i = 0; i < progressBars.length; i++) {
+        progressBars[i].classList.remove('active');
+    }
+    if (progressBars.length > 2) {
+        progressBars[2].classList.add('active');
+    }
+    var indicator = document.querySelector('.progress-indicator');
+    if (indicator) indicator.textContent = '3/6';
 
-  // === 3단계 UI 강제 세팅 (자동로드 대비) ===
-  // 라벨
-  var inputLabel =
-    (firstMemoryScreen && firstMemoryScreen.querySelector('.input-label')) ||
-    document.querySelector('#firstMemoryScreen .input-label');
-  if (inputLabel) inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+    // === UI 요소들을 애니메이션을 위해 숨김 상태로 초기화 ===
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    // 모든 요소를 숨김 상태로 초기화
+    if (title) {
+        title.style.opacity = '0';
+        title.textContent = '';
+    }
+    if (subtitle) {
+        subtitle.style.opacity = '0';
+        subtitle.textContent = '';
+    }
+    if (inputForm) {
+        inputForm.classList.remove('ui-show');
+    }
+    if (helpButtons) {
+        helpButtons.classList.remove('ui-show');
+    }
 
-  // 입력 요소 찾기
-  var inputEl =
-    (firstMemoryScreen && firstMemoryScreen.querySelector('#dateInput')) ||
-    (firstMemoryScreen && firstMemoryScreen.querySelector('#locationInput2')) ||
-    (firstMemoryScreen && firstMemoryScreen.querySelector('.form-input')) ||
-    document.querySelector('#firstMemoryScreen input[type="text"]') ||
-    document.querySelector('.form-input');
+    // === 3단계 UI 강제 세팅 (자동로드 대비) ===
+    // 라벨
+    var inputLabel =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.input-label')) ||
+        document.querySelector('#firstMemoryScreen .input-label');
+    if (inputLabel) inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
 
-  if (!inputEl) {
-    // 없으면 생성
-    inputEl = document.createElement('input');
-    inputEl.type = 'text';
-    inputEl.className = 'form-input';
-    var inputGroup =
-      (firstMemoryScreen && firstMemoryScreen.querySelector('.input-group')) ||
-      firstMemoryScreen ||
-      document.body;
-    inputGroup.appendChild(inputEl);
-  }
+    // 입력 요소 찾기
+    var inputEl =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('#dateInput')) ||
+        (firstMemoryScreen && firstMemoryScreen.querySelector('#locationInput2')) ||
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.form-input')) ||
+        document.querySelector('#firstMemoryScreen input[type="text"]') ||
+        document.querySelector('.form-input');
 
-  // 입력 필드 초기화
-  inputEl.value = '';
-  inputEl.id = 'dateInput';
-  inputEl.placeholder = 'YYYYMMDD';
-  inputEl.maxLength = 8;
+    if (!inputEl) {
+        // 없으면 생성
+        inputEl = document.createElement('input');
+        inputEl.type = 'text';
+        inputEl.className = 'form-input';
+        var inputGroup =
+            (firstMemoryScreen && firstMemoryScreen.querySelector('.input-group')) ||
+            firstMemoryScreen ||
+            document.body;
+        inputGroup.appendChild(inputEl);
+    }
 
-  // 결과/피드백 초기화
-  var feedback =
-    (firstMemoryScreen && firstMemoryScreen.querySelector('.result-message')) ||
-    document.querySelector('.result-message');
-  if (feedback) {
-    feedback.textContent = '';
-    feedback.className = 'result-message';
-  }
+    // 입력 필드 초기화
+    inputEl.value = '';
+    inputEl.id = 'dateInput';
+    inputEl.placeholder = 'YYYYMMDD';
+    inputEl.maxLength = 8;
 
-  // 버튼 참조
-  var helpButtons =
-    (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
-    document.querySelector('#firstMemoryScreen .help-buttons') ||
-    document.querySelector('.help-buttons');
+    // 버튼 참조
+    var helpButtonsEl =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons') ||
+        document.querySelector('.help-buttons');
 
-  var confirmButton =
-    (firstMemoryScreen && firstMemoryScreen.querySelector('.confirm-button')) ||
-    document.querySelector('#firstMemoryScreen .confirm-button') ||
-    document.querySelector('.confirm-button');
+    var confirmButton =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.confirm-button')) ||
+        document.querySelector('#firstMemoryScreen .confirm-button') ||
+        document.querySelector('.confirm-button');
 
-  var hintButton =
-    (helpButtons && helpButtons.querySelector('.help-button:first-child')) ||
-    document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+    var hintButton =
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:first-child')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
 
-  var answerButton =
-    (helpButtons && helpButtons.querySelector('.help-button:last-child')) ||
-    document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+    var answerButton =
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:last-child')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
 
-  // 버튼 핸들러 3단계 전용으로 재설정
-  if (confirmButton) {
-    confirmButton.onclick = null;
-    confirmButton.setAttribute('onclick', 'checkThirdMemoryAnswer()');
-  }
-  if (hintButton) {
-    hintButton.onclick = null;
-    hintButton.setAttribute('onclick', 'showThirdMemoryHint()');
-  }
-  if (answerButton) {
-    answerButton.onclick = null;
-    answerButton.setAttribute('onclick', 'showThirdMemoryAnswer()');
-    answerButton.style.display = 'block';
-  }
+    // 버튼 핸들러 3단계 전용으로 재설정
+    if (confirmButton) {
+        confirmButton.onclick = null;
+        confirmButton.setAttribute('onclick', 'checkThirdMemoryAnswer()');
+    }
+    if (hintButton) {
+        hintButton.onclick = null;
+        hintButton.setAttribute('onclick', 'showThirdMemoryHint()');
+    }
+    if (answerButton) {
+        answerButton.onclick = null;
+        answerButton.setAttribute('onclick', 'showThirdMemoryAnswer()');
+        answerButton.style.display = 'block';
+    }
 
-  // 버튼 박스 스타일 원복
-  if (helpButtons) {
-    helpButtons.style.position = 'relative';
-    helpButtons.style.top = '0';
-    helpButtons.style.right = '0';
-    helpButtons.style.justifyContent = 'flex-start';
-    helpButtons.style.marginBottom = '30px';
-  }
+    // 버튼 박스 스타일 원복
+    if (helpButtonsEl) {
+        helpButtonsEl.style.position = 'relative';
+        helpButtonsEl.style.top = '0';
+        helpButtonsEl.style.right = '0';
+        helpButtonsEl.style.justifyContent = 'flex-start';
+        helpButtonsEl.style.marginBottom = '30px';
+    }
 
-  // 입력 포커스
-  if (inputEl && inputEl.focus) {
-    try { inputEl.focus(); } catch (e) {}
-  }
-
-  // === 화면 표시 애니메이션 ===
-  if (firstMemoryScreen) {
-    firstMemoryScreen.style.display = 'flex';
-    setTimeout(() => {
-      firstMemoryScreen.classList.add('show');
-      startThirdMemoryAnimation();
-    }, 100);
-  }
+    // === 화면 표시 애니메이션 ===
+    if (firstMemoryScreen) {
+        firstMemoryScreen.style.display = 'flex';
+        setTimeout(() => {
+            firstMemoryScreen.classList.add('show');
+            startThirdMemoryAnimation();
+        }, 100);
+    }
 }
 
         
@@ -3118,7 +3126,7 @@ function showThirdMemoryScreen() {
             }, 500);
         }
         
-        function showFourthMemoryScreen() {
+     function showFourthMemoryScreen() {
     // === 화면 전환 ===
     var videoContainer = document.getElementById('videoContainer');
     var firstMemoryScreen = document.getElementById('firstMemoryScreen');
@@ -3135,6 +3143,28 @@ function showThirdMemoryScreen() {
     }
     var indicator = document.querySelector('.progress-indicator');
     if (indicator) indicator.textContent = '4/6';
+
+    // === UI 요소들을 애니메이션을 위해 숨김 상태로 초기화 ===
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    // 모든 요소를 숨김 상태로 초기화
+    if (title) {
+        title.style.opacity = '0';
+        title.textContent = '';
+    }
+    if (subtitle) {
+        subtitle.style.opacity = '0';
+        subtitle.textContent = '';
+    }
+    if (inputForm) {
+        inputForm.classList.remove('ui-show');
+    }
+    if (helpButtons) {
+        helpButtons.classList.remove('ui-show');
+    }
 
     // === 4단계 UI 강제 세팅 (자동로드 대비) ===
     // 라벨
@@ -3170,7 +3200,7 @@ function showThirdMemoryScreen() {
     inputEl.maxLength = 8;
 
     // 버튼 참조
-    var helpButtons =
+    var helpButtonsEl =
         (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
         document.querySelector('#firstMemoryScreen .help-buttons') ||
         document.querySelector('.help-buttons');
@@ -3181,11 +3211,11 @@ function showThirdMemoryScreen() {
         document.querySelector('.confirm-button');
 
     var hintButton =
-        (helpButtons && helpButtons.querySelector('.help-button:first-child')) ||
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:first-child')) ||
         document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
 
     var answerButton =
-        (helpButtons && helpButtons.querySelector('.help-button:last-child')) ||
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:last-child')) ||
         document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
 
     // 버튼 핸들러 4단계 전용으로 재설정
@@ -3204,12 +3234,12 @@ function showThirdMemoryScreen() {
     }
 
     // 버튼 박스 스타일 원복
-    if (helpButtons) {
-        helpButtons.style.position = 'relative';
-        helpButtons.style.top = '0';
-        helpButtons.style.right = '0';
-        helpButtons.style.justifyContent = 'flex-start';
-        helpButtons.style.marginBottom = '30px';
+    if (helpButtonsEl) {
+        helpButtonsEl.style.position = 'relative';
+        helpButtonsEl.style.top = '0';
+        helpButtonsEl.style.right = '0';
+        helpButtonsEl.style.justifyContent = 'flex-start';
+        helpButtonsEl.style.marginBottom = '30px';
     }
 
     // === 화면 표시 애니메이션 ===
@@ -3971,6 +4001,28 @@ function showFifthMemoryScreen() {
     var indicator = document.querySelector('.progress-indicator');
     if (indicator) indicator.textContent = '5/6';
 
+    // === UI 요소들을 애니메이션을 위해 숨김 상태로 초기화 ===
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    // 모든 요소를 숨김 상태로 초기화
+    if (title) {
+        title.style.opacity = '0';
+        title.textContent = '';
+    }
+    if (subtitle) {
+        subtitle.style.opacity = '0';
+        subtitle.textContent = '';
+    }
+    if (inputForm) {
+        inputForm.classList.remove('ui-show');
+    }
+    if (helpButtons) {
+        helpButtons.classList.remove('ui-show');
+    }
+
     // === 5단계 UI 강제 세팅 (자동로드 대비) ===
     // 라벨
     var inputLabel =
@@ -4005,7 +4057,7 @@ function showFifthMemoryScreen() {
     inputEl.maxLength = 8;
 
     // 버튼 참조
-    var helpButtons =
+    var helpButtonsEl =
         (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
         document.querySelector('#firstMemoryScreen .help-buttons') ||
         document.querySelector('.help-buttons');
@@ -4016,11 +4068,11 @@ function showFifthMemoryScreen() {
         document.querySelector('.confirm-button');
 
     var hintButton =
-        (helpButtons && helpButtons.querySelector('.help-button:first-child')) ||
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:first-child')) ||
         document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
 
     var answerButton =
-        (helpButtons && helpButtons.querySelector('.help-button:last-child')) ||
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:last-child')) ||
         document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
 
     // 버튼 핸들러 5단계 전용으로 재설정
@@ -4039,12 +4091,12 @@ function showFifthMemoryScreen() {
     }
 
     // 버튼 박스 스타일 원복
-    if (helpButtons) {
-        helpButtons.style.position = 'relative';
-        helpButtons.style.top = '0';
-        helpButtons.style.right = '0';
-        helpButtons.style.justifyContent = 'flex-start';
-        helpButtons.style.marginBottom = '30px';
+    if (helpButtonsEl) {
+        helpButtonsEl.style.position = 'relative';
+        helpButtonsEl.style.top = '0';
+        helpButtonsEl.style.right = '0';
+        helpButtonsEl.style.justifyContent = 'flex-start';
+        helpButtonsEl.style.marginBottom = '30px';
     }
 
     // === 화면 표시 애니메이션 ===
@@ -4555,6 +4607,28 @@ function showSixthMemoryScreen() {
     var indicator = document.querySelector('.progress-indicator');
     if (indicator) indicator.textContent = '6/6';
 
+    // === UI 요소들을 애니메이션을 위해 숨김 상태로 초기화 ===
+    const title = document.querySelector('.memory-title');
+    const subtitle = document.querySelector('.memory-subtitle');
+    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
+    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
+    
+    // 모든 요소를 숨김 상태로 초기화
+    if (title) {
+        title.style.opacity = '0';
+        title.textContent = '';
+    }
+    if (subtitle) {
+        subtitle.style.opacity = '0';
+        subtitle.textContent = '';
+    }
+    if (inputForm) {
+        inputForm.classList.remove('ui-show');
+    }
+    if (helpButtons) {
+        helpButtons.classList.remove('ui-show');
+    }
+
     // === 6단계 UI 강제 세팅 (자동로드 대비) ===
     // 라벨
     var inputLabel =
@@ -4589,7 +4663,7 @@ function showSixthMemoryScreen() {
     inputEl.maxLength = 8;
 
     // 버튼 참조
-    var helpButtons =
+    var helpButtonsEl =
         (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
         document.querySelector('#firstMemoryScreen .help-buttons') ||
         document.querySelector('.help-buttons');
@@ -4600,11 +4674,11 @@ function showSixthMemoryScreen() {
         document.querySelector('.confirm-button');
 
     var hintButton =
-        (helpButtons && helpButtons.querySelector('.help-button:first-child')) ||
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:first-child')) ||
         document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
 
     var answerButton =
-        (helpButtons && helpButtons.querySelector('.help-button:last-child')) ||
+        (helpButtonsEl && helpButtonsEl.querySelector('.help-button:last-child')) ||
         document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
 
     // 버튼 핸들러 6단계 전용으로 재설정
@@ -4623,12 +4697,12 @@ function showSixthMemoryScreen() {
     }
 
     // 버튼 박스 스타일 원복
-    if (helpButtons) {
-        helpButtons.style.position = 'relative';
-        helpButtons.style.top = '0';
-        helpButtons.style.right = '0';
-        helpButtons.style.justifyContent = 'flex-start';
-        helpButtons.style.marginBottom = '30px';
+    if (helpButtonsEl) {
+        helpButtonsEl.style.position = 'relative';
+        helpButtonsEl.style.top = '0';
+        helpButtonsEl.style.right = '0';
+        helpButtonsEl.style.justifyContent = 'flex-start';
+        helpButtonsEl.style.marginBottom = '30px';
     }
 
     // === 화면 표시 애니메이션 ===
