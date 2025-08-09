@@ -5159,12 +5159,7 @@ function showBearPhotoInDialog() {
     memoryPhotoScreen.style.display = 'flex';
     memoryPhoto.innerHTML = '<img src="bear.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
     memoryPhoto.classList.add('show');
-    
-    // 3초 후 자동으로 사진 숨기기
-    setTimeout(() => {
-        memoryPhotoScreen.style.display = 'none';
-        memoryPhoto.classList.remove('show');
-    }, 3000);
+
 }
 
 function nextFinalSequenceDialog() {
@@ -5178,6 +5173,8 @@ function nextFinalSequenceDialog() {
 let answers = { question1: null, question2: null };
 
 function showMultipleChoiceQuestions() {
+
+    document.getElementById('memoryPhotoScreen').style.display = 'none';
     // 새로운 화면 생성
     const gameContainer = document.querySelector('.game-container');
     
