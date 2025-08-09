@@ -1168,6 +1168,8 @@ const sixthPhotoHintDialogs = [
                         
                         setTimeout(() => {
                             autoSave('first_memory_playback_complete');
+                            memoryResultScreen.style.display = 'none';
+        memoryResultText.classList.remove('show', 'blink');
                             showSecondMemoryScreen();
                         }, 1500);
                     }, 500);
@@ -1651,6 +1653,8 @@ const sixthPhotoHintDialogs = [
                         
                         setTimeout(() => {
                             showFirstMemoryScreen();
+                            memoryResultScreen.style.display = 'none';
+        memoryResultText.classList.remove('show', 'blink');
                         }, 1500);
                     }, 500);
                 });
@@ -2437,7 +2441,8 @@ const sixthPhotoHintDialogs = [
                         
                         setTimeout(() => {
                             autoSave('second_memory_playback_complete');
-                            ;
+                            memoryResultScreen.style.display = 'none';
+                            memoryResultText.classList.remove('show', 'blink');
                         }, 1500);
                     }, 500);
                 });
@@ -3104,6 +3109,8 @@ function showThirdMemoryScreen() {
                         
                         setTimeout(() => {
                             autoSave('third_memory_playback_complete');
+                            memoryResultScreen.style.display = 'none';
+        memoryResultText.classList.remove('show', 'blink');
                             showFourthMemoryScreen();
                         }, 1500);
                     }, 500);
@@ -3937,6 +3944,8 @@ function showFourthMemoryEndScreen() {
                 
                 setTimeout(() => {
                     showFifthMemoryScreen();
+                    memoryResultScreen.style.display = 'none';
+        memoryResultText.classList.remove('show', 'blink');
                     autoSave('fourth_memory_playback_complete');
                 }, 1500);
             }, 500);
@@ -4519,6 +4528,8 @@ function showFifthMemoryEndScreen() {
                 
                 setTimeout(() => {
                     autoSave('fifth_memory_playback_complete');
+                    memoryResultScreen.style.display = 'none';
+        memoryResultText.classList.remove('show', 'blink');
                     showSixthMemoryScreen();
                 }, 1500);
             }, 500);
