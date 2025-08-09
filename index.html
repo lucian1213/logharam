@@ -893,7 +893,7 @@ const sixthPhotoHintDialogs = [
             memoryPlaybackScreen.style.display = 'none';
             memoryPhotoScreen.style.display = 'flex';
 
-        memoryPhoto.innerHTML = '<img src="1.png" style="width: 100%; height: 100%; object-fit: contain;">';
+        memoryPhoto.innerHTML = '<img src="1.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
                 
             setTimeout(() => {
                 memoryPhoto.classList.add('show');
@@ -2249,7 +2249,7 @@ const sixthPhotoHintDialogs = [
             memoryPhotoScreen.style.display = 'flex';
             
             // 사진 내용은 나중에 추가
-            memoryPhoto.innerHTML = '<img src="2.png" style="width: 100%; height: 100%; object-fit: contain;">';
+            memoryPhoto.innerHTML = '<img src="2.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
             
             setTimeout(() => {
                 memoryPhoto.classList.add('show');
@@ -2910,7 +2910,7 @@ function showThirdMemoryScreen() {
             memoryPhotoScreen.style.display = 'flex';
             
             // 사진 내용은 나중에 추가
-              memoryPhoto.innerHTML = '<img src="3.png" style="width: 100%; height: 100%; object-fit: contain;">';
+              memoryPhoto.innerHTML = '<img src="3.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
     
             
             setTimeout(() => {
@@ -3803,7 +3803,7 @@ function showFourthMemoryPhoto() {
     memoryPlaybackScreen.style.display = 'none';
     memoryPhotoScreen.style.display = 'flex';
     
-    memoryPhoto.innerHTML = '<img src="4.png" style="width: 100%; height: 100%; object-fit: contain;">';
+    memoryPhoto.innerHTML = '<img src="4.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
     
     
     setTimeout(() => {
@@ -4433,7 +4433,7 @@ function showFifthMemoryPhoto() {
     memoryPlaybackScreen.style.display = 'none';
     memoryPhotoScreen.style.display = 'flex';
     
-    memoryPhoto.innerHTML = '<img src="5.png" style="width: 100%; height: 100%; object-fit: contain;">';
+    memoryPhoto.innerHTML = '<img src="5.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
     
     setTimeout(() => {
         memoryPhoto.classList.add('show');
@@ -5130,10 +5130,19 @@ function showFinalSequenceDialog() {
         continueBtn.classList.add('hidden');
         isTyping = true;
         
-        typeWriter(dialogText, finalSequenceDialogs[rpgDialogStep], 50, () => {
-            isTyping = false;
-            continueBtn.classList.remove('hidden');
-        });
+       typeWriter(dialogText, finalSequenceDialogs[rpgDialogStep], 50, () => {
+    isTyping = false;
+    continueBtn.classList.remove('hidden');
+    
+    // === 이 부분 추가 ===
+    // 두 번째 대사(곰인형 대사)일 때 사진 표시
+    if (rpgDialogStep === 1) {
+        setTimeout(() => {
+            showBearPhotoInDialog();
+        }, 1000);
+    }
+    // === 추가 끝 ===
+});
     } else {
         dialog.style.display = 'none';
         dialogOverlay.style.display = 'none';
@@ -5141,6 +5150,21 @@ function showFinalSequenceDialog() {
         // 3지선다 문제로 이동
         showMultipleChoiceQuestions();
     }
+}
+
+function showBearPhotoInDialog() {
+    const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
+    const memoryPhoto = document.getElementById('memoryPhoto');
+    
+    memoryPhotoScreen.style.display = 'flex';
+    memoryPhoto.innerHTML = '<img src="bear.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
+    memoryPhoto.classList.add('show');
+    
+    // 3초 후 자동으로 사진 숨기기
+    setTimeout(() => {
+        memoryPhotoScreen.style.display = 'none';
+        memoryPhoto.classList.remove('show');
+    }, 3000);
 }
 
 function nextFinalSequenceDialog() {
