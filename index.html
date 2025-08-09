@@ -3103,6 +3103,7 @@ function showThirdMemoryScreen() {
                         memoryResultText.classList.add('blink');
                         
                         setTimeout(() => {
+                            autoSave('third_memory_playback_complete');
                             showFourthMemoryScreen();
                         }, 1500);
                     }, 500);
@@ -3286,6 +3287,7 @@ function showThirdMemoryScreen() {
             }
 
             if (date === '20230520') {
+                autoSave('fourth_memory_date_complete');
                 startFourthStep();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -3446,6 +3448,7 @@ function showThirdMemoryScreen() {
             }
 
             if (location === '74562732') {
+                autoSave('fourth_memory_location_complete');
                 startFourthMemoryPlayback();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -3892,6 +3895,7 @@ function showFourthMemoryEndScreen() {
                 
                 setTimeout(() => {
                     showFifthMemoryScreen();
+                    autoSave('fourth_memory_playback_complete');
                 }, 1500);
             }, 500);
         });
@@ -5400,6 +5404,73 @@ if (saveData && saveData.step === 'main_complete') {
         document.getElementById('memoryPlaybackScreen').style.display = 'none';
         
         startThirdMemoryPlayback();
+    }, 1000);
+    } else if (saveData && saveData.step === 'third_memory_playback_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        showFourthMemoryScreen();
+    }, 1000);
+    } else if (saveData && saveData.step === 'fourth_memory_date_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    setTimeout(() => {
+        // 모든 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        firstMemoryScreen.style.display = 'flex';
+        firstMemoryScreen.classList.add('show');
+        
+        // 제목 설정
+        const title = document.querySelector('.memory-title');
+        title.style.opacity = '1';
+        title.textContent = '네번째 기억';
+        
+        // 프로그레스 바: 모두 비활성화 후 4번째만 활성화
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => bar.classList.remove('active'));
+        progressBars[3].classList.add('active');
+        document.querySelector('.progress-indicator').textContent = '4/6';
+        
+        // 네 번째 기억 날짜 입력 완료 상태이므로 바로 장소코드 단계로
+        setTimeout(() => {
+            startFourthStep();
+        }, 500);
+    }, 1000);
+} else if (saveData && saveData.step === 'fourth_memory_location_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        startFourthMemoryPlayback();
+    }, 1000);
+} else if (saveData && saveData.step === 'fourth_memory_playback_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        showFifthMemoryScreen();
     }, 1000);
         
        } else {
