@@ -5246,10 +5246,26 @@ function showFinalSequenceDialog() {
 }
 
 function showBearPhotoInDialog() {
-    // 이전 기억 화면들 완전히 정리
+    // 여섯 번째 기억의 모든 UI 요소들 완전히 숨기기
+    const questionScreen = document.getElementById('questionScreen');
+    if (questionScreen) {
+        questionScreen.style.display = 'none';
+    }
+    
+    // 모든 화면 정리
+    document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('firstMemoryScreen').style.display = 'none';
     document.getElementById('memoryResultScreen').style.display = 'none';
     document.getElementById('memoryPlaybackScreen').style.display = 'none';
+    
+    // 여섯 번째 기억에서 추가된 입력 폼들 정리
+    const gameContainer = document.querySelector('.game-container');
+    const existingInputs = gameContainer.querySelectorAll('div[style*="margin-top"]');
+    existingInputs.forEach(el => {
+        if (el.innerHTML.includes('장소입력') || el.innerHTML.includes('스페인해적선')) {
+            el.style.display = 'none';
+        }
+    });
     
     const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
     const memoryPhoto = document.getElementById('memoryPhoto');
@@ -5257,8 +5273,6 @@ function showBearPhotoInDialog() {
     // 이전 사진 내용 완전히 정리
     memoryPhoto.classList.remove('show');
     memoryPhoto.innerHTML = '';
-    memoryPhoto.style.transform = 'none'; // 이전 스타일 초기화
-    memoryPhoto.style.background = 'none'; // 배경 초기화
     
     // 새 사진만 표시
     setTimeout(() => {
@@ -5267,7 +5281,6 @@ function showBearPhotoInDialog() {
         memoryPhoto.classList.add('show');
     }, 100);
 }
-
 function nextFinalSequenceDialog() {
     if (isTyping) return;
     
