@@ -2444,79 +2444,70 @@ const sixthPhotoHintDialogs = [
             }, 500);
         }
         
-        function showThirdMemoryScreen() {
-            const memoryResultScreen = document.getElementById('memoryResultScreen');
-            const firstMemoryScreen = document.getElementById('firstMemoryScreen');
-            
-            memoryResultScreen.style.display = 'none';
-            
-            // 화면 초기화
-            firstMemoryScreen.classList.remove('show');
-            const progressBars = document.querySelectorAll('.progress-bar');
-            const progressBars = document.querySelectorAll('.progress-bar');
-            progressBars.forEach(bar => bar.classList.remove('active'));
-            if (progressBars[2]) progressBars[2].classList.add('active');
-                
-            document.querySelector('.progress-indicator').textContent = '3/6';
+       function showThirdMemoryScreen() {
+    // 화면 전환
+    document.getElementById('videoContainer').style.display = 'none';
+    document.getElementById('firstMemoryScreen').style.display = 'block';
 
-            
-            
-            
-            // 제목과 부제목 초기화
-            const title = document.querySelector('.memory-title');
-            const subtitle = document.querySelector('.memory-subtitle');
-            const inputForm = document.querySelector('#firstMemoryScreen .input-form');
-            const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
-            const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
-            const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
-            const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
-            
-            title.style.opacity = '0';
-            subtitle.style.opacity = '0';
-            inputForm.classList.remove('ui-show');
-            helpButtons.classList.remove('ui-show');
-            
-            // 입력 필드 초기화
-            // === 3단계 UI를 항상 강제 세팅 (자동로드 대비) ===
-            // 입력 요소 선정: 기존 id/클래스가 무엇이든 우선순위대로 탐색
-            let inputEl =
-              firstMemoryScreen.querySelector('#dateInput') ||
-              firstMemoryScreen.querySelector('#locationInput2') ||
-              firstMemoryScreen.querySelector('.form-input') ||
-              firstMemoryScreen.querySelector('input[type="text"]');
+    // === 진행바 초기화 ===
+    for (let i = 0; i < progressBars.length; i++) {
+        progressBars[i].classList.remove('active');
+    }
+    if (progressBars[2]) {
+        progressBars[2].classList.add('active');
+    }
+    document.querySelector('.progress-indicator').textContent = '3/6';
 
-            if (!inputEl) {
-              // 정말 없으면 안전장치로 생성
-              inputEl = document.createElement('input');
-              inputEl.type = 'text';
-              inputEl.className = 'form-input';
-              (firstMemoryScreen.querySelector('.input-group') || firstMemoryScreen).appendChild(inputEl);
-            }
+    // === 3단계 UI 강제 세팅 ===
+    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
 
-            // 라벨/입력 초기화
-            const inputLabelAlways = firstMemoryScreen.querySelector('.input-label');
-            if (inputLabelAlways) inputLabelAlways.textContent = '연도와 날짜(숫자 8자리) :';
-            inputEl.value = '';
-            inputEl.id = 'dateInput';
-            inputEl.placeholder = 'YYYYMMDD';
-            inputEl.maxLength = 8;
+    // 입력 요소 찾기
+    let inputEl =
+        firstMemoryScreen.querySelector('#dateInput') ||
+        firstMemoryScreen.querySelector('#locationInput2') ||
+        firstMemoryScreen.querySelector('.form-input') ||
+        firstMemoryScreen.querySelector('input[type="text"]');
 
-            // (이미 상단에서 선언된) 버튼 참조를 그대로 활용해 항상 3단계용 핸들러로 교체
-            if (confirmButton) confirmButton.setAttribute('onclick', 'checkThirdMemoryAnswer()');
-            if (hintButton)    hintButton.setAttribute('onclick',    'showThirdMemoryHint()');
-            if (answerButton) {
-              answerButton.setAttribute('onclick', 'showThirdMemoryAnswer()');
-              answerButton.style.display = 'block';
-            }
+    if (!inputEl) {
+        // 정말 없으면 안전장치로 생성
+        inputEl = document.createElement('input');
+        inputEl.type = 'text';
+        inputEl.className = 'form-input';
+        (firstMemoryScreen.querySelector('.input-group') || firstMemoryScreen).appendChild(inputEl);
+    }
 
-            // 버튼 정렬/위치 원복(이전 단계 스타일 잔존 방지)
-            if (helpButtons) {
-              helpButtons.style.position = 'relative';
-              helpButtons.style.top = '0';
-              helpButtons.style.right = '0';
-              helpButtons.style.justifyContent = 'flex-start';
-              helpButtons.style.marginBottom = '30px';
-            }
+    // 라벨 세팅
+    const inputLabel = firstMemoryScreen.querySelector('.input-label');
+    if (inputLabel) {
+        inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+    }
+
+    // 입력 필드 속성 초기화
+    inputEl.value = '';
+    inputEl.id = 'dateInput';
+    inputEl.placeholder = 'YYYYMMDD';
+    inputEl.maxLength = 8;
+
+    // 버튼 핸들러 재설정
+    if (confirmButton) confirmButton.setAttribute('onclick', 'checkThirdMemoryAnswer()');
+    if (hintButton) hintButton.setAttribute('onclick', 'showThirdMemoryHint()');
+    if (answerButton) {
+        answerButton.setAttribute('onclick', 'showThirdMemoryAnswer()');
+        answerButton.style.display = 'block';
+    }
+
+    // 버튼 위치/정렬 초기화
+    if (helpButtons) {
+        helpButtons.style.position = 'relative';
+        helpButtons.style.top = '0';
+        helpButtons.style.right = '0';
+        helpButtons.style.justifyContent = 'flex-start';
+        helpButtons.style.marginBottom = '30px';
+    }
+
+    // 기타 필요한 초기화 로직이 있으면 여기에 추가
+}
+
            
             firstMemoryScreen.style.display = 'flex';
             
