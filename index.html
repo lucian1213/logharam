@@ -3945,65 +3945,108 @@ function showFourthMemoryEndScreen() {
 }
 
 function showFifthMemoryScreen() {
-    const memoryResultScreen = document.getElementById('memoryResultScreen');
-    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
-    
-    memoryResultScreen.style.display = 'none';
-    
-    // 화면 초기화
-    firstMemoryScreen.classList.remove('show');
-    const progressBars = document.querySelectorAll('.progress-bar');
-    progressBars[3].classList.remove('active');
-    progressBars[4].classList.add('active');
-    
-    document.querySelector('.progress-indicator').textContent = '5/6';
-    
-    // 제목과 부제목 초기화
-    const title = document.querySelector('.memory-title');
-    const subtitle = document.querySelector('.memory-subtitle');
-    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
-    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
-    
-    title.style.opacity = '0';
-    subtitle.style.opacity = '0';
-    inputForm.classList.remove('ui-show');
-    helpButtons.classList.remove('ui-show');
-    
+    // === 화면 전환 ===
+    var videoContainer = document.getElementById('videoContainer');
+    var firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    if (videoContainer) videoContainer.style.display = 'none';
+    if (firstMemoryScreen) firstMemoryScreen.style.display = 'block';
+
+    // === 진행바: 전체 off → 5번만 on ===
+    var progressBars = document.querySelectorAll('.progress-bar');
+    for (var i = 0; i < progressBars.length; i++) {
+        progressBars[i].classList.remove('active');
+    }
+    if (progressBars.length > 4) {
+        progressBars[4].classList.add('active');
+    }
+    var indicator = document.querySelector('.progress-indicator');
+    if (indicator) indicator.textContent = '5/6';
+
+    // === 5단계 UI 강제 세팅 (자동로드 대비) ===
+    // 라벨
+    var inputLabel =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.input-label')) ||
+        document.querySelector('#firstMemoryScreen .input-label');
+    if (inputLabel) inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+
+    // 입력 요소 찾기
+    var inputEl =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('#dateInput')) ||
+        (firstMemoryScreen && firstMemoryScreen.querySelector('#locationInput4')) ||
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.form-input')) ||
+        document.querySelector('#firstMemoryScreen input[type="text"]') ||
+        document.querySelector('.form-input');
+
+    if (!inputEl) {
+        // 없으면 생성
+        inputEl = document.createElement('input');
+        inputEl.type = 'text';
+        inputEl.className = 'form-input';
+        var inputGroup =
+            (firstMemoryScreen && firstMemoryScreen.querySelector('.input-group')) ||
+            firstMemoryScreen ||
+            document.body;
+        inputGroup.appendChild(inputEl);
+    }
+
     // 입력 필드 초기화
-    const locationInput = document.getElementById('locationInput4');
-    if (locationInput) {
-        locationInput.value = '';
-        locationInput.id = 'dateInput';
-        locationInput.placeholder = 'YYYYMMDD';
-        locationInput.maxLength = 8;
-        
-        const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
-        inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
-        
-        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+    inputEl.value = '';
+    inputEl.id = 'dateInput';
+    inputEl.placeholder = 'YYYYMMDD';
+    inputEl.maxLength = 8;
+
+    // 버튼 참조
+    var helpButtons =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons') ||
+        document.querySelector('.help-buttons');
+
+    var confirmButton =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.confirm-button')) ||
+        document.querySelector('#firstMemoryScreen .confirm-button') ||
+        document.querySelector('.confirm-button');
+
+    var hintButton =
+        (helpButtons && helpButtons.querySelector('.help-button:first-child')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+
+    var answerButton =
+        (helpButtons && helpButtons.querySelector('.help-button:last-child')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+
+    // 버튼 핸들러 5단계 전용으로 재설정
+    if (confirmButton) {
+        confirmButton.onclick = null;
         confirmButton.setAttribute('onclick', 'checkFifthMemoryAnswer()');
-        
-        const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
-        const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+    }
+    if (hintButton) {
+        hintButton.onclick = null;
         hintButton.setAttribute('onclick', 'showFifthMemoryHint()');
+    }
+    if (answerButton) {
+        answerButton.onclick = null;
         answerButton.setAttribute('onclick', 'showFifthMemoryAnswer()');
         answerButton.style.display = 'block';
-        
+    }
+
+    // 버튼 박스 스타일 원복
+    if (helpButtons) {
         helpButtons.style.position = 'relative';
         helpButtons.style.top = '0';
         helpButtons.style.right = '0';
         helpButtons.style.justifyContent = 'flex-start';
         helpButtons.style.marginBottom = '30px';
     }
-    
-    firstMemoryScreen.style.display = 'flex';
-    
-    setTimeout(() => {
-        firstMemoryScreen.classList.add('show');
-        startFifthMemoryAnimation();
-    }, 100);
-}
 
+    // === 화면 표시 애니메이션 ===
+    if (firstMemoryScreen) {
+        firstMemoryScreen.style.display = 'flex';
+        setTimeout(() => {
+            firstMemoryScreen.classList.add('show');
+            startFifthMemoryAnimation();
+        }, 100);
+    }
+}
 function startFifthMemoryAnimation() {
     const title = document.querySelector('.memory-title');
     const subtitle = document.querySelector('.memory-subtitle');
@@ -4195,6 +4238,7 @@ function checkFifthMemoryAnswer() {
     }
 
     if (date === '20240724') {
+        autoSave('fifth_memory_date_complete');
         startFifthStep();
     } else {
         showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -4347,6 +4391,7 @@ function checkFifthLocationAnswer() {
     }
 
     if (location === '36985452') {
+        autoSave('fifth_memory_location_complete'); 
         startFifthMemoryPlayback();
     } else {
         showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -4473,6 +4518,7 @@ function showFifthMemoryEndScreen() {
                 memoryResultText.classList.add('blink');
                 
                 setTimeout(() => {
+                    autoSave('fifth_memory_playback_complete');
                     showSixthMemoryScreen();
                 }, 1500);
             }, 500);
@@ -5513,6 +5559,61 @@ if (saveData && saveData.step === 'main_complete') {
         document.getElementById('memoryPlaybackScreen').style.display = 'none';
         
         showFifthMemoryScreen();
+    }, 1000);
+    } else if (saveData && saveData.step === 'fifth_memory_date_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    setTimeout(() => {
+        // 모든 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        firstMemoryScreen.style.display = 'flex';
+        firstMemoryScreen.classList.add('show');
+        
+        // 제목 설정
+        const title = document.querySelector('.memory-title');
+        title.style.opacity = '1';
+        title.textContent = '다섯번째 기억';
+        
+        // 프로그레스 바: 모두 비활성화 후 5번째만 활성화
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => bar.classList.remove('active'));
+        progressBars[4].classList.add('active');
+        document.querySelector('.progress-indicator').textContent = '5/6';
+        
+        // 다섯 번째 기억 날짜 입력 완료 상태이므로 바로 장소코드 단계로
+        setTimeout(() => {
+            startFifthStep();
+        }, 500);
+    }, 1000);
+} else if (saveData && saveData.step === 'fifth_memory_location_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        startFifthMemoryPlayback();
+    }, 1000);
+} else if (saveData && saveData.step === 'fifth_memory_playback_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        showSixthMemoryScreen();
     }, 1000);
         
        } else {
