@@ -2655,6 +2655,7 @@ function showThirdMemoryScreen() {
             }
 
             if (date === '20220620') {
+                autoSave('third_memory_date_complete');
                 startThirdStep();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -2866,6 +2867,7 @@ function showThirdMemoryScreen() {
             }
 
             if (location === '65252211') {
+                autoSave('third_memory_location_complete');
                 startThirdMemoryPlayback();
             } else {
                 showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -5355,6 +5357,49 @@ if (saveData && saveData.step === 'main_complete') {
     document.getElementById('loadingScreen').style.display = 'none';
     setTimeout(() => {
         showThirdMemoryScreen();
+    }, 1000);
+    } else if (saveData && saveData.step === 'third_memory_date_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    setTimeout(() => {
+        // 모든 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        const firstMemoryScreen = document.getElementById('firstMemoryScreen');
+        firstMemoryScreen.style.display = 'flex';
+        firstMemoryScreen.classList.add('show');
+        
+        // 제목 설정
+        const title = document.querySelector('.memory-title');
+        title.style.opacity = '1';
+        title.textContent = '세번째 기억';
+        
+        // 프로그레스 바: 모두 비활성화 후 3번째만 활성화
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => bar.classList.remove('active'));
+        progressBars[2].classList.add('active');
+        document.querySelector('.progress-indicator').textContent = '3/6';
+        
+        // 세 번째 기억 날짜 입력 완료 상태이므로 바로 장소코드 단계로
+        setTimeout(() => {
+            startThirdStep();
+        }, 500);
+    }, 1000);
+} else if (saveData && saveData.step === 'third_memory_location_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        startThirdMemoryPlayback();
     }, 1000);
         
        } else {
