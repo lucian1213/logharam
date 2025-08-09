@@ -4527,63 +4527,107 @@ function showFifthMemoryEndScreen() {
 }
 
 function showSixthMemoryScreen() {
-    const memoryResultScreen = document.getElementById('memoryResultScreen');
-    const firstMemoryScreen = document.getElementById('firstMemoryScreen');
-    
-    memoryResultScreen.style.display = 'none';
-    
-    // 화면 초기화
-    firstMemoryScreen.classList.remove('show');
-    const progressBars = document.querySelectorAll('.progress-bar');
-    progressBars[4].classList.remove('active');
-    progressBars[5].classList.add('active');
-    
-    document.querySelector('.progress-indicator').textContent = '6/6';
-    
-    // 제목과 부제목 초기화
-    const title = document.querySelector('.memory-title');
-    const subtitle = document.querySelector('.memory-subtitle');
-    const inputForm = document.querySelector('#firstMemoryScreen .input-form');
-    const helpButtons = document.querySelector('#firstMemoryScreen .help-buttons');
-    
-    title.style.opacity = '0';
-    subtitle.style.opacity = '0';
-    inputForm.classList.remove('ui-show');
-    helpButtons.classList.remove('ui-show');
-    
+    // === 화면 전환 ===
+    var videoContainer = document.getElementById('videoContainer');
+    var firstMemoryScreen = document.getElementById('firstMemoryScreen');
+    if (videoContainer) videoContainer.style.display = 'none';
+    if (firstMemoryScreen) firstMemoryScreen.style.display = 'block';
+
+    // === 진행바: 전체 off → 6번만 on ===
+    var progressBars = document.querySelectorAll('.progress-bar');
+    for (var i = 0; i < progressBars.length; i++) {
+        progressBars[i].classList.remove('active');
+    }
+    if (progressBars.length > 5) {
+        progressBars[5].classList.add('active');
+    }
+    var indicator = document.querySelector('.progress-indicator');
+    if (indicator) indicator.textContent = '6/6';
+
+    // === 6단계 UI 강제 세팅 (자동로드 대비) ===
+    // 라벨
+    var inputLabel =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.input-label')) ||
+        document.querySelector('#firstMemoryScreen .input-label');
+    if (inputLabel) inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
+
+    // 입력 요소 찾기
+    var inputEl =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('#dateInput')) ||
+        (firstMemoryScreen && firstMemoryScreen.querySelector('#locationInput5')) ||
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.form-input')) ||
+        document.querySelector('#firstMemoryScreen input[type="text"]') ||
+        document.querySelector('.form-input');
+
+    if (!inputEl) {
+        // 없으면 생성
+        inputEl = document.createElement('input');
+        inputEl.type = 'text';
+        inputEl.className = 'form-input';
+        var inputGroup =
+            (firstMemoryScreen && firstMemoryScreen.querySelector('.input-group')) ||
+            firstMemoryScreen ||
+            document.body;
+        inputGroup.appendChild(inputEl);
+    }
+
     // 입력 필드 초기화
-    const locationInput = document.getElementById('locationInput5');
-    if (locationInput) {
-        locationInput.value = '';
-        locationInput.id = 'dateInput';
-        locationInput.placeholder = 'YYYYMMDD';
-        locationInput.maxLength = 8;
-        
-        const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
-        inputLabel.textContent = '연도와 날짜(숫자 8자리) :';
-        
-        const confirmButton = document.querySelector('#firstMemoryScreen .confirm-button');
+    inputEl.value = '';
+    inputEl.id = 'dateInput';
+    inputEl.placeholder = 'YYYYMMDD';
+    inputEl.maxLength = 8;
+
+    // 버튼 참조
+    var helpButtons =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.help-buttons')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons') ||
+        document.querySelector('.help-buttons');
+
+    var confirmButton =
+        (firstMemoryScreen && firstMemoryScreen.querySelector('.confirm-button')) ||
+        document.querySelector('#firstMemoryScreen .confirm-button') ||
+        document.querySelector('.confirm-button');
+
+    var hintButton =
+        (helpButtons && helpButtons.querySelector('.help-button:first-child')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
+
+    var answerButton =
+        (helpButtons && helpButtons.querySelector('.help-button:last-child')) ||
+        document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+
+    // 버튼 핸들러 6단계 전용으로 재설정
+    if (confirmButton) {
+        confirmButton.onclick = null;
         confirmButton.setAttribute('onclick', 'checkSixthMemoryAnswer()');
-        
-        const hintButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:first-child');
-        const answerButton = document.querySelector('#firstMemoryScreen .help-buttons .help-button:last-child');
+    }
+    if (hintButton) {
+        hintButton.onclick = null;
         hintButton.setAttribute('onclick', 'showSixthMemoryHint()');
+    }
+    if (answerButton) {
+        answerButton.onclick = null;
         answerButton.setAttribute('onclick', 'showSixthMemoryAnswer()');
         answerButton.style.display = 'block';
-        
+    }
+
+    // 버튼 박스 스타일 원복
+    if (helpButtons) {
         helpButtons.style.position = 'relative';
         helpButtons.style.top = '0';
         helpButtons.style.right = '0';
         helpButtons.style.justifyContent = 'flex-start';
         helpButtons.style.marginBottom = '30px';
     }
-    
-    firstMemoryScreen.style.display = 'flex';
-    
-    setTimeout(() => {
-        firstMemoryScreen.classList.add('show');
-        startSixthMemoryAnimation();
-    }, 100);
+
+    // === 화면 표시 애니메이션 ===
+    if (firstMemoryScreen) {
+        firstMemoryScreen.style.display = 'flex';
+        setTimeout(() => {
+            firstMemoryScreen.classList.add('show');
+            startSixthMemoryAnimation();
+        }, 100);
+    }
 }
 
 function startSixthMemoryAnimation() {
@@ -4759,6 +4803,7 @@ function checkSixthMemoryAnswer() {
 
     if (date === '20250724') {
         // 장소코드 스킵하고 바로 기억 재생
+        autoSave('sixth_memory_date_complete');
         startSixthMemoryPlayback();
     } else {
         showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -5035,6 +5080,7 @@ function checkFinalLocationAnswer() {
     }
 
     if (location === '스페인해적선') {
+        autoSave('sixth_memory_location_complete');
         showFinalSequence();
     } else {
         showPopup('정답이 아닌것 같다. 다시 한번 생각해보자.');
@@ -5614,6 +5660,47 @@ if (saveData && saveData.step === 'main_complete') {
         document.getElementById('memoryPlaybackScreen').style.display = 'none';
         
         showSixthMemoryScreen();
+    }, 1000);
+    } else if (saveData && saveData.step === 'sixth_memory_date_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    setTimeout(() => {
+        // 모든 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        // 여섯 번째 기억은 날짜 입력 후 바로 기억 재생으로
+        startSixthMemoryPlayback();
+    }, 1000);
+} else if (saveData && saveData.step === 'sixth_memory_location_complete') {
+    console.log('🎮 저장된 진행상황 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    setTimeout(() => {
+        // 화면 초기화
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('memoryResultScreen').style.display = 'none';
+        document.getElementById('memoryPhotoScreen').style.display = 'none';
+        document.getElementById('memoryPlaybackScreen').style.display = 'none';
+        
+        showFinalSequence();
+    }, 1000);
+} else if (saveData && saveData.step === 'game_completed') {
+    console.log('🎮 게임 완료 상태 복원:', saveData.step);
+    document.getElementById('loadingScreen').style.display = 'none';
+    
+    // 게임 완료 메시지나 엔딩 화면 표시
+    setTimeout(() => {
+        alert('이미 게임을 완료하셨습니다! 새 게임을 시작하시겠습니까?');
+        if (confirm('저장 데이터를 삭제하고 새 게임을 시작하시겠습니까?')) {
+            localStorage.removeItem('memoryGameSave');
+            location.reload();
+        } else {
+            // 엔딩 화면이나 완료 상태 유지
+            showEpilogue(); // 또는 적절한 완료 화면
+        }
     }, 1000);
         
        } else {
