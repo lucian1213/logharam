@@ -5246,39 +5246,29 @@ function showFinalSequenceDialog() {
 }
 
 function showBearPhotoInDialog() {
-    // 여섯 번째 기억의 모든 UI 요소들 완전히 숨기기
-    const questionScreen = document.getElementById('questionScreen');
-    if (questionScreen) {
-        questionScreen.style.display = 'none';
-    }
-    
-    // 모든 화면 정리
+    // 모든 화면 정리 (기존 코드)
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('firstMemoryScreen').style.display = 'none';
     document.getElementById('memoryResultScreen').style.display = 'none';
     document.getElementById('memoryPlaybackScreen').style.display = 'none';
     
-    // 여섯 번째 기억에서 추가된 입력 폼들 정리
-    const gameContainer = document.querySelector('.game-container');
-    const existingInputs = gameContainer.querySelectorAll('div[style*="margin-top"]');
-    existingInputs.forEach(el => {
-        if (el.innerHTML.includes('장소입력') || el.innerHTML.includes('스페인해적선')) {
-            el.style.display = 'none';
-        }
-    });
-    
     const memoryPhotoScreen = document.getElementById('memoryPhotoScreen');
     const memoryPhoto = document.getElementById('memoryPhoto');
     
-    // 이전 사진 내용 완전히 정리
-    memoryPhoto.classList.remove('show');
-    memoryPhoto.innerHTML = '';
+    // memoryPhotoScreen 전체 내용 완전히 지우기
+    memoryPhotoScreen.innerHTML = '';
     
-    // 새 사진만 표시
+    // memoryPhoto 요소 다시 생성
+    const newMemoryPhoto = document.createElement('div');
+    newMemoryPhoto.id = 'memoryPhoto';
+    newMemoryPhoto.className = 'memory-photo';
+    memoryPhotoScreen.appendChild(newMemoryPhoto);
+    
+    // 새 사진 표시
     setTimeout(() => {
         memoryPhotoScreen.style.display = 'flex';
-        memoryPhoto.innerHTML = '<img src="bear.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
-        memoryPhoto.classList.add('show');
+        newMemoryPhoto.innerHTML = '<img src="bear.png" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%);">';
+        newMemoryPhoto.classList.add('show');
     }, 100);
 }
 function nextFinalSequenceDialog() {
