@@ -2423,31 +2423,39 @@ const sixthPhotoHintDialogs = [
         }
         
         function showSecondMemoryEndScreen() {
-            // 모든 화면 숨기기
-            document.getElementById('memoryPhotoScreen').style.display = 'none';
-            
-            // 종료 메시지 표시
-            const memoryResultScreen = document.getElementById('memoryResultScreen');
-            const memoryResultText = document.getElementById('memoryResultText');
-            
-            memoryResultScreen.style.display = 'flex';
-            memoryResultText.classList.remove('show', 'blink');
-            
+    // 모든 화면 숨기기
+    document.getElementById('memoryPhotoScreen').style.display = 'none';
+    
+    // 종료 메시지 표시
+    const memoryResultScreen = document.getElementById('memoryResultScreen');
+    const memoryResultText = document.getElementById('memoryResultText');
+    
+    memoryResultScreen.style.display = 'flex';
+    memoryResultText.classList.remove('show', 'blink');
+    memoryResultText.innerHTML = ''; // 이전 내용 완전히 지우기
+    
+    setTimeout(() => {
+        memoryResultText.classList.add('show');
+        typeWriter(memoryResultText, "두번째 기억 재생이\n종료되었습니다.", 80, () => {
             setTimeout(() => {
-                memoryResultText.classList.add('show');
-                typeWriter(memoryResultText, "두번째 기억 재생이\n종료되었습니다.", 80, () => {
-                    setTimeout(() => {
-                        memoryResultText.classList.add('blink');
-                        
-                        setTimeout(() => {
-                            autoSave('second_memory_playback_complete');
-                            memoryResultScreen.style.display = 'none';
-                            memoryResultText.classList.remove('show', 'blink');
-                        }, 1500);
-                    }, 500);
-                });
+                memoryResultText.classList.add('blink');
+                
+                setTimeout(() => {
+                    // 저장 먼저
+                    autoSave('second_memory_playback_complete');
+                    
+                    // 화면 완전히 정리
+                    memoryResultScreen.style.display = 'none';
+                    memoryResultText.classList.remove('show', 'blink');
+                    memoryResultText.innerHTML = ''; // 내용도 지우기
+                    
+                    // 다음 화면으로
+                    showThirdMemoryScreen();
+                }, 1500);
             }, 500);
-        }
+        });
+    }, 500);
+}
         
 function showThirdMemoryScreen() {
     // === 화면 전환 ===
