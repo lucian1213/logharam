@@ -619,6 +619,11 @@
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
             font-family: 'Orbit', monospace;
         }
+
+        .game-container.no-snap { 
+  scroll-snap-type: none !important; 
+  overflow-anchor: none;
+}
         .name-confirm-button:hover { background: #00ff00; color: #000000; }
         #popupMessage { white-space: pre-line; }
 
@@ -4967,6 +4972,9 @@ function showSixthMemoryPhotos() {
     memoryPhoto.style.width = '100%';
     memoryPhoto.style.maxWidth = '350px';
     memoryPhoto.classList.add('show');
+    const gc = document.querySelector('.game-container');
+gc.classList.add('no-snap');  // 스냅 해제 모드 ON (여섯번째 기억 구간)
+gc.scrollTop = 0;             // 진입 시 바로 최상단 정렬(권장)
     
     setTimeout(() => {
         showSixthMemoryDialog();
