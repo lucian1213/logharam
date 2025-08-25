@@ -764,7 +764,7 @@ function checkSave() {
         ];
         
         const secondStepDialogs = [
-            "기억 키워드? 기억 키워드가 뭐지? 회전목마에 대한 기억이니까 회전목마에 가보면 발견할 수 있지 않을까?",
+            "기억 좌표? 회전목마에 대한 기억이니까 회전목마에 가보면 발견할 수 있지 않을까?",
             "(회전 목마 근처에서 해당 표식이 그려진 게시물을 찾아보세요. 힌트보기를 누르면 게시물의 위치를 사진으로 확인할 수 있습니다.)"
         ];
         
@@ -1404,7 +1404,7 @@ const sixthPhotoHintDialogs = [
         }
         
         function startSecondStepForSecondMemory() {
-            console.log('두번째 기억 - 기억 키워드 단계 시작');
+            console.log('두번째 기억 - 기억 좌표 단계 시작');
             
             const subtitle = document.querySelector('.memory-subtitle');
             const inputForm = document.querySelector('#firstMemoryScreen .input-form');
@@ -1421,8 +1421,8 @@ const sixthPhotoHintDialogs = [
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '기억 키워드 :';
-                dateInput.placeholder = '기억 키워드를 입력하세요';
+                inputLabel.textContent = '기억 좌표 :';
+                dateInput.placeholder = '기억 좌표를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput2';
@@ -1446,7 +1446,7 @@ const sixthPhotoHintDialogs = [
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 키워드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 좌표를 입력해주세요.", 80, () => {
                     setTimeout(() => {
                         firstMemoryScreen.classList.add('intro-waiting');
                         
@@ -1512,7 +1512,7 @@ const sixthPhotoHintDialogs = [
         }
         
         function showSecondLocationAnswer() {
-            showPopup('두번째 기억 기억 키워드 정답은 곧 구현됩니다!');
+            showPopup('두번째 기억 기억 좌표 정답은 곧 구현됩니다!');
         }
         
         function checkSecondLocationAnswer() {
@@ -2066,8 +2066,8 @@ const sixthPhotoHintDialogs = [
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '기억 키워드 :';
-                dateInput.placeholder = '기억 키워드를 입력하세요';
+                inputLabel.textContent = '기억 좌표 :';
+                dateInput.placeholder = '기억 좌표를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput';
@@ -2083,7 +2083,7 @@ const sixthPhotoHintDialogs = [
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 키워드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 좌표를 입력해주세요.", 80, () => {
                     console.log('타이핑 완료, UI 요소들 다시 표시');
                     
                     setTimeout(() => {
@@ -2761,8 +2761,8 @@ function showThirdMemoryScreen() {
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '기억 키워드 :';
-                dateInput.placeholder = '기억 키워드를 입력하세요';
+                inputLabel.textContent = '기억 좌표 :';
+                dateInput.placeholder = '기억 좌표를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput3';
@@ -2786,7 +2786,7 @@ function showThirdMemoryScreen() {
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 기억 키워드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 기억 좌표를 입력해주세요.", 80, () => {
                     setTimeout(() => {
                         firstMemoryScreen.classList.add('intro-waiting');
                         
@@ -2879,7 +2879,7 @@ function showThirdMemoryScreen() {
         }
         
         function showThirdLocationAnswer() {
-            showPopup('정답\n\n기억 키워드 : 성장');
+            showPopup('정답\n\n기억 좌표 : 성장');
         }
         
         function checkThirdLocationAnswer() {
@@ -3408,8 +3408,8 @@ function showThirdMemoryScreen() {
                 const dateInput = document.getElementById('dateInput');
                 const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
                 
-                inputLabel.textContent = '기억 키워드 :';
-                dateInput.placeholder = '기억 키워드를 입력하세요';
+                inputLabel.textContent = '기억 좌표 :';
+                dateInput.placeholder = '기억 좌표를 입력하세요';
                 dateInput.value = '';
                 dateInput.removeAttribute('maxlength');
                 dateInput.id = 'locationInput4';
@@ -3433,7 +3433,7 @@ function showThirdMemoryScreen() {
                 subtitle.textContent = '';
                 subtitle.style.opacity = '1';
                 
-                typeWriter(subtitle, "해당 기억의 기억 키워드를 입력해주세요.", 80, () => {
+                typeWriter(subtitle, "해당 기억의 기억 좌표를 입력해주세요.", 80, () => {
                     setTimeout(() => {
                         firstMemoryScreen.classList.add('intro-waiting');
                         
@@ -3526,7 +3526,7 @@ function showThirdMemoryScreen() {
         }
         
         function showFourthLocationAnswer() {
-            showPopup('정답\n\n기억 키워드 : 분실');
+            showPopup('정답\n\n기억 좌표 : 분실');
         }
         
         function checkFourthLocationAnswer() {
@@ -4333,8 +4333,8 @@ function startFifthStep() {
         const dateInput = document.getElementById('dateInput');
         const inputLabel = document.querySelector('#firstMemoryScreen .input-label');
         
-        inputLabel.textContent = '기억 키워드 :';
-        dateInput.placeholder = '기억 키워드를 입력하세요';
+        inputLabel.textContent = '기억 좌표 :';
+        dateInput.placeholder = '기억 좌표를 입력하세요';
         dateInput.value = '';
         dateInput.removeAttribute('maxlength');
         dateInput.id = 'locationInput5';
@@ -4358,7 +4358,7 @@ function startFifthStep() {
         subtitle.textContent = '';
         subtitle.style.opacity = '1';
         
-        typeWriter(subtitle, "해당 기억의 기억 키워드를 입력해주세요.", 80, () => {
+        typeWriter(subtitle, "해당 기억의 기억 좌표를 입력해주세요.", 80, () => {
             setTimeout(() => {
                 firstMemoryScreen.classList.add('intro-waiting');
                 
@@ -4451,7 +4451,7 @@ function showFifthLocationHint() {
 }
 
 function showFifthLocationAnswer() {
-    showPopup('정답\n\n기억 키워드 : 소실');
+    showPopup('정답\n\n기억 좌표 : 소실');
 }
 
 function checkFifthLocationAnswer() {
@@ -4898,7 +4898,7 @@ function checkSixthMemoryAnswer() {
     }
 
     if (date === '20250924') {
-        // 기억 키워드 스킵하고 바로 기억 재생
+        // 기억 좌표 스킵하고 바로 기억 재생
         autoSave('sixth_memory_date_complete');
         startSixthMemoryPlayback();
     } else {
@@ -5576,7 +5576,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[0].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '1/6';
         
-        // 기억 키워드 입력 상태로 설정
+        // 기억 좌표 입력 상태로 설정
         setTimeout(() => {
             startSecondStep();
         }, 500);
@@ -5612,7 +5612,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[1].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '2/6';
         
-        // 기억 키워드 입력 상태로
+        // 기억 좌표 입력 상태로
         setTimeout(() => {
             startSecondStepForSecondMemory();
         }, 500);
@@ -5655,7 +5655,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[2].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '3/6';
         
-        // 세 번째 기억 날짜 입력 완료 상태이므로 바로 기억 키워드 단계로
+        // 세 번째 기억 날짜 입력 완료 상태이므로 바로 기억 좌표 단계로
         setTimeout(() => {
             startThirdStep();
         }, 500);
@@ -5710,7 +5710,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[3].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '4/6';
         
-        // 네 번째 기억 날짜 입력 완료 상태이므로 바로 기억 키워드 단계로
+        // 네 번째 기억 날짜 입력 완료 상태이므로 바로 기억 좌표 단계로
         setTimeout(() => {
             startFourthStep();
         }, 500);
@@ -5765,7 +5765,7 @@ if (saveData && saveData.step === 'main_complete') {
         progressBars[4].classList.add('active');
         document.querySelector('.progress-indicator').textContent = '5/6';
         
-        // 다섯 번째 기억 날짜 입력 완료 상태이므로 바로 기억 키워드 단계로
+        // 다섯 번째 기억 날짜 입력 완료 상태이므로 바로 기억 좌표 단계로
         setTimeout(() => {
             startFifthStep();
         }, 500);
