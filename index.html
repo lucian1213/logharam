@@ -4942,7 +4942,8 @@ function showSixthMemoryPhotos() {
     const gameContainer = document.querySelector('.game-container');
     
     // 게임 컨테이너 스타일 조정 (height: auto 제거)
-    gameContainer.style.maxHeight = '95vh';
+    gameContainer.style.height = 'auto';
+    gameContainer.style.maxHeight = 'none';
     gameContainer.style.overflowY = 'auto';
     
     memoryPlaybackScreen.style.display = 'none';
