@@ -4942,16 +4942,15 @@ function showSixthMemoryPhotos() {
     const gameContainer = document.querySelector('.game-container');
     
     // 게임 컨테이너 스타일 조정 (height: auto 제거)
-    gameContainer.style.maxHeight = '95vh';
+    gameContainer.style.position = 'absolute';
+    gameContainer.style.top = '10px';  // 50% 대신 상단에서 10px
+    gameContainer.style.left = '50%';
+    gameContainer.style.transform = 'translateX(-50%)';  // Y축 중앙정렬 제거
+    gameContainer.style.width = '95vw';
+    gameContainer.style.maxWidth = '400px';
+    gameContainer.style.height = 'auto';  // 고정 높이 제거
+    gameContainer.style.maxHeight = 'calc(100vh - 20px)';  // 뷰포트 전체 활용
     gameContainer.style.overflowY = 'auto';
-    
-    memoryPlaybackScreen.style.display = 'none';
-    memoryPhotoScreen.style.display = 'flex';
-    memoryPhotoScreen.style.flexDirection = 'column';
-    memoryPhotoScreen.style.alignItems = 'center';
-    memoryPhotoScreen.style.padding = '20px';
-    memoryPhotoScreen.style.height = '100%'; // auto 대신 100%
-    memoryPhotoScreen.style.position = 'relative'; // 추가
     
     // memoryPhoto 스타일 초기화
     memoryPhoto.style.transform = 'none'; // scale 초기화
