@@ -4879,7 +4879,7 @@ function nextSixthMemoryHintDialog() {
 }
 
 function showSixthMemoryAnswer() {
-    showPopup('정답\n\n연도와 날짜 : 20250724');
+    showPopup('정답<br><br>연도와 날짜 : 20250924');
 }
 
 function checkSixthMemoryAnswer() {
@@ -4895,7 +4895,7 @@ function checkSixthMemoryAnswer() {
         return;
     }
 
-    if (date === '20250724') {
+    if (date === '20250924') {
         // 기억 키워드 스킵하고 바로 기억 재생
         autoSave('sixth_memory_date_complete');
         startSixthMemoryPlayback();
